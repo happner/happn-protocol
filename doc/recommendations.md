@@ -12,6 +12,7 @@ protocol recommendations:
 - on set and subsequent emit, skip emitting to the originator of the set event?
 - on detachment from event (off) we must also only pass in what is necessary
 - on get, why do we need the sessionid?
+- client to pass protocol up to server, this is so that we can perform optimsiations in a backwards compatible way
 
 
 
