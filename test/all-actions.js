@@ -33,24 +33,53 @@ describe('secure-protocol-operations', function () {
 
       log:function(direction, packet){
 
-        //console.log(direction + ':::', packet);
+        if (!suppressPrint) console.log(direction + ':::', packet);
+
+        fs.appendFile(__dirname + path.sep + 'results' + path.sep + test_id + '.log', JSON.stringify(packet, null, 2) + '\r\n');
+      }
+    };
+
+    var inboundLayers = [
+      function(message, cb){
+        spyConfig.log('in', message);
+        cb(null, message);
+      }
+    ];
+
+    var outboundLayers = [
+      function(message, cb){
+        spyConfig.log('out', message);
+        cb(null, message);
+      }
+    ];
+
+    var serviceConfig = {
+      secure: true,
+      services:{
+        protocol:{
+          config:{
+            inboundLayers:inboundLayers
+          }
+        }
       }
     };
 
     try {
+
       service.create({
           secure: true,
           services: {
-            pubsub: {
-              config: {
-                transformMiddleware: [{path: './transform-message-spy', options: spyConfig}]
+            protocol:{
+              config:{
+                inboundLayers:inboundLayers
+                outboundLayers:inboundLayers
               }
             }
           }
         }
       , function (e, happnInst) {
-        if (e)
-          return callback(e);
+
+        if (e) return callback(e);
 
         happnInstance = happnInst;
 
@@ -92,7 +121,7 @@ describe('secure-protocol-operations', function () {
     }
   });
 
-  after(function (done) {
+  after('disconnection messages', function (done) {
 
     publisherclient.disconnect()
       .then(listenerclient.disconnect()
@@ -102,7 +131,7 @@ describe('secure-protocol-operations', function () {
 
   });
 
-  it('the listener should pick up a single wildcard event', function (callback) {
+  it('subscribe to a single wildcard event', function (callback) {
 
 
     try {
@@ -147,7 +176,7 @@ describe('secure-protocol-operations', function () {
     }
   });
 
-  it('the publisher should get null for unfound data, exact path', function (callback) {
+  it('should get null for unfound data, exact path', function (callback) {
 
 
     var test_path_end = require('shortid').generate();
@@ -164,7 +193,7 @@ describe('secure-protocol-operations', function () {
   });
 
 
-  it('the publisher should set new data', function (callback) {
+  it('should set new data', function (callback) {
 
 
     try {
@@ -191,7 +220,7 @@ describe('secure-protocol-operations', function () {
     }
   });
 
-  it('set_multiple, the publisher should set multiple data items, then do a wildcard get to return them', function (callback) {
+  it('should set multiple data items, then do a wildcard get to return them', function (callback) {
 
 
     var timesCount = 10;
@@ -784,7 +813,6 @@ describe('secure-protocol-operations', function () {
   it('the listener should pick up a single delete event', function (callback) {
 
 
-
     //We put the data we want to delete into the database
     publisherclient.set('/2_websockets_embedded_sanity/' + test_id + '/testsubscribe/data/delete_me', {
       property1: 'property1',
@@ -958,8 +986,8 @@ describe('secure-protocol-operations', function () {
   });
 
   it('should unsubscribe from all events', function (callback) {
-    this.timeout(10000);
 
+    this.timeout(10000);
     var onHappened = false;
 
     listenerclient.onAll(function (message) {
