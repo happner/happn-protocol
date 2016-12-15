@@ -2,12 +2,12 @@
 
 ##PROTOCOL VERSION: 1.1.0
 
-###HAPPN VERSION: 1.0.1
+###HAPPN VERSION: 1.0.4
 #connect a client
 
 ###create a client session and login
 
-(existing client with session id: 83061d75-fdb9-414b-9e2e-7204f9a24110 was already created) ##DIFF_IGNORE
+(existing client with session id: 5a448c21-13e2-4b7d-bfcb-42ebefe290f1 was already created) ##DIFF_IGNORE
 ###client -> server
 ```json
 {
@@ -1132,7 +1132,7 @@
 
 *the disconnectAllClients method is called - this method is called on the happn instance shutdown, causing the server to push out a disconnection message to all connected clients*
 
-one connected client remaining, so disconnect warning is sent to it, session id (matches the one stipulated in section 1_1) is:83061d75-fdb9-414b-9e2e-7204f9a24110  ##DIFF_IGNORE
+one connected client remaining, so disconnect warning is sent to it, session id (matches the one stipulated in section 1_1) is:5a448c21-13e2-4b7d-bfcb-42ebefe290f1  ##DIFF_IGNORE
 ###server -> client
 ```json
 {
