@@ -28,7 +28,7 @@ manual run:
 
 > npm run describe && git add --all && git commit -m "protocol describe run"
 
-> git diff HEAD:./automated-docs/happn-2/current/protocol.md ./automated-docs/happn-3/current/protocol.md >> ./automated-docs/changes.txt
+> git diff --minimal HEAD:./automated-docs/happn-2/current/protocol.md HEAD:./automated-docs/happn-3/current/protocol.md >> ./automated-docs/changes.diff
 
 ```
 
