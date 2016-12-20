@@ -7,7 +7,7 @@
 
 ###create a client session and login
 
-(existing client with session id: a542580d-472a-41c8-af03-07f7799e5db5 was already created) ##DIFF_IGNORE
+(existing client with session id: 8f34ac34-55dd-4dc9-a9b3-d52822e80649 was already created) ##DIFF_IGNORE
 ###client -> server
 ```json
 {
@@ -210,7 +210,7 @@
   "_meta": {
     "created": "{{number, utc}}",
     "modified": "{{number, utc}}",
-    "path": "/_TAGSset/some/data/9eb6588cf91041e1ab5a65b5c81807ce",
+    "path": "/_TAGSset/some/data/15f7b84fca014cbe8aabd11bddb426d5",
     "tag": "MYTAG",
     "type": "response",
     "status": "ok",
@@ -252,7 +252,7 @@
   "_meta": {
     "created": "{{number, utc}}",
     "modified": "{{number, utc}}",
-    "path": "/_TAGStag/non-existent/e80cb7d504e54126a4b8f84d4e3a2121",
+    "path": "/_TAGStag/non-existent/a0afc782995442a1b87774ae3ce07a7c",
     "tag": "MYTAG",
     "type": "response",
     "status": "ok",

@@ -873,11 +873,11 @@ async.eachSeries(jobs, function(job, jobCB){
 function writeReportToFile(){
 
   var outputFile = __dirname + path.sep + 'automated-docs' + path.sep + 'happn-3' + path.sep + protocol + path.sep + version + path.sep + 'protocol.md';
-  var outputFileCurrent = __dirname + path.sep + 'automated-docs' + path.sep + 'happn-3' + path.sep + protocol + path.sep + 'current' + path.sep + 'protocol.md';
+  var outputFileCurrent = __dirname + path.sep + 'automated-docs' + path.sep + 'happn-3' + path.sep + 'current' + path.sep + 'protocol.md';
 
   fs.ensureDirSync(__dirname + path.sep + 'automated-docs' + path.sep + 'happn-3' + path.sep + protocol + path.sep + version);
 
-  fs.ensureDirSync(__dirname + path.sep + 'automated-docs' + path.sep + 'happn-3' + path.sep + protocol + path.sep + 'current');
+  fs.ensureDirSync(__dirname + path.sep + 'automated-docs' + path.sep + 'happn-3' + path.sep + 'current');
 
   try{
 

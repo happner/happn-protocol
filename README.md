@@ -5,10 +5,10 @@ happn protocol
 
 - current version 1.1.0
 
-[LATEST PROTOCOL DOCUMENT 1.1.0 HAPPN-3](https://github.com/happner/happn-protocol/blob/master/automated-docs/happn-3/1.1.0/current/protocol.md)
+[LATEST PROTOCOL DOCUMENT 1.1.0 HAPPN-3](https://github.com/happner/happn-protocol/blob/master/automated-docs/happn-3/current/protocol.md)
 --------------------------------
 
-[LATEST PROTOCOL DOCUMENT 1.1.0 HAPPN-2](https://github.com/happner/happn-protocol/blob/master/automated-docs/happn-2/1.1.0/current/protocol.md)
+[LATEST PROTOCOL DOCUMENT 1.1.0 HAPPN-2](https://github.com/happner/happn-protocol/blob/master/automated-docs/happn-2/current/protocol.md)
 --------------------------------
 
 automated protocol documents for happn-3, in format protocol version / happn version
@@ -23,6 +23,13 @@ manual run:
 -----------
 ```bash
 > npm run describe
+
+# check the difference between the 2 current protocols
+
+> npm run describe && git add --all && git commit -m "protocol describe run"
+
+> git diff HEAD:./automated-docs/happn-2/current/protocol.md ./automated-docs/happn-3/current/protocol.md >> ./automated-docs/changes.txt
+
 ```
 
 changes with each protocol update:
