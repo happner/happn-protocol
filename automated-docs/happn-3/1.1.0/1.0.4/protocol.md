@@ -2,12 +2,12 @@
 
 ##PROTOCOL VERSION: 1.1.0
 
-###HAPPN VERSION: 1.0.3
+###HAPPN VERSION: 1.0.4
 #connect a client
 
 ###create a client session and login
 
-(existing client with session id: b9aff142-e841-4028-afc7-7e841613ac8c was already created) ##DIFF_IGNORE
+(existing client with session id: 245d845d-d91f-4c2f-8165-b403e243f3d5 was already created) ##DIFF_IGNORE
 ###client -> server
 ```json
 {
@@ -306,7 +306,7 @@
     "sessionId": "{{guid}}",
     "action": "set",
     "error": {
-      "name": "{{string}}",
+      "name": "Error",
       "cause": {},
       "isOperational": true,
       "message": "Attempt to tag something that doesn't exist in the first place"
@@ -385,10 +385,54 @@
     "sessionId": "{{guid}}",
     "action": "set",
     "error": {
-      "name": "{{string}}",
+      "name": "Error",
       "cause": {},
       "isOperational": true,
       "message": "a fly in the ointment"
+    }
+  }
+}
+```
+###fails to do a set, access denied, unauthorised
+
+###client -> server
+```json
+{
+  "action": "set",
+  "eventId": "{{number, matches handler in client}}",
+  "path": "try/and/set/no/permission",
+  "data": {
+    "access": {
+      "was": "denied"
+    }
+  },
+  "sessionId": "{{guid}}",
+  "options": {
+    "timeout": 30000
+  }
+}
+```
+###server -> client
+```json
+{
+  "data": null,
+  "_meta": {
+    "type": "response",
+    "status": "error",
+    "published": false,
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "set",
+    "error": {
+      "name": "AccessDenied",
+      "cause": {
+        "name": "AccessDenied",
+        "code": 403,
+        "message": "unauthorized"
+      },
+      "isOperational": true,
+      "code": 403,
+      "message": "unauthorized"
     }
   }
 }
@@ -519,10 +563,50 @@
     "sessionId": "{{guid}}",
     "action": "remove",
     "error": {
-      "name": "{{string}}",
+      "name": "Error",
       "cause": {},
       "isOperational": true,
       "message": "a fly in the ointment"
+    }
+  }
+}
+```
+###an error happens when we try and remove an item, access denied
+
+###client -> server
+```json
+{
+  "action": "remove",
+  "eventId": "{{number, matches handler in client}}",
+  "path": "remove/no/permissions",
+  "data": null,
+  "sessionId": "{{guid}}",
+  "options": {
+    "timeout": 30000
+  }
+}
+```
+###server -> client
+```json
+{
+  "data": null,
+  "_meta": {
+    "type": "response",
+    "status": "error",
+    "published": false,
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "remove",
+    "error": {
+      "name": "AccessDenied",
+      "cause": {
+        "name": "AccessDenied",
+        "code": 403,
+        "message": "unauthorized"
+      },
+      "isOperational": true,
+      "code": 403,
+      "message": "unauthorized"
     }
   }
 }
@@ -1094,10 +1178,53 @@
     "sessionId": "{{guid}}",
     "action": "on",
     "error": {
-      "name": "{{string}}",
+      "name": "Error",
       "cause": {},
       "isOperational": true,
       "message": "a fly in the ointment"
+    }
+  }
+}
+```
+###failure to subscribe - access denied
+
+###client -> server
+```json
+{
+  "action": "on",
+  "eventId": "{{number, matches handler in client}}",
+  "path": "/ALL@/subscription/access/denied",
+  "data": null,
+  "sessionId": "{{guid}}",
+  "options": {
+    "event_type": "all",
+    "count": 0,
+    "refCount": 0,
+    "timeout": 30000
+  }
+}
+```
+###server -> client
+```json
+{
+  "data": null,
+  "_meta": {
+    "type": "response",
+    "status": "error",
+    "published": false,
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "on",
+    "error": {
+      "name": "AccessDenied",
+      "cause": {
+        "name": "AccessDenied",
+        "code": 403,
+        "message": "unauthorized"
+      },
+      "isOperational": true,
+      "code": 403,
+      "message": "unauthorized"
     }
   }
 }
@@ -1132,7 +1259,7 @@
 
 *the disconnectAllClients method is called - this method is called on the happn instance shutdown, causing the server to push out a disconnection message to all connected clients*
 
-one connected client remaining, so disconnect warning is sent to it, session id (matches the one stipulated in section 1_1) is:b9aff142-e841-4028-afc7-7e841613ac8c  ##DIFF_IGNORE
+one connected client remaining, so disconnect warning is sent to it, session id (matches the one stipulated in section 1_1) is:245d845d-d91f-4c2f-8165-b403e243f3d5  ##DIFF_IGNORE
 ###server -> client
 ```json
 {

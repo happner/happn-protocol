@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "test": "mocha test",
-    "describe": "node describe"
+    "describe": "node describe && node describe_old"
   },
   "dependencies": {
     "async": "^2.0.1",

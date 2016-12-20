@@ -24,41 +24,26 @@ describe('secure-protocol-operations', function () {
 
   before('should initialize the service', function (callback) {
 
-
     test_id = Date.now() + '_' + require('shortid').generate();
 
     var spyConfig = {
 
-      suppressPrint:false,//make this
+      suppressPrint:true,
 
       log:function(direction, packet){
 
-        if (!suppressPrint) console.log(direction + ':::', packet);
+        if (direction == 'incoming') packetsIn.push(packet);
+        if (direction == 'outgoing') packetsOut.push(packet);
 
-        fs.appendFile(__dirname + path.sep + 'results' + path.sep + test_id + '.log', JSON.stringify(packet, null, 2) + '\r\n');
       }
     };
-
-    var inboundLayers = [
-      function(message, cb){
-        spyConfig.log('in', message);
-        cb(null, message);
-      }
-    ];
-
-    var outboundLayers = [
-      function(message, cb){
-        spyConfig.log('out', message);
-        cb(null, message);
-      }
-    ];
 
     var serviceConfig = {
       secure: true,
       services:{
-        protocol:{
+        pubsub:{
           config:{
-            inboundLayers:inboundLayers
+            transformMiddleware:middleware
           }
         }
       }

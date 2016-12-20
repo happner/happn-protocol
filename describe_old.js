@@ -1,9 +1,9 @@
 var async = require('async');
-var happn = require('happn-3');
+var happn = require('happn');
 var path = require('path');
 var fs = require('fs-extra');
 
-var package = require([__dirname, 'node_modules', 'happn-3', 'package.json'].join(path.sep));
+var package = require([__dirname, 'node_modules', 'happn', 'package.json'].join(path.sep));
 
 var protocol = package.protocol;
 
@@ -20,6 +20,8 @@ var otherClient = null;
 var currentService = null;
 
 var traverse = require('traverse');
+
+var addedTestGroup, addedTestuser;
 
 var ephemerals = {
   timestamp:'number, utc',
@@ -64,7 +66,6 @@ var ephemerals = {
   }
 };
 
-
 var cleanJSON = function(json){
 
   var cloned = JSON.parse(JSON.stringify(json));
@@ -84,44 +85,36 @@ var cleanJSON = function(json){
 
 };
 
-var inboundLayers = [
+var middleware = {
 
-  function(message, cb){
+  incoming: function(message, cb){
 
     if (!currentJob) return cb(null, message);
 
     currentJob.output.push('###client -> server');
-    currentJob.output.push(cleanJSON(message.raw));
 
-    if (['throw/an/error', '/ALL@/subscription/error', 'remove/failed'].indexOf(message.raw.path) > -1) return cb(new Error('a fly in the ointment'));
+    currentJob.output.push(cleanJSON(message.data, null, 2));
 
-    else cb(null, message);
-  }
-];
-
-var outboundLayers = [
-
-  function(message, cb){
+    cb(null, message);
+  },
+  outgoing: function(message, cb){
 
     if (!currentJob) return cb(null, message);
 
     currentJob.output.push('###server -> client');
 
-    if (message.response) currentJob.output.push(cleanJSON(message.response));
-
-    else currentJob.output.push(cleanJSON(message.raw, null, 2));
+    currentJob.output.push(cleanJSON(message.data, null, 2));
 
     cb(null, message);
   }
-];
+};
 
 var serviceConfig = {
   secure: true,
-  services:{
-    protocol:{
+  services: {
+    pubsub:{
       config:{
-        inboundLayers:inboundLayers,
-        outboundLayers:outboundLayers
+        transformMiddleware: [{instance:middleware}]
       }
     }
   }
@@ -140,9 +133,25 @@ var jobs = [
       var _this = this;
 
       happn.service.create(params.config, function(e, service){
+
         currentService = service;
+        
+        var previousFunct = currentService.services.pubsub.handle_message;
+
+        //cut in here
+        currentService.services.pubsub.handle_message = function(message, socketInstance){
+
+          if (['throw/an/error', '/ALL@/subscription/error', 'remove/failed'].indexOf(message.path) > -1) {
+            var error = new Error('a fly in the ointment');
+            return currentService.services.pubsub.handleDataResponseSocket(error, message, null, socketInstance);
+          }
+
+          previousFunct.call(currentService.services.pubsub, message, socketInstance);
+        };
+
         _this.output.push('##PROTOCOL VERSION: ' + protocol + '\r\n');
         _this.output.push('###HAPPN VERSION: ' + version);
+
         cb(null, _this.output);
       });
     }
@@ -178,43 +187,43 @@ var jobs = [
         }
       };
 
-      currentService.services.security.users.upsertGroup(testGroup, {overwrite: false}, function (e, result) {
+      currentService.services.security.upsertGroup(testGroup, {overwrite: false}, function (e, result) {
 
         if (e) return cb(e);
         addedTestGroup = result;
 
-        currentService.services.security.users.upsertUser(testUser, {overwrite: false}, function (e, result) {
+        currentService.services.security.upsertUser(testUser, {overwrite: false}, function (e, result) {
+
+          if (e) return cb(e);
+          addedTestuser = result;
+
+          currentService.services.security.linkGroup(addedTestGroup, addedTestuser, function (e) {
 
             if (e) return cb(e);
-            addedTestuser = result;
 
-            currentService.services.security.users.linkGroup(addedTestGroup, addedTestuser, function (e) {
+            happn.client.create(testUser, function(e, instance){
 
               if (e) return cb(e);
 
-              happn.client.create(testUser, function(e, instance){
+              otherClient = instance;
 
-                if (e) return cb(e);
+              _this.output = ['(existing client with session id: ' + otherClient.session.id + ' was already created) ##DIFF_IGNORE'];//we only want to demonstrate the login sequence once
 
-                otherClient = instance;
+              setTimeout(function(){
 
-                _this.output = ['(existing client with session id: ' + otherClient.session.id + ' was already created) ##DIFF_IGNORE'];//we only want to demonstrate the login sequence once
+                happn.client.create(params.config, function(e, instance){
 
-                setTimeout(function(){
+                  if (e) return cb(e);
 
-                  happn.client.create(params.config, function(e, instance){
+                  currentClient = instance;
 
-                    if (e) return cb(e);
+                  cb(null, _this.output);
 
-                    currentClient = instance;
+                });
 
-                    cb(null, _this.output);
-
-                  });
-
-                }, 1000);
-              });
+              }, 1000);
             });
+          });
         });
       });
     }
@@ -811,28 +820,6 @@ var jobs = [
       })
     }
   }
-  ,{
-    step:'disconnect from server',
-    text:'when a client is forcefully diconnected from the server side, or when a service shutdown happens, all clients are notified a disconnection is imminent',
-    description:'the disconnectAllClients method is called - this method is called on the happn instance shutdown, causing the server to push out a disconnection message to all connected clients',
-    parameters:{
-      path:'/subscription/error',
-      options:{}
-    },
-
-    do:function(params, cb){
-
-      var _this = this;
-
-      _this.output.push('one connected client remaining, so disconnect warning is sent to it, session id (matches the one stipulated in section 1_1) is:' + otherClient.session.id + '  ##DIFF_IGNORE');
-
-      currentService.services.session.disconnectAllClients(function(e){
-
-        if (e) return cb(e);
-        cb(null, _this.output);
-      })
-    }
-  }
 ];
 
 var protocolReport = [];
@@ -872,24 +859,24 @@ async.eachSeries(jobs, function(job, jobCB){
 
 function writeReportToFile(){
 
-  var outputFile = __dirname + path.sep + 'automated-docs' + path.sep + 'happn-3' + path.sep + protocol + path.sep + version + path.sep + 'protocol.md';
-  var outputFileCurrent = __dirname + path.sep + 'automated-docs' + path.sep + 'happn-3' + path.sep + protocol + path.sep + 'current' + path.sep + 'protocol.md';
+  var outputFile = __dirname + path.sep + 'automated-docs' + path.sep + 'happn-2' + path.sep + protocol + path.sep + version + path.sep + 'protocol.md';
 
-  fs.ensureDirSync(__dirname + path.sep + 'automated-docs' + path.sep + 'happn-3' + path.sep + protocol + path.sep + version);
+  var outputFileCurrent = __dirname + path.sep + 'automated-docs' + path.sep + 'happn-2' + path.sep + protocol + path.sep + 'current' + path.sep + 'protocol.md';
 
-  fs.ensureDirSync(__dirname + path.sep + 'automated-docs' + path.sep + 'happn-3' + path.sep + protocol + path.sep + 'current');
+  fs.ensureDirSync(__dirname + path.sep + 'automated-docs' + path.sep + 'happn-2' + path.sep + protocol + path.sep + version);
+
+  fs.ensureDirSync(__dirname + path.sep + 'automated-docs' + path.sep + 'happn-2' + path.sep + protocol + path.sep + 'current');
 
   try{
 
     fs.unlinkSync(outputFile);
     fs.unlinkSync(outputFileCurrent);
-
   }catch(e){}
 
   protocolReport.forEach(function(line){
     fs.appendFileSync(outputFile, line + '\r\n');
     fs.appendFileSync(outputFileCurrent, line + '\r\n');
   });
-  
+
   return outputFile;
 }
