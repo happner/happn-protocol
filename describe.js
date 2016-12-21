@@ -21,6 +21,12 @@ var currentService = null;
 
 var traverse = require('traverse');
 
+var addedTestGroup, addedTestuser;
+
+var dateFormat = require('dateformat');
+
+var now = new Date();
+
 var ephemerals = {
   timestamp:'number, utc',
   _id:'matches path if nedb, generated if mongo',
@@ -156,9 +162,13 @@ var jobs = [
       var _this = this;
 
       happn.service.create(params.config, function(e, service){
+
         currentService = service;
-        _this.output.push('##PROTOCOL VERSION: ' + protocol + '\r\n');
+
+        _this.output.push('##PROTOCOL VERSION: ' + protocol);
         _this.output.push('###HAPPN VERSION: ' + version);
+        _this.output.push('####RUN: ' + dateFormat(now, "yyyy mmmm dd hh:MM"));
+
         cb(null, _this.output);
       });
     }

@@ -13,11 +13,12 @@ happn protocol
 
 automated protocol documents for happn-3, in format protocol version / happn version
 
-- [1.2.0/1.1.0](https://github.com/happner/happn-protocol/blob/master/automated-docs/happn-3/1.1.0/1.0.4/protocol.md)
+- [1.1.0/1.0.4](https://github.com/happner/happn-protocol/blob/master/automated-docs/happn-3/1.1.0/1.0.4/protocol.md)
+- [1.2.0/1.1.0](https://github.com/happner/happn-protocol/blob/master/automated-docs/happn-3/1.2.0/1.1.0/protocol.md)
 
 automated protocol documents for happn-2, in format protocol version / happn version
 
-- [1.1.0/2.16.3](https://github.com/happner/happn-protocol/blob/master/automated-docs/happn-2/2.16.3/2.16.3/protocol.md)
+- [1.1.0/2.16.3](https://github.com/happner/happn-protocol/blob/master/automated-docs/happn-2/1.1.0/2.16.3/protocol.md)
 
 manual run:
 -----------

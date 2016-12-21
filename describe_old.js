@@ -23,6 +23,10 @@ var traverse = require('traverse');
 
 var addedTestGroup, addedTestuser;
 
+var dateFormat = require('dateformat');
+
+var now = new Date();
+
 var ephemerals = {
   timestamp:'number, utc',
   _id:'matches path if nedb, generated if mongo',
@@ -159,8 +163,9 @@ var jobs = [
           previousFunct.call(currentService.services.pubsub, message, socketInstance);
         };
 
-        _this.output.push('##PROTOCOL VERSION: ' + protocol + '\r\n');
+        _this.output.push('##PROTOCOL VERSION: ' + protocol);
         _this.output.push('###HAPPN VERSION: ' + version);
+        _this.output.push('####RUN DATE: ' + dateFormat(now, "yyyy mmmm dd hh:MM"));
 
         cb(null, _this.output);
       });
