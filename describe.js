@@ -241,7 +241,7 @@ var jobs = [
     heading:'set',
     text:'set a piece of data using a key value pair',
     parameters:{
-      path:'set/some/data',
+      path:'/set/some/data',
       val:{data:{was:'set'}}
     },
     do:function(params, cb){
@@ -261,7 +261,7 @@ var jobs = [
     step:'merge data',
     text:'merge some new values with an existing record, NB: the merge only goes 1 property level deep',
     parameters:{
-      path:'set/some/data',
+      path:'/set/some/data',
       val:{an: {additional: 'field'}}
     },
     do:function(params, cb){
@@ -282,7 +282,7 @@ var jobs = [
     text:'tag some existing data',
     description:'tag an existing record, a clone of the record gets stored under /_TAGS/{{tagged record path}}',
     parameters:{
-      path:'set/some/data'
+      path:'/set/some/data'
     },
     do:function(params, cb){
 
