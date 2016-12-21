@@ -22,6 +22,7 @@ automated protocol documents for happn-2, in format protocol version / happn ver
 manual run:
 -----------
 ```bash
+
 > npm run describe
 
 # check the difference between the 2 current protocols

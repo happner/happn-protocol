@@ -132,6 +132,16 @@ var jobs = [
 
       var _this = this;
 
+      function TestError(message, reason) {
+
+        this.name = 'TestError';
+        this.message = message;
+
+        if (reason) this.reason = reason;
+      }
+
+      TestError.prototype = Error.prototype;
+
       happn.service.create(params.config, function(e, service){
 
         currentService = service;
@@ -142,7 +152,7 @@ var jobs = [
         currentService.services.pubsub.handle_message = function(message, socketInstance){
 
           if (['throw/an/error', '/ALL@/subscription/error', 'remove/failed'].indexOf(message.path) > -1) {
-            var error = new Error('a fly in the ointment');
+            var error = new TestError('a fly in the ointment');
             return currentService.services.pubsub.handleDataResponseSocket(error, message, null, socketInstance);
           }
 
@@ -481,7 +491,7 @@ var jobs = [
   {
     step:'receive event',
     text:'set a piece of data, and get the event back based on the subscription in the previous step',
-    description:'the item from the server with the property \'publication\' is the emitted event - the other server -> client message is the response on the set action',
+    description:'the item from the server with the _meta.type \'data\' is the emitted event - the other server -> client message with _meta.type \'response\' is the response on the set action',
     parameters:{
       path:'/subscribe/on/all/events',
       val:{data:{was:'set'}}
@@ -551,7 +561,7 @@ var jobs = [
   {
     step:'receive event',
     text:'set a piece of data, and get the event back based on the subscription in the previous step',
-    description:'the item from the server with the property \'publication\' is the emitted event - the other server -> client message is the response on the set action',
+    description:'the item from the server with the _meta.type \'data\' is the emitted event - the other server -> client message with _meta.type \'response\' is the response on the set action',
     parameters:{
       path:'/subscribe/on/specific',
       val:{data:{was:'set'}}
@@ -613,7 +623,7 @@ var jobs = [
   {
     step:'receive remove event',
     text:'remove a piece of data, and get the event back based on the subscription in the previous step',
-    description:'the item from the server with the property \'publication\' is the emitted event - the other server -> client message is the response on the remove action',
+    description:'the item from the server with the _meta.type \'data\' is the emitted event - the other server -> client message with _meta.type \'response\' is the response on the remove action',
     parameters:{
       path:'/subscribe/on/remove',
       val:{data:{was:'removed'}}
@@ -668,7 +678,7 @@ var jobs = [
   {
     step:'receive event then unsubscribe',
     text:'set a piece of data, and get the event back based on the subscription in the previous step',
-    description:'the item from the server with the property \'publication\' is the emitted event - the other server -> client message is the response on the set action',
+    description:'the item from the server with the _meta.type \'data\' is the emitted event - the other server -> client message with _meta.type \'response\' is the response on the set action',
     parameters:{
       path:'/subscribe/once',
       val:{data:{was:'set'}}
@@ -723,7 +733,7 @@ var jobs = [
   {
     step:'don\'t receive event',
     text:'set a piece of data, and get a response from the server, but no publication because noPublish was set to true',
-    description:'the item from the server with the property \'publication\' is the emitted event - the other server -> client message is the response on the set action',
+    description:'the item from the server with the _meta.type \'data\' is the emitted event - the other server -> client message with _meta.type \'response\' is the response on the set action',
     parameters:{
       path:'/subscribe/noPublish',
       val:{data:{was:'set'}},

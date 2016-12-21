@@ -84,6 +84,16 @@ var cleanJSON = function(json){
 
 };
 
+function TestError(message, reason) {
+
+  this.name = 'TestError';
+  this.message = message;
+
+  if (reason) this.reason = reason;
+}
+
+TestError.prototype = Error.prototype;
+
 var inboundLayers = [
 
   function(message, cb){
@@ -91,9 +101,10 @@ var inboundLayers = [
     if (!currentJob) return cb(null, message);
 
     currentJob.output.push('###client -> server');
+
     currentJob.output.push(cleanJSON(message.raw));
 
-    if (['throw/an/error', '/ALL@/subscription/error', 'remove/failed'].indexOf(message.raw.path) > -1) return cb(new Error('a fly in the ointment'));
+    if (['throw/an/error', '/ALL@/subscription/error', 'remove/failed'].indexOf(message.raw.path) > -1) return cb(new TestError('a fly in the ointment'));
 
     else cb(null, message);
   }
@@ -109,7 +120,12 @@ var outboundLayers = [
 
     if (message.response) currentJob.output.push(cleanJSON(message.response));
 
-    else currentJob.output.push(cleanJSON(message.raw, null, 2));
+    else {
+
+      if (message.request && message.request.publication) currentJob.output.push(cleanJSON(message.request.publication, null, 2));
+
+      else currentJob.output.push(cleanJSON(message.raw, null, 2));
+    }
 
     cb(null, message);
   }
@@ -472,7 +488,7 @@ var jobs = [
   {
     step:'receive event',
     text:'set a piece of data, and get the event back based on the subscription in the previous step',
-    description:'the item from the server with the property \'publication\' is the emitted event - the other server -> client message is the response on the set action',
+    description:'the item from the server with the _meta.type \'data\' is the emitted event - the other server -> client message with _meta.type \'response\' is the response on the set action',
     parameters:{
       path:'/subscribe/on/all/events',
       val:{data:{was:'set'}}
@@ -542,7 +558,7 @@ var jobs = [
   {
     step:'receive event',
     text:'set a piece of data, and get the event back based on the subscription in the previous step',
-    description:'the item from the server with the property \'publication\' is the emitted event - the other server -> client message is the response on the set action',
+    description:'the item from the server with the _meta.type \'data\' is the emitted event - the other server -> client message with _meta.type \'response\' is the response on the set action',
     parameters:{
       path:'/subscribe/on/specific',
       val:{data:{was:'set'}}
@@ -604,7 +620,7 @@ var jobs = [
   {
     step:'receive remove event',
     text:'remove a piece of data, and get the event back based on the subscription in the previous step',
-    description:'the item from the server with the property \'publication\' is the emitted event - the other server -> client message is the response on the remove action',
+    description:'the item from the server with the _meta.type \'data\' is the emitted event - the other server -> client message with _meta.type \'response\' is the response on the remove action',
     parameters:{
       path:'/subscribe/on/remove',
       val:{data:{was:'removed'}}
@@ -659,7 +675,7 @@ var jobs = [
   {
     step:'receive event then unsubscribe',
     text:'set a piece of data, and get the event back based on the subscription in the previous step',
-    description:'the item from the server with the property \'publication\' is the emitted event - the other server -> client message is the response on the set action',
+    description:'the item from the server with the _meta.type \'data\' is the emitted event - the other server -> client message with _meta.type \'response\' is the response on the set action',
     parameters:{
       path:'/subscribe/once',
       val:{data:{was:'set'}}
@@ -714,7 +730,7 @@ var jobs = [
   {
     step:'don\'t receive event',
     text:'set a piece of data, and get a response from the server, but no publication because noPublish was set to true',
-    description:'the item from the server with the property \'publication\' is the emitted event - the other server -> client message is the response on the set action',
+    description:'the item from the server with the _meta.type \'data\' is the emitted event - the other server -> client message with _meta.type \'response\' is the response on the set action',
     parameters:{
       path:'/subscribe/noPublish',
       val:{data:{was:'set'}},

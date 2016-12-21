@@ -7,7 +7,7 @@
 
 ###create a client session and login
 
-(existing client with session id: 8f34ac34-55dd-4dc9-a9b3-d52822e80649 was already created) ##DIFF_IGNORE
+(existing client with session id: d00faa2d-e4ea-432c-8e45-ca692062572f was already created) ##DIFF_IGNORE
 ###client -> server
 ```json
 {
@@ -210,7 +210,7 @@
   "_meta": {
     "created": "{{number, utc}}",
     "modified": "{{number, utc}}",
-    "path": "/_TAGSset/some/data/15f7b84fca014cbe8aabd11bddb426d5",
+    "path": "/_TAGSset/some/data/66e285e5cffe42378daa4109301c5ce7",
     "tag": "MYTAG",
     "type": "response",
     "status": "ok",
@@ -252,7 +252,7 @@
   "_meta": {
     "created": "{{number, utc}}",
     "modified": "{{number, utc}}",
-    "path": "/_TAGStag/non-existent/a0afc782995442a1b87774ae3ce07a7c",
+    "path": "/_TAGStag/non-existent/920aec3f72c54eb7ab056a85603b4418",
     "tag": "MYTAG",
     "type": "response",
     "status": "ok",
@@ -337,7 +337,8 @@
     "sessionId": "{{guid}}",
     "action": "set",
     "error": {
-      "name": "Error: a fly in the ointment"
+      "name": "TestError",
+      "message": "a fly in the ointment"
     }
   },
   "protocol": "1.1.0"
@@ -511,7 +512,8 @@
     "sessionId": "{{guid}}",
     "action": "remove",
     "error": {
-      "name": "Error: a fly in the ointment"
+      "name": "TestError",
+      "message": "a fly in the ointment"
     }
   },
   "protocol": "1.1.0"
@@ -588,7 +590,7 @@
 ```
 ###set a piece of data, and get the event back based on the subscription in the previous step
 
-*the item from the server with the property 'publication' is the emitted event - the other server -> client message is the response on the set action*
+*the item from the server with the _meta.type 'data' is the emitted event - the other server -> client message with _meta.type 'response' is the response on the set action*
 
 ###client -> server
 ```json
@@ -716,7 +718,7 @@
 ```
 ###set a piece of data, and get the event back based on the subscription in the previous step
 
-*the item from the server with the property 'publication' is the emitted event - the other server -> client message is the response on the set action*
+*the item from the server with the _meta.type 'data' is the emitted event - the other server -> client message with _meta.type 'response' is the response on the set action*
 
 ###client -> server
 ```json
@@ -814,7 +816,7 @@
 ```
 ###remove a piece of data, and get the event back based on the subscription in the previous step
 
-*the item from the server with the property 'publication' is the emitted event - the other server -> client message is the response on the remove action*
+*the item from the server with the _meta.type 'data' is the emitted event - the other server -> client message with _meta.type 'response' is the response on the remove action*
 
 ###client -> server
 ```json
@@ -900,7 +902,7 @@
 ```
 ###set a piece of data, and get the event back based on the subscription in the previous step
 
-*the item from the server with the property 'publication' is the emitted event - the other server -> client message is the response on the set action*
+*the item from the server with the _meta.type 'data' is the emitted event - the other server -> client message with _meta.type 'response' is the response on the set action*
 
 ###client -> server
 ```json
@@ -1026,7 +1028,7 @@
 ```
 ###set a piece of data, and get a response from the server, but no publication because noPublish was set to true
 
-*the item from the server with the property 'publication' is the emitted event - the other server -> client message is the response on the set action*
+*the item from the server with the _meta.type 'data' is the emitted event - the other server -> client message with _meta.type 'response' is the response on the set action*
 
 ###client -> server
 ```json
@@ -1099,7 +1101,8 @@
     "sessionId": "{{guid}}",
     "action": "on",
     "error": {
-      "name": "Error: a fly in the ointment"
+      "name": "TestError",
+      "message": "a fly in the ointment"
     }
   },
   "protocol": "1.1.0"

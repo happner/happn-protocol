@@ -7,7 +7,7 @@
 
 ###create a client session and login
 
-(existing client with session id: e87e7320-fa1d-4056-b448-786bc4e525e6 was already created) ##DIFF_IGNORE
+(existing client with session id: 4ef1f79b-247c-4327-a11f-1b6038d7cb28 was already created) ##DIFF_IGNORE
 ###client -> server
 ```json
 {
@@ -385,8 +385,11 @@
     "sessionId": "{{guid}}",
     "action": "set",
     "error": {
-      "name": "Error",
-      "cause": {},
+      "name": "TestError",
+      "cause": {
+        "name": "TestError",
+        "message": "a fly in the ointment"
+      },
       "isOperational": true,
       "message": "a fly in the ointment"
     }
@@ -563,8 +566,11 @@
     "sessionId": "{{guid}}",
     "action": "remove",
     "error": {
-      "name": "Error",
-      "cause": {},
+      "name": "TestError",
+      "cause": {
+        "name": "TestError",
+        "message": "a fly in the ointment"
+      },
       "isOperational": true,
       "message": "a fly in the ointment"
     }
@@ -647,7 +653,7 @@
 ```
 ###set a piece of data, and get the event back based on the subscription in the previous step
 
-*the item from the server with the property 'publication' is the emitted event - the other server -> client message is the response on the set action*
+*the item from the server with the _meta.type 'data' is the emitted event - the other server -> client message with _meta.type 'response' is the response on the set action*
 
 ###client -> server
 ```json
@@ -669,29 +675,22 @@
 ###server -> client
 ```json
 {
-  "publication": {
+  "data": {
     "data": {
-      "data": {
-        "was": "set"
-      }
-    },
-    "_meta": {
-      "created": "{{number, utc}}",
-      "modified": "{{number, utc}}",
-      "modifiedBy": "_ADMIN",
-      "path": "/subscribe/on/all/events",
-      "action": "/SET@/subscribe/on/all/events",
-      "type": "data",
-      "channel": "/ALL@*",
-      "sessionId": "{{guid}}"
-    },
-    "__outbound": true
+      "was": "set"
+    }
   },
-  "channel": "/ALL@*",
-  "opts": {
-    "clone": false
+  "_meta": {
+    "created": "{{number, utc}}",
+    "modified": "{{number, utc}}",
+    "modifiedBy": "_ADMIN",
+    "path": "/subscribe/on/all/events",
+    "action": "/SET@/subscribe/on/all/events",
+    "type": "data",
+    "channel": "/ALL@*",
+    "sessionId": "{{guid}}"
   },
-  "action": "emit"
+  "__outbound": true
 }
 ```
 ###server -> client
@@ -780,7 +779,7 @@
 ```
 ###set a piece of data, and get the event back based on the subscription in the previous step
 
-*the item from the server with the property 'publication' is the emitted event - the other server -> client message is the response on the set action*
+*the item from the server with the _meta.type 'data' is the emitted event - the other server -> client message with _meta.type 'response' is the response on the set action*
 
 ###client -> server
 ```json
@@ -802,29 +801,22 @@
 ###server -> client
 ```json
 {
-  "publication": {
+  "data": {
     "data": {
-      "data": {
-        "was": "set"
-      }
-    },
-    "_meta": {
-      "created": "{{number, utc}}",
-      "modified": "{{number, utc}}",
-      "modifiedBy": "_ADMIN",
-      "path": "/subscribe/on/specific",
-      "action": "/SET@/subscribe/on/specific",
-      "type": "data",
-      "channel": "/SET@/subscribe/on/specific",
-      "sessionId": "{{guid}}"
-    },
-    "__outbound": true
+      "was": "set"
+    }
   },
-  "channel": "/SET@/subscribe/on/specific",
-  "opts": {
-    "clone": false
+  "_meta": {
+    "created": "{{number, utc}}",
+    "modified": "{{number, utc}}",
+    "modifiedBy": "_ADMIN",
+    "path": "/subscribe/on/specific",
+    "action": "/SET@/subscribe/on/specific",
+    "type": "data",
+    "channel": "/SET@/subscribe/on/specific",
+    "sessionId": "{{guid}}"
   },
-  "action": "emit"
+  "__outbound": true
 }
 ```
 ###server -> client
@@ -884,7 +876,7 @@
 ```
 ###remove a piece of data, and get the event back based on the subscription in the previous step
 
-*the item from the server with the property 'publication' is the emitted event - the other server -> client message is the response on the remove action*
+*the item from the server with the _meta.type 'data' is the emitted event - the other server -> client message with _meta.type 'response' is the response on the remove action*
 
 ###client -> server
 ```json
@@ -902,25 +894,18 @@
 ###server -> client
 ```json
 {
-  "publication": {
-    "data": {
-      "removed": 1
-    },
-    "_meta": {
-      "timestamp": "{{number, utc}}",
-      "path": "/subscribe/on/remove",
-      "action": "/REMOVE@/subscribe/on/remove",
-      "type": "data",
-      "channel": "/REMOVE@/subscribe/on/remove",
-      "sessionId": "{{guid}}"
-    },
-    "__outbound": true
+  "data": {
+    "removed": 1
   },
-  "channel": "/REMOVE@/subscribe/on/remove",
-  "opts": {
-    "clone": false
+  "_meta": {
+    "timestamp": "{{number, utc}}",
+    "path": "/subscribe/on/remove",
+    "action": "/REMOVE@/subscribe/on/remove",
+    "type": "data",
+    "channel": "/REMOVE@/subscribe/on/remove",
+    "sessionId": "{{guid}}"
   },
-  "action": "emit"
+  "__outbound": true
 }
 ```
 ###server -> client
@@ -975,7 +960,7 @@
 ```
 ###set a piece of data, and get the event back based on the subscription in the previous step
 
-*the item from the server with the property 'publication' is the emitted event - the other server -> client message is the response on the set action*
+*the item from the server with the _meta.type 'data' is the emitted event - the other server -> client message with _meta.type 'response' is the response on the set action*
 
 ###client -> server
 ```json
@@ -997,29 +982,22 @@
 ###server -> client
 ```json
 {
-  "publication": {
+  "data": {
     "data": {
-      "data": {
-        "was": "set"
-      }
-    },
-    "_meta": {
-      "created": "{{number, utc}}",
-      "modified": "{{number, utc}}",
-      "modifiedBy": "_ADMIN",
-      "path": "/subscribe/once",
-      "action": "/SET@/subscribe/once",
-      "type": "data",
-      "channel": "/ALL@/subscribe/once",
-      "sessionId": "{{guid}}"
-    },
-    "__outbound": true
+      "was": "set"
+    }
   },
-  "channel": "/ALL@/subscribe/once",
-  "opts": {
-    "clone": false
+  "_meta": {
+    "created": "{{number, utc}}",
+    "modified": "{{number, utc}}",
+    "modifiedBy": "_ADMIN",
+    "path": "/subscribe/once",
+    "action": "/SET@/subscribe/once",
+    "type": "data",
+    "channel": "/ALL@/subscribe/once",
+    "sessionId": "{{guid}}"
   },
-  "action": "emit"
+  "__outbound": true
 }
 ```
 ###client -> server
@@ -1106,7 +1084,7 @@
 ```
 ###set a piece of data, and get a response from the server, but no publication because noPublish was set to true
 
-*the item from the server with the property 'publication' is the emitted event - the other server -> client message is the response on the set action*
+*the item from the server with the _meta.type 'data' is the emitted event - the other server -> client message with _meta.type 'response' is the response on the set action*
 
 ###client -> server
 ```json
@@ -1178,8 +1156,11 @@
     "sessionId": "{{guid}}",
     "action": "on",
     "error": {
-      "name": "Error",
-      "cause": {},
+      "name": "TestError",
+      "cause": {
+        "name": "TestError",
+        "message": "a fly in the ointment"
+      },
       "isOperational": true,
       "message": "a fly in the ointment"
     }
@@ -1259,7 +1240,7 @@
 
 *the disconnectAllClients method is called - this method is called on the happn instance shutdown, causing the server to push out a disconnection message to all connected clients*
 
-one connected client remaining, so disconnect warning is sent to it, session id (matches the one stipulated in section 1_1) is:e87e7320-fa1d-4056-b448-786bc4e525e6  ##DIFF_IGNORE
+one connected client remaining, so disconnect warning is sent to it, session id (matches the one stipulated in section 1_1) is:4ef1f79b-247c-4327-a11f-1b6038d7cb28  ##DIFF_IGNORE
 ###server -> client
 ```json
 {
