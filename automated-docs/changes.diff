@@ -1,0 +1,1143 @@
+diff --git a/HEAD:./automated-docs/happn-2/current/protocol.md b/HEAD:./automated-docs/happn-3/current/protocol.md
+index 84d742d..76d481d 100644
+--- a/HEAD:./automated-docs/happn-2/current/protocol.md
++++ b/HEAD:./automated-docs/happn-3/current/protocol.md
+@@ -2,18 +2,40 @@
+ 
+ ##PROTOCOL VERSION: 1.1.0
+ 
+-###HAPPN VERSION: 2.16.3
++###HAPPN VERSION: 1.0.4
+ #connect a client
+ 
+ ###create a client session and login
+ 
+-(existing client with session id: d00faa2d-e4ea-432c-8e45-ca692062572f was already created) ##DIFF_IGNORE
++(existing client with session id: 4ef1f79b-247c-4327-a11f-1b6038d7cb28 was already created) ##DIFF_IGNORE
+ ###client -> server
+ ```json
+ {
+-  "action": "describe",
++  "action": "configure-session",
+   "eventId": "{{number, matches handler in client}}",
+-  "protocol": "1.1.0"
++  "data": {
++    "protocol": "happn_1.1.0"
++  }
++}
++```
++###server -> client
++```json
++{
++  "data": null,
++  "_meta": {
++    "type": "response",
++    "status": "ok",
++    "published": false,
++    "eventId": "{{number, matches handler in client}}",
++    "action": "configure-session"
++  }
++}
++```
++###client -> server
++```json
++{
++  "action": "describe",
++  "eventId": "{{number, matches handler in client}}"
+ }
+ ```
+ ###server -> client
+@@ -31,8 +53,7 @@
+     "published": false,
+     "eventId": "{{number, matches handler in client}}",
+     "action": "describe"
+-  },
+-  "protocol": "1.1.0"
++  }
+ }
+ ```
+ ###client -> server
+@@ -43,11 +64,13 @@
+   "data": {
+     "username": "_ADMIN",
+     "info": {
+-      "_browser": false
++      "_browser": false,
++      "_local": false
+     },
+-    "password": "happn"
+-  },
+-  "protocol": "1.1.0"
++    "protocol": "happn_1.1.0",
++    "password": "happn",
++    "publicKey": "{{ECDSA public key}}"
++  }
+ }
+ ```
+ ###server -> client
+@@ -55,20 +78,53 @@
+ {
+   "data": {
+     "id": "{{guid}}",
+-    "token": "{{string, jwt token}}",
+-    "timestamp": "{{number, utc}}",
++    "protocol": "happn_1.1.0",
++    "happn": {
++      "name": "{{string}}",
++      "secure": true,
++      "encryptPayloads": false,
++      "publicKey": "{{ECDSA public key}}"
++    },
+     "info": {
+       "_browser": false,
+-      "_local": false,
+-      "happn": {
+-        "name": "{{string}}"
+-      }
++      "_local": false
+     },
+-    "index": 1,
+     "type": 1,
+     "user": {
+-      "username": "_ADMIN"
+-    }
++      "custom_data": {},
++      "username": "_ADMIN",
++      "_meta": {
++        "created": "{{number, utc}}",
++        "modified": "{{number, utc}}",
++        "path": "/_SYSTEM/_SECURITY/_USER/_ADMIN",
++        "_id": "{{matches path if nedb, generated if mongo}}"
++      },
++      "groups": {
++        "_ADMIN": {
++          "data": {},
++          "_meta": {
++            "created": "{{number, utc}}",
++            "modified": "{{number, utc}}",
++            "path": "/_SYSTEM/_SECURITY/_USER/_ADMIN/_USER_GROUP/_ADMIN",
++            "_id": "{{matches path if nedb, generated if mongo}}"
++          }
++        }
++      }
++    },
++    "timestamp": "{{number, utc}}",
++    "isEncrypted": false,
++    "policy": {
++      "0": {
++        "ttl": 0,
++        "inactivity_threshold": null
++      },
++      "1": {
++        "ttl": 0,
++        "inactivity_threshold": null
++      }
++    },
++    "permissionSetKey": "/_ADMIN/",
++    "token": "{{string, jwt token}}"
+   },
+   "_meta": {
+     "type": "response",
+@@ -76,8 +132,7 @@
+     "published": false,
+     "eventId": "{{number, matches handler in client}}",
+     "action": "login"
+-  },
+-  "protocol": "1.1.0"
++  }
+ }
+ ```
+ #set
+@@ -97,9 +152,8 @@
+   },
+   "sessionId": "{{guid}}",
+   "options": {
+-    "timeout": 20000
+-  },
+-  "protocol": "1.1.0"
++    "timeout": 30000
++  }
+ }
+ ```
+ ###server -> client
+@@ -113,15 +167,15 @@
+   "_meta": {
+     "created": "{{number, utc}}",
+     "modified": "{{number, utc}}",
++    "modifiedBy": "_ADMIN",
+     "path": "set/some/data",
++    "action": "set",
+     "type": "response",
+-    "status": "ok",
+     "published": true,
++    "status": "ok",
+     "eventId": "{{number, matches handler in client}}",
+-    "sessionId": "{{guid}}",
+-    "action": "/SET@set/some/data"
+-  },
+-  "protocol": "1.1.0"
++    "sessionId": "{{guid}}"
++  }
+ }
+ ```
+ ###merge some new values with an existing record, NB: the merge only goes 1 property level deep
+@@ -140,9 +194,8 @@
+   "sessionId": "{{guid}}",
+   "options": {
+     "merge": true,
+-    "timeout": 20000
+-  },
+-  "protocol": "1.1.0"
++    "timeout": 30000
++  }
+ }
+ ```
+ ###server -> client
+@@ -160,14 +213,13 @@
+     "created": "{{number, utc}}",
+     "modified": "{{number, utc}}",
+     "path": "set/some/data",
++    "action": "set",
+     "type": "response",
+-    "status": "ok",
+     "published": true,
++    "status": "ok",
+     "eventId": "{{number, matches handler in client}}",
+-    "sessionId": "{{guid}}",
+-    "action": "/SET@set/some/data"
+-  },
+-  "protocol": "1.1.0"
++    "sessionId": "{{guid}}"
++  }
+ }
+ ```
+ ###tag some existing data
+@@ -180,12 +232,13 @@
+   "action": "set",
+   "eventId": "{{number, matches handler in client}}",
+   "path": "set/some/data",
++  "data": null,
+   "sessionId": "{{guid}}",
+   "options": {
+     "tag": "MYTAG",
+-    "timeout": 20000
+-  },
+-  "protocol": "1.1.0"
++    "nullValue": true,
++    "timeout": 30000
++  }
+ }
+ ```
+ ###server -> client
+@@ -201,7 +254,8 @@
+       }
+     },
+     "_meta": {
+-      "path": "set/some/data"
++      "path": "set/some/data",
++      "modifiedBy": "_ADMIN"
+     },
+     "created": "{{number, utc}}",
+     "modified": "{{number, utc}}",
+@@ -210,16 +264,15 @@
+   "_meta": {
+     "created": "{{number, utc}}",
+     "modified": "{{number, utc}}",
+-    "path": "/_TAGSset/some/data/66e285e5cffe42378daa4109301c5ce7",
++    "path": "{{/_TAGS/set/some/data/[unique generated id]}}",
+     "tag": "MYTAG",
++    "action": "set",
+     "type": "response",
+-    "status": "ok",
+     "published": true,
++    "status": "ok",
+     "eventId": "{{number, matches handler in client}}",
+-    "sessionId": "{{guid}}",
+-    "action": "/SET@set/some/data"
+-  },
+-  "protocol": "1.1.0"
++    "sessionId": "{{guid}}"
++  }
+ }
+ ```
+ ###tag failure
+@@ -232,36 +285,33 @@
+   "action": "set",
+   "eventId": "{{number, matches handler in client}}",
+   "path": "tag/non-existent",
++  "data": null,
+   "sessionId": "{{guid}}",
+   "options": {
+     "tag": "MYTAG",
+-    "timeout": 20000
+-  },
+-  "protocol": "1.1.0"
++    "nullValue": true,
++    "timeout": 30000
++  }
+ }
+ ```
+ ###server -> client
+ ```json
+ {
+-  "data": {
+-    "data": {},
+-    "_meta": {
+-      "path": "tag/non-existent"
+-    }
+-  },
++  "data": null,
+   "_meta": {
+-    "created": "{{number, utc}}",
+-    "modified": "{{number, utc}}",
+-    "path": "/_TAGStag/non-existent/920aec3f72c54eb7ab056a85603b4418",
+-    "tag": "MYTAG",
+     "type": "response",
+-    "status": "ok",
+-    "published": true,
++    "status": "error",
++    "published": false,
+     "eventId": "{{number, matches handler in client}}",
+     "sessionId": "{{guid}}",
+-    "action": "/SET@tag/non-existent"
+-  },
+-  "protocol": "1.1.0"
++    "action": "set",
++    "error": {
++      "name": "Error",
++      "cause": {},
++      "isOperational": true,
++      "message": "Attempt to tag something that doesn't exist in the first place"
++    }
++  }
+ }
+ ```
+ ###setSibling
+@@ -280,9 +330,8 @@
+   "sessionId": "{{guid}}",
+   "options": {
+     "set_type": "sibling",
+-    "timeout": 20000
+-  },
+-  "protocol": "1.1.0"
++    "timeout": 30000
++  }
+ }
+ ```
+ ###server -> client
+@@ -294,15 +343,15 @@
+   "_meta": {
+     "created": "{{number, utc}}",
+     "modified": "{{number, utc}}",
++    "modifiedBy": "_ADMIN",
+     "path": "set/sibling/data/[unique generated id]",
++    "action": "set",
+     "type": "response",
+-    "status": "ok",
+     "published": true,
++    "status": "ok",
+     "eventId": "{{number, matches handler in client}}",
+-    "sessionId": "{{guid}}",
+-    "action": "/SET@set/sibling/data"
+-  },
+-  "protocol": "1.1.0"
++    "sessionId": "{{guid}}"
++  }
+ }
+ ```
+ ###fails to do a set
+@@ -320,9 +369,8 @@
+   },
+   "sessionId": "{{guid}}",
+   "options": {
+-    "timeout": 20000
+-  },
+-  "protocol": "1.1.0"
++    "timeout": 30000
++  }
+ }
+ ```
+ ###server -> client
+@@ -338,10 +386,14 @@
+     "action": "set",
+     "error": {
+       "name": "TestError",
++      "cause": {
++        "name": "TestError",
++        "message": "a fly in the ointment"
++      },
++      "isOperational": true,
+       "message": "a fly in the ointment"
+     }
+-  },
+-  "protocol": "1.1.0"
++  }
+ }
+ ```
+ ###fails to do a set, access denied, unauthorised
+@@ -359,9 +411,8 @@
+   },
+   "sessionId": "{{guid}}",
+   "options": {
+-    "timeout": 20000
+-  },
+-  "protocol": "1.1.0"
++    "timeout": 30000
++  }
+ }
+ ```
+ ###server -> client
+@@ -377,10 +428,16 @@
+     "action": "set",
+     "error": {
+       "name": "AccessDenied",
++      "cause": {
++        "name": "AccessDenied",
++        "code": 403,
++        "message": "unauthorized"
++      },
++      "isOperational": true,
++      "code": 403,
+       "message": "unauthorized"
+     }
+-  },
+-  "protocol": "1.1.0"
++  }
+ }
+ ```
+ ###removes one data point
+@@ -391,11 +448,11 @@
+   "action": "remove",
+   "eventId": "{{number, matches handler in client}}",
+   "path": "remove/one",
++  "data": null,
+   "sessionId": "{{guid}}",
+   "options": {
+-    "timeout": 20000
+-  },
+-  "protocol": "1.1.0"
++    "timeout": 30000
++  }
+ }
+ ```
+ ###server -> client
+@@ -407,14 +464,13 @@
+   "_meta": {
+     "timestamp": "{{number, utc}}",
+     "path": "remove/one",
++    "action": "remove",
+     "type": "response",
+-    "status": "ok",
+     "published": true,
++    "status": "ok",
+     "eventId": "{{number, matches handler in client}}",
+-    "sessionId": "{{guid}}",
+-    "action": "/REMOVE@remove/one"
+-  },
+-  "protocol": "1.1.0"
++    "sessionId": "{{guid}}"
++  }
+ }
+ ```
+ ###using a wildcard, we remove 2 items in the db keyed like so: remove/multiple/1 and remove/multiple/2 using a single request
+@@ -425,11 +481,11 @@
+   "action": "remove",
+   "eventId": "{{number, matches handler in client}}",
+   "path": "remove/multiple/*",
++  "data": null,
+   "sessionId": "{{guid}}",
+   "options": {
+-    "timeout": 20000
+-  },
+-  "protocol": "1.1.0"
++    "timeout": 30000
++  }
+ }
+ ```
+ ###server -> client
+@@ -441,14 +497,13 @@
+   "_meta": {
+     "timestamp": "{{number, utc}}",
+     "path": "remove/multiple/*",
++    "action": "remove",
+     "type": "response",
+-    "status": "ok",
+     "published": true,
++    "status": "ok",
+     "eventId": "{{number, matches handler in client}}",
+-    "sessionId": "{{guid}}",
+-    "action": "/REMOVE@remove/multiple/*"
+-  },
+-  "protocol": "1.1.0"
++    "sessionId": "{{guid}}"
++  }
+ }
+ ```
+ ###call sequence representing a request to remove something that is not there
+@@ -459,11 +514,11 @@
+   "action": "remove",
+   "eventId": "{{number, matches handler in client}}",
+   "path": "remove/non_existant",
++  "data": null,
+   "sessionId": "{{guid}}",
+   "options": {
+-    "timeout": 20000
+-  },
+-  "protocol": "1.1.0"
++    "timeout": 30000
++  }
+ }
+ ```
+ ###server -> client
+@@ -475,14 +530,13 @@
+   "_meta": {
+     "timestamp": "{{number, utc}}",
+     "path": "remove/non_existant",
++    "action": "remove",
+     "type": "response",
+-    "status": "ok",
+     "published": true,
++    "status": "ok",
+     "eventId": "{{number, matches handler in client}}",
+-    "sessionId": "{{guid}}",
+-    "action": "/REMOVE@remove/non_existant"
+-  },
+-  "protocol": "1.1.0"
++    "sessionId": "{{guid}}"
++  }
+ }
+ ```
+ ###an error happens when we try and remove an item
+@@ -493,11 +547,11 @@
+   "action": "remove",
+   "eventId": "{{number, matches handler in client}}",
+   "path": "remove/failed",
++  "data": null,
+   "sessionId": "{{guid}}",
+   "options": {
+-    "timeout": 20000
+-  },
+-  "protocol": "1.1.0"
++    "timeout": 30000
++  }
+ }
+ ```
+ ###server -> client
+@@ -513,10 +567,14 @@
+     "action": "remove",
+     "error": {
+       "name": "TestError",
++      "cause": {
++        "name": "TestError",
++        "message": "a fly in the ointment"
++      },
++      "isOperational": true,
+       "message": "a fly in the ointment"
+     }
+-  },
+-  "protocol": "1.1.0"
++  }
+ }
+ ```
+ ###an error happens when we try and remove an item, access denied
+@@ -527,11 +585,11 @@
+   "action": "remove",
+   "eventId": "{{number, matches handler in client}}",
+   "path": "remove/no/permissions",
++  "data": null,
+   "sessionId": "{{guid}}",
+   "options": {
+-    "timeout": 20000
+-  },
+-  "protocol": "1.1.0"
++    "timeout": 30000
++  }
+ }
+ ```
+ ###server -> client
+@@ -547,10 +605,16 @@
+     "action": "remove",
+     "error": {
+       "name": "AccessDenied",
++      "cause": {
++        "name": "AccessDenied",
++        "code": 403,
++        "message": "unauthorized"
++      },
++      "isOperational": true,
++      "code": 403,
+       "message": "unauthorized"
+     }
+-  },
+-  "protocol": "1.1.0"
++  }
+ }
+ ```
+ #data subscriptions
+@@ -563,14 +627,14 @@
+   "action": "on",
+   "eventId": "{{number, matches handler in client}}",
+   "path": "/ALL@*",
++  "data": null,
+   "sessionId": "{{guid}}",
+   "options": {
+     "event_type": "all",
+     "count": 0,
+     "refCount": 0,
+-    "timeout": 20000
+-  },
+-  "protocol": "1.1.0"
++    "timeout": 30000
++  }
+ }
+ ```
+ ###server -> client
+@@ -584,8 +648,7 @@
+     "eventId": "{{number, matches handler in client}}",
+     "sessionId": "{{guid}}",
+     "action": "on"
+-  },
+-  "protocol": "1.1.0"
++  }
+ }
+ ```
+ ###set a piece of data, and get the event back based on the subscription in the previous step
+@@ -605,9 +668,8 @@
+   },
+   "sessionId": "{{guid}}",
+   "options": {
+-    "timeout": 20000
+-  },
+-  "protocol": "1.1.0"
++    "timeout": 30000
++  }
+ }
+ ```
+ ###server -> client
+@@ -621,13 +683,14 @@
+   "_meta": {
+     "created": "{{number, utc}}",
+     "modified": "{{number, utc}}",
++    "modifiedBy": "_ADMIN",
+     "path": "/subscribe/on/all/events",
+-    "type": "data",
+-    "sessionId": "{{guid}}",
+     "action": "/SET@/subscribe/on/all/events",
+-    "channel": "/ALL@*"
++    "type": "data",
++    "channel": "/ALL@*",
++    "sessionId": "{{guid}}"
+   },
+-  "protocol": "1.1.0"
++  "__outbound": true
+ }
+ ```
+ ###server -> client
+@@ -641,15 +704,15 @@
+   "_meta": {
+     "created": "{{number, utc}}",
+     "modified": "{{number, utc}}",
++    "modifiedBy": "_ADMIN",
+     "path": "/subscribe/on/all/events",
++    "action": "set",
+     "type": "response",
+-    "status": "ok",
+     "published": true,
++    "status": "ok",
+     "eventId": "{{number, matches handler in client}}",
+-    "sessionId": "{{guid}}",
+-    "action": "/SET@/subscribe/on/all/events"
+-  },
+-  "protocol": "1.1.0"
++    "sessionId": "{{guid}}"
++  }
+ }
+ ```
+ ###unsubscribe from all changes on all data points, NB: will remove all subscriptions
+@@ -660,12 +723,12 @@
+   "action": "off",
+   "eventId": "{{number, matches handler in client}}",
+   "path": "*",
++  "data": null,
+   "sessionId": "{{guid}}",
+   "options": {
+     "refCount": 0,
+-    "timeout": 20000
+-  },
+-  "protocol": "1.1.0"
++    "timeout": 30000
++  }
+ }
+ ```
+ ###server -> client
+@@ -679,8 +742,7 @@
+     "eventId": "{{number, matches handler in client}}",
+     "sessionId": "{{guid}}",
+     "action": "off"
+-  },
+-  "protocol": "1.1.0"
++  }
+ }
+ ```
+ ###subscribe to only set actions on a specific data point
+@@ -691,14 +753,14 @@
+   "action": "on",
+   "eventId": "{{number, matches handler in client}}",
+   "path": "/SET@/subscribe/on/specific",
++  "data": null,
+   "sessionId": "{{guid}}",
+   "options": {
+     "event_type": "set",
+     "count": 0,
+     "refCount": 1,
+-    "timeout": 20000
+-  },
+-  "protocol": "1.1.0"
++    "timeout": 30000
++  }
+ }
+ ```
+ ###server -> client
+@@ -712,8 +774,7 @@
+     "eventId": "{{number, matches handler in client}}",
+     "sessionId": "{{guid}}",
+     "action": "on"
+-  },
+-  "protocol": "1.1.0"
++  }
+ }
+ ```
+ ###set a piece of data, and get the event back based on the subscription in the previous step
+@@ -733,9 +794,8 @@
+   },
+   "sessionId": "{{guid}}",
+   "options": {
+-    "timeout": 20000
+-  },
+-  "protocol": "1.1.0"
++    "timeout": 30000
++  }
+ }
+ ```
+ ###server -> client
+@@ -749,13 +809,14 @@
+   "_meta": {
+     "created": "{{number, utc}}",
+     "modified": "{{number, utc}}",
++    "modifiedBy": "_ADMIN",
+     "path": "/subscribe/on/specific",
+-    "type": "data",
+-    "sessionId": "{{guid}}",
+     "action": "/SET@/subscribe/on/specific",
+-    "channel": "/SET@/subscribe/on/specific"
++    "type": "data",
++    "channel": "/SET@/subscribe/on/specific",
++    "sessionId": "{{guid}}"
+   },
+-  "protocol": "1.1.0"
++  "__outbound": true
+ }
+ ```
+ ###server -> client
+@@ -769,15 +830,15 @@
+   "_meta": {
+     "created": "{{number, utc}}",
+     "modified": "{{number, utc}}",
++    "modifiedBy": "_ADMIN",
+     "path": "/subscribe/on/specific",
++    "action": "set",
+     "type": "response",
+-    "status": "ok",
+     "published": true,
++    "status": "ok",
+     "eventId": "{{number, matches handler in client}}",
+-    "sessionId": "{{guid}}",
+-    "action": "/SET@/subscribe/on/specific"
+-  },
+-  "protocol": "1.1.0"
++    "sessionId": "{{guid}}"
++  }
+ }
+ ```
+ ###subscribe to the removal of data at a specified point
+@@ -789,14 +850,14 @@
+   "action": "on",
+   "eventId": "{{number, matches handler in client}}",
+   "path": "/REMOVE@/subscribe/on/remove",
++  "data": null,
+   "sessionId": "{{guid}}",
+   "options": {
+     "event_type": "remove",
+     "count": 0,
+     "refCount": 2,
+-    "timeout": 20000
+-  },
+-  "protocol": "1.1.0"
++    "timeout": 30000
++  }
+ }
+ ```
+ ###server -> client
+@@ -810,8 +871,7 @@
+     "eventId": "{{number, matches handler in client}}",
+     "sessionId": "{{guid}}",
+     "action": "on"
+-  },
+-  "protocol": "1.1.0"
++  }
+ }
+ ```
+ ###remove a piece of data, and get the event back based on the subscription in the previous step
+@@ -824,11 +884,11 @@
+   "action": "remove",
+   "eventId": "{{number, matches handler in client}}",
+   "path": "/subscribe/on/remove",
++  "data": null,
+   "sessionId": "{{guid}}",
+   "options": {
+-    "timeout": 20000
+-  },
+-  "protocol": "1.1.0"
++    "timeout": 30000
++  }
+ }
+ ```
+ ###server -> client
+@@ -840,12 +900,12 @@
+   "_meta": {
+     "timestamp": "{{number, utc}}",
+     "path": "/subscribe/on/remove",
+-    "type": "data",
+-    "sessionId": "{{guid}}",
+     "action": "/REMOVE@/subscribe/on/remove",
+-    "channel": "/REMOVE@/subscribe/on/remove"
++    "type": "data",
++    "channel": "/REMOVE@/subscribe/on/remove",
++    "sessionId": "{{guid}}"
+   },
+-  "protocol": "1.1.0"
++  "__outbound": true
+ }
+ ```
+ ###server -> client
+@@ -857,14 +917,13 @@
+   "_meta": {
+     "timestamp": "{{number, utc}}",
+     "path": "/subscribe/on/remove",
++    "action": "remove",
+     "type": "response",
+-    "status": "ok",
+     "published": true,
++    "status": "ok",
+     "eventId": "{{number, matches handler in client}}",
+-    "sessionId": "{{guid}}",
+-    "action": "/REMOVE@/subscribe/on/remove"
+-  },
+-  "protocol": "1.1.0"
++    "sessionId": "{{guid}}"
++  }
+ }
+ ```
+ ###subscribe to a change only once, on the native happn client this is done by specifying the 'count' option, but you can tell from the following sequence how to unsubscribe
+@@ -875,14 +934,14 @@
+   "action": "on",
+   "eventId": "{{number, matches handler in client}}",
+   "path": "/ALL@/subscribe/once",
++  "data": null,
+   "sessionId": "{{guid}}",
+   "options": {
+     "event_type": "all",
+     "count": 1,
+     "refCount": 3,
+-    "timeout": 20000
+-  },
+-  "protocol": "1.1.0"
++    "timeout": 30000
++  }
+ }
+ ```
+ ###server -> client
+@@ -896,8 +955,7 @@
+     "eventId": "{{number, matches handler in client}}",
+     "sessionId": "{{guid}}",
+     "action": "on"
+-  },
+-  "protocol": "1.1.0"
++  }
+ }
+ ```
+ ###set a piece of data, and get the event back based on the subscription in the previous step
+@@ -917,9 +975,8 @@
+   },
+   "sessionId": "{{guid}}",
+   "options": {
+-    "timeout": 20000
+-  },
+-  "protocol": "1.1.0"
++    "timeout": 30000
++  }
+ }
+ ```
+ ###server -> client
+@@ -933,13 +990,28 @@
+   "_meta": {
+     "created": "{{number, utc}}",
+     "modified": "{{number, utc}}",
++    "modifiedBy": "_ADMIN",
+     "path": "/subscribe/once",
+-    "type": "data",
+-    "sessionId": "{{guid}}",
+     "action": "/SET@/subscribe/once",
+-    "channel": "/ALL@/subscribe/once"
++    "type": "data",
++    "channel": "/ALL@/subscribe/once",
++    "sessionId": "{{guid}}"
+   },
+-  "protocol": "1.1.0"
++  "__outbound": true
++}
++```
++###client -> server
++```json
++{
++  "action": "off",
++  "eventId": "{{number, matches handler in client}}",
++  "path": "/ALL@/subscribe/once",
++  "data": null,
++  "sessionId": "{{guid}}",
++  "options": {
++    "refCount": 1,
++    "timeout": 30000
++  }
+ }
+ ```
+ ###server -> client
+@@ -953,33 +1025,19 @@
+   "_meta": {
+     "created": "{{number, utc}}",
+     "modified": "{{number, utc}}",
++    "modifiedBy": "_ADMIN",
+     "path": "/subscribe/once",
++    "action": "set",
+     "type": "response",
+-    "status": "ok",
+     "published": true,
++    "status": "ok",
+     "eventId": "{{number, matches handler in client}}",
+-    "sessionId": "{{guid}}",
+-    "action": "/SET@/subscribe/once"
+-  },
+-  "protocol": "1.1.0"
++    "sessionId": "{{guid}}"
++  }
+ }
+ ```
+ ###perform an action without publishing using the noPublish flag
+ 
+-###client -> server
+-```json
+-{
+-  "action": "off",
+-  "eventId": "{{number, matches handler in client}}",
+-  "path": "/ALL@/subscribe/once",
+-  "sessionId": "{{guid}}",
+-  "options": {
+-    "refCount": 1,
+-    "timeout": 20000
+-  },
+-  "protocol": "1.1.0"
+-}
+-```
+ ###server -> client
+ ```json
+ {
+@@ -991,8 +1049,7 @@
+     "eventId": "{{number, matches handler in client}}",
+     "sessionId": "{{guid}}",
+     "action": "off"
+-  },
+-  "protocol": "1.1.0"
++  }
+ }
+ ```
+ ###client -> server
+@@ -1001,14 +1058,14 @@
+   "action": "on",
+   "eventId": "{{number, matches handler in client}}",
+   "path": "/ALL@/subscribe/noPublish",
++  "data": null,
+   "sessionId": "{{guid}}",
+   "options": {
+     "event_type": "all",
+     "count": 0,
+     "refCount": 4,
+-    "timeout": 20000
+-  },
+-  "protocol": "1.1.0"
++    "timeout": 30000
++  }
+ }
+ ```
+ ###server -> client
+@@ -1022,8 +1079,7 @@
+     "eventId": "{{number, matches handler in client}}",
+     "sessionId": "{{guid}}",
+     "action": "on"
+-  },
+-  "protocol": "1.1.0"
++  }
+ }
+ ```
+ ###set a piece of data, and get a response from the server, but no publication because noPublish was set to true
+@@ -1044,9 +1100,8 @@
+   "sessionId": "{{guid}}",
+   "options": {
+     "noPublish": true,
+-    "timeout": 20000
+-  },
+-  "protocol": "1.1.0"
++    "timeout": 30000
++  }
+ }
+ ```
+ ###server -> client
+@@ -1060,6 +1115,7 @@
+   "_meta": {
+     "created": "{{number, utc}}",
+     "modified": "{{number, utc}}",
++    "modifiedBy": "_ADMIN",
+     "path": "/subscribe/noPublish",
+     "type": "response",
+     "status": "ok",
+@@ -1067,8 +1123,7 @@
+     "eventId": "{{number, matches handler in client}}",
+     "sessionId": "{{guid}}",
+     "action": "set"
+-  },
+-  "protocol": "1.1.0"
++  }
+ }
+ ```
+ ###failure to subscribe
+@@ -1079,14 +1134,14 @@
+   "action": "on",
+   "eventId": "{{number, matches handler in client}}",
+   "path": "/ALL@/subscription/error",
++  "data": null,
+   "sessionId": "{{guid}}",
+   "options": {
+     "event_type": "all",
+     "count": 0,
+     "refCount": 5,
+-    "timeout": 20000
+-  },
+-  "protocol": "1.1.0"
++    "timeout": 30000
++  }
+ }
+ ```
+ ###server -> client
+@@ -1102,10 +1157,14 @@
+     "action": "on",
+     "error": {
+       "name": "TestError",
++      "cause": {
++        "name": "TestError",
++        "message": "a fly in the ointment"
++      },
++      "isOperational": true,
+       "message": "a fly in the ointment"
+     }
+-  },
+-  "protocol": "1.1.0"
++  }
+ }
+ ```
+ ###failure to subscribe - access denied
+@@ -1116,14 +1175,14 @@
+   "action": "on",
+   "eventId": "{{number, matches handler in client}}",
+   "path": "/ALL@/subscription/access/denied",
++  "data": null,
+   "sessionId": "{{guid}}",
+   "options": {
+     "event_type": "all",
+     "count": 0,
+     "refCount": 0,
+-    "timeout": 20000
+-  },
+-  "protocol": "1.1.0"
++    "timeout": 30000
++  }
+ }
+ ```
+ ###server -> client
+@@ -1139,10 +1198,16 @@
+     "action": "on",
+     "error": {
+       "name": "AccessDenied",
++      "cause": {
++        "name": "AccessDenied",
++        "code": 403,
++        "message": "unauthorized"
++      },
++      "isOperational": true,
++      "code": 403,
+       "message": "unauthorized"
+     }
+-  },
+-  "protocol": "1.1.0"
++  }
+ }
+ ```
+ #Disconnection
+@@ -1152,29 +1217,37 @@
+ ###client -> server
+ ```json
+ {
+-  "action": "off",
++  "action": "disconnect",
+   "eventId": "{{number, matches handler in client}}",
+-  "path": "*",
+-  "sessionId": "{{guid}}",
+-  "options": {
+-    "refCount": 0,
+-    "timeout": 20000
+-  },
+-  "protocol": "1.1.0"
++  "sessionId": "{{guid}}"
+ }
+ ```
+ ###server -> client
+ ```json
+ {
+-  "data": {},
++  "data": null,
+   "_meta": {
+-    "status": "ok",
+     "type": "response",
++    "status": "ok",
+     "published": false,
+     "eventId": "{{number, matches handler in client}}",
+     "sessionId": "{{guid}}",
+-    "action": "off"
++    "action": "disconnect"
++  }
++}
++```
++###when a client is forcefully diconnected from the server side, or when a service shutdown happens, all clients are notified a disconnection is imminent
++
++*the disconnectAllClients method is called - this method is called on the happn instance shutdown, causing the server to push out a disconnection message to all connected clients*
++
++one connected client remaining, so disconnect warning is sent to it, session id (matches the one stipulated in section 1_1) is:4ef1f79b-247c-4327-a11f-1b6038d7cb28  ##DIFF_IGNORE
++###server -> client
++```json
++{
++  "_meta": {
++    "type": "system"
+   },
+-  "protocol": "1.1.0"
++  "eventKey": "server-side-disconnect",
++  "data": "server-side-disconnect"
+ }
+ ```

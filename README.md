@@ -5,7 +5,7 @@ happn protocol
 
 - current version 1.1.0
 
-[LATEST PROTOCOL DOCUMENT 1.1.0 HAPPN-3](https://github.com/happner/happn-protocol/blob/master/automated-docs/happn-3/current/protocol.md)
+[LATEST PROTOCOL DOCUMENT 1.2.0 HAPPN-3](https://github.com/happner/happn-protocol/blob/master/automated-docs/happn-3/current/protocol.md)
 --------------------------------
 
 [LATEST PROTOCOL DOCUMENT 1.1.0 HAPPN-2](https://github.com/happner/happn-protocol/blob/master/automated-docs/happn-2/current/protocol.md)
@@ -13,7 +13,7 @@ happn protocol
 
 automated protocol documents for happn-3, in format protocol version / happn version
 
-- [1.1.0/1.0.4](https://github.com/happner/happn-protocol/blob/master/automated-docs/happn-3/1.1.0/1.0.4/protocol.md)
+- [1.2.0/1.1.0](https://github.com/happner/happn-protocol/blob/master/automated-docs/happn-3/1.1.0/1.0.4/protocol.md)
 
 automated protocol documents for happn-2, in format protocol version / happn version
 

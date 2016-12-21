@@ -7,7 +7,7 @@
 
 ###create a client session and login
 
-(existing client with session id: d00faa2d-e4ea-432c-8e45-ca692062572f was already created) ##DIFF_IGNORE
+(existing client with session id: fda4b6de-919b-484f-9653-d41f452e1699 was already created) ##DIFF_IGNORE
 ###client -> server
 ```json
 {
@@ -89,7 +89,7 @@
 {
   "action": "set",
   "eventId": "{{number, matches handler in client}}",
-  "path": "set/some/data",
+  "path": "/set/some/data",
   "data": {
     "data": {
       "was": "set"
@@ -113,13 +113,13 @@
   "_meta": {
     "created": "{{number, utc}}",
     "modified": "{{number, utc}}",
-    "path": "set/some/data",
+    "path": "/set/some/data",
     "type": "response",
     "status": "ok",
     "published": true,
     "eventId": "{{number, matches handler in client}}",
     "sessionId": "{{guid}}",
-    "action": "/SET@set/some/data"
+    "action": "/SET@/set/some/data"
   },
   "protocol": "1.1.0"
 }
@@ -131,7 +131,7 @@
 {
   "action": "set",
   "eventId": "{{number, matches handler in client}}",
-  "path": "set/some/data",
+  "path": "/set/some/data",
   "data": {
     "an": {
       "additional": "field"
@@ -159,13 +159,13 @@
   "_meta": {
     "created": "{{number, utc}}",
     "modified": "{{number, utc}}",
-    "path": "set/some/data",
+    "path": "/set/some/data",
     "type": "response",
     "status": "ok",
     "published": true,
     "eventId": "{{number, matches handler in client}}",
     "sessionId": "{{guid}}",
-    "action": "/SET@set/some/data"
+    "action": "/SET@/set/some/data"
   },
   "protocol": "1.1.0"
 }
@@ -179,7 +179,7 @@
 {
   "action": "set",
   "eventId": "{{number, matches handler in client}}",
-  "path": "set/some/data",
+  "path": "/set/some/data",
   "sessionId": "{{guid}}",
   "options": {
     "tag": "MYTAG",
@@ -201,7 +201,7 @@
       }
     },
     "_meta": {
-      "path": "set/some/data"
+      "path": "/set/some/data"
     },
     "created": "{{number, utc}}",
     "modified": "{{number, utc}}",
@@ -210,14 +210,14 @@
   "_meta": {
     "created": "{{number, utc}}",
     "modified": "{{number, utc}}",
-    "path": "/_TAGSset/some/data/66e285e5cffe42378daa4109301c5ce7",
+    "path": "{{/_TAGS/set/some/data/[unique generated id]}}",
     "tag": "MYTAG",
     "type": "response",
     "status": "ok",
     "published": true,
     "eventId": "{{number, matches handler in client}}",
     "sessionId": "{{guid}}",
-    "action": "/SET@set/some/data"
+    "action": "/SET@/set/some/data"
   },
   "protocol": "1.1.0"
 }
@@ -252,7 +252,7 @@
   "_meta": {
     "created": "{{number, utc}}",
     "modified": "{{number, utc}}",
-    "path": "/_TAGStag/non-existent/920aec3f72c54eb7ab056a85603b4418",
+    "path": "/_TAGStag/non-existent/cb183cec95a1403eaf63b0acdf25a2d3",
     "tag": "MYTAG",
     "type": "response",
     "status": "ok",
@@ -1178,3 +1178,7 @@
   "protocol": "1.1.0"
 }
 ```
+###when a client is forcefully diconnected from the server side, or when a service shutdown happens, all clients are notified a disconnection is imminent
+
+*the disconnectAllClients method is called - this method is called on the happn instance shutdown, causing the server to push out a disconnection message to all connected clients*
+
