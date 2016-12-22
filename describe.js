@@ -913,6 +913,7 @@ function writeReportToFile(){
   }catch(e){}
 
   protocolReport.forEach(function(line){
+
     fs.appendFileSync(outputFile, line + '\r\n');
     fs.appendFileSync(outputFileCurrent, line + '\r\n');
   });
