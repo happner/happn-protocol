@@ -30,7 +30,14 @@ manual run:
 
 > npm run describe && git add --all && git commit -m "protocol describe run"
 
+# see what changed from happn-2 to happn-3
+
 > git diff --minimal HEAD:./automated-docs/happn-2/current/protocol.md HEAD:./automated-docs/happn-3/current/protocol.md >> ./automated-docs/changes.diff
+
+# see what changed from happn-3 to happn-2
+
+git diff --minimal HEAD:./automated-docs/happn-3/current/protocol.md HEAD:./automated-docs/happn-2/current/protocol.md
+
 
 ```
 
