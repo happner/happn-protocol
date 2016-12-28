@@ -75,9 +75,10 @@ MUST respond to a PUBREL packet by sending a PUBCOMP packet containing the same 
 After it has sent a PUBCOMP, the receiver MUST treat any subsequent PUBLISH packet that contains that Packet Identifier as being a new publication.
 
 ###UNDERSTANDING TOPICS (same as keys/data-points):
-wildcards for multiple levels  #
-wildcards for single levels +
-$ is reserved for wildcards
+*far more structured than happn's wildcard - this may usher in performance improvements as the reg expression causes full table scans on the happner side*
+- wildcards for multiple levels  #
+- wildcards for single levels +
+- $ is reserved for wildcards
 
 SECURITY:
 
@@ -125,7 +126,8 @@ check out: [MQTT NIST].
 - json compression client and server headers
 - remove "data" property on outgoing server puts when data is empty {}
 
-##FURTURE CONSIDERATIONS
+
+##FUTURE CONSIDERATIONS
 
 - the client and server could actually be indistinguishable, they are both simply brokers connected to each other by endpoints, the client just runs a different set of services
     - at the evry least the queing/emitting and/acknowledgement of messages could be a shared codebase
