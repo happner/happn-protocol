@@ -112,8 +112,8 @@ check out: [MQTT NIST].
 - the protocol needs to emit to subscribers
 - create multiple queues by configuration, this allows for ordered messages
 - the happn-3 client must be passed an IP address/porr range, and be able to:
- (1) connect to a host using a semi-random binary search algorithm.
- (2) on disconnection, immediately move subscriptions and login to a new item in the configured cluster
+ (1) connect to a host using a semi-random selection algorithm. Load balancing:check
+ (2) on unintended disconnection, immediately move subscriptions and login to a new item in the configured cluster, so redundancy:check
 - Quality of Service - packet based, this means any packets being published are pushed to all connected clients and are accounted for by ACK packets sent back by the clients
 - QoS IS DEFINED ON SUBSCRIPTIONS - so subscriptions can define how the want to be treated in terms of delivery - v cool
 - ping/pong to be brought into the protocol layer
