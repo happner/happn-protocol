@@ -2,12 +2,12 @@
 
 ##PROTOCOL VERSION: 1.1.0
 ###HAPPN VERSION: 2.21.0
-####RUN DATE: 2017 July 25 09:29
+####RUN DATE: 2017 July 25 09:44
 #connect a client
 
 ###create a client session and login
 
-(existing client with session id: ec03b548-de75-4f3f-8876-e0001356ce71 was already created) ##DIFF_IGNORE
+(existing client with session id: 78ba3a4e-f96b-44b1-b1ff-94559cfb8f2a was already created) ##DIFF_IGNORE
 ###client -> server
 ```json
 {
@@ -252,7 +252,7 @@
   "_meta": {
     "created": "{{number, utc}}",
     "modified": "{{number, utc}}",
-    "path": "/_TAGStag/non-existent/ea02c5c1e208416fbce0bb48b62ad776",
+    "path": "/_TAGStag/non-existent/3d407f39f73a49c4a99e8717433e47df",
     "tag": "MYTAG",
     "type": "response",
     "status": "ok",
