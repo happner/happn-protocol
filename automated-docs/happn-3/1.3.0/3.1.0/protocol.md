@@ -2,12 +2,12 @@
 
 ##PROTOCOL VERSION: 1.3.0
 ###HAPPN VERSION: 3.1.0
-####RUN: 2017 September 05 12:04
+####RUN: 2017 September 05 01:45
 #connect a client
 
 ###create a client session and login
 
-(existing client with session id: 7f1c36cf-2928-4efd-87dc-f58e0f5c079c was already created) ##DIFF_IGNORE
+(existing client with session id: 60a0514b-7b53-4177-948f-a8251bd209cd was already created) ##DIFF_IGNORE
 ###client -> server
 ```json
 {
@@ -117,7 +117,7 @@
     },
     "timestamp": "{{number, utc}}",
     "isEncrypted": false,
-    "origin": "dewvole_VkvaHwPK7",
+    "origin": "sourdive_NJbtTuvYQ",
     "policy": {
       "0": {
         "ttl": 0,
@@ -314,7 +314,7 @@
   "_meta": {
     "created": "{{number, utc}}",
     "modified": "{{number, utc}}",
-    "path": "/_TAGS/tag/non-existent/1504605864369_6e8c323f1f9d49a3a5c1692aa7a9440f",
+    "path": "/_TAGS/tag/non-existent/1504611937666_90b829b1e85545d5bcc23ca2e299ad82",
     "tag": "MYTAG",
     "published": true,
     "type": "response",
@@ -690,7 +690,7 @@
     "type": "data",
     "sessionId": "{{guid}}",
     "consistency": 2,
-    "publicationId": "e53c4672-1b04-4a3f-b53b-23f3abfe1497-18"
+    "publicationId": "da98c955-07d3-4a85-83f3-9cfdd380b259-18"
   },
   "__outbound": true
 }
@@ -823,7 +823,7 @@
     "type": "data",
     "sessionId": "{{guid}}",
     "consistency": 2,
-    "publicationId": "e53c4672-1b04-4a3f-b53b-23f3abfe1497-21"
+    "publicationId": "da98c955-07d3-4a85-83f3-9cfdd380b259-21"
   },
   "__outbound": true
 }
@@ -917,7 +917,7 @@
     "type": "data",
     "sessionId": "{{guid}}",
     "consistency": 2,
-    "publicationId": "e53c4672-1b04-4a3f-b53b-23f3abfe1497-24"
+    "publicationId": "da98c955-07d3-4a85-83f3-9cfdd380b259-24"
   },
   "__outbound": true
 }
@@ -1014,7 +1014,7 @@
     "type": "data",
     "sessionId": "{{guid}}",
     "consistency": 2,
-    "publicationId": "e53c4672-1b04-4a3f-b53b-23f3abfe1497-26"
+    "publicationId": "da98c955-07d3-4a85-83f3-9cfdd380b259-26"
   },
   "__outbound": true
 }
@@ -1262,7 +1262,7 @@
 
 *the disconnectAllClients method is called - this method is called on the happn instance shutdown, causing the server to push out a disconnection message to all connected clients*
 
-one connected client remaining, so disconnect warning is sent to it, session id (matches the one stipulated in section 1_1) is:7f1c36cf-2928-4efd-87dc-f58e0f5c079c  ##DIFF_IGNORE
+one connected client remaining, so disconnect warning is sent to it, session id (matches the one stipulated in section 1_1) is:60a0514b-7b53-4177-948f-a8251bd209cd  ##DIFF_IGNORE
 ###server -> client
 ```json
 {
