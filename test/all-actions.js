@@ -56,7 +56,7 @@ describe('secure-protocol-operations', function () {
           services: {
             protocol:{
               config:{
-                inboundLayers:inboundLayers
+                inboundLayers:inboundLayers,
                 outboundLayers:inboundLayers
               }
             }

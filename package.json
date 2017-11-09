@@ -14,7 +14,7 @@
     "dateformat": "^2.0.0",
     "fs-extra": "^1.0.0",
     "happn": "latest",
-    "happn-3": "latest",
+    "happn-3": "5.0.0-alpha.2",
     "shortid": "^2.2.6",
     "traverse": "^0.6.6"
   },

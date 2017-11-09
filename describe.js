@@ -400,36 +400,38 @@ var jobs = [
         });
       });
     }
-  },{
-    step:'remove a multiple items',
-    text:'using a wildcard, we remove 2 items in the db keyed like so: remove/multiple/1 and remove/multiple/2 using a single request',
-    parameters:{
-      path:'remove/multiple',
-      val:{to:{be:"removed"}}
-    },
-    do:function(params, cb){
-
-      var _this = this;
-
-      currentClient.set(params.path + '/1', params.val, function(e){
-
-        if (e) return cb(e);
-
-        currentClient.set(params.path + '/2', params.val, function(e){
-
-          if (e) return cb(e);
-
-          _this.output = [];//clear away the set as we already documented this
-
-          currentClient.remove(params.path + '/*', function(e, results){
-
-            if (e) return cb(e);
-            cb(null, _this.output);
-          });
-        });
-      });
-    }
-  }, {
+  },
+  // {
+  //   step:'remove a multiple items',
+  //   text:'using a wildcard, we remove 2 items in the db keyed like so: remove/multiple/1 and remove/multiple/2 using a single request',
+  //   parameters:{
+  //     path:'remove/multiple',
+  //     val:{to:{be:"removed"}}
+  //   },
+  //   do:function(params, cb){
+  //
+  //     var _this = this;
+  //
+  //     currentClient.set(params.path + '/1', params.val, function(e){
+  //
+  //       if (e) return cb(e);
+  //
+  //       currentClient.set(params.path + '/2', params.val, function(e){
+  //
+  //         if (e) return cb(e);
+  //
+  //         _this.output = [];//clear away the set as we already documented this
+  //
+  //         currentClient.remove(params.path + '/*', function(e, results){
+  //
+  //           if (e) return cb(e);
+  //           cb(null, _this.output);
+  //         });
+  //       });
+  //     });
+  //   }
+  // },
+  {
     step:'remove no items',
     text:'call sequence representing a request to remove something that is not there',
     parameters:{
