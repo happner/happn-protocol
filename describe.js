@@ -2,6 +2,7 @@ var async = require('async');
 var happn = require('happn-3');
 var path = require('path');
 var fs = require('fs-extra');
+var glob = require('glob');
 
 var package = require([__dirname, 'node_modules', 'happn-3', 'package.json'].join(path.sep));
 
@@ -912,11 +913,39 @@ async.eachSeries(jobs, function(job, jobCB){
   var reportFile = writeReportToFile(protocolReport);
   var jsonreportFile = writeJSONReportToFile(jsonReport);
 
+  updateDocsListMd();
+
   console.log('protocol described in file: ' + reportFile);
   console.log('over the wire json described in file: ' + jsonreportFile);
-  process.exit();
+
 
 });
+
+function updateDocsListMd(){
+
+  glob(__dirname + '/automated-docs/happn-3/*/*/protocol.md', function (e, files) {
+
+    if (e) console.warn('failed updating automated docs: ', e.toString());
+
+    var automatedLinks = ['#### automated protocol documents for happn-3', '*in format: protocol version / happn version*'];
+
+    files.forEach(function(file){
+
+      var protocolVersion = file.split('/')[8];
+      var happnVersion = file.split('/')[9];
+
+      automatedLinks.push('- [' + protocolVersion + '/' + happnVersion + '](https://github.com/happner/happn-protocol/blob/master/automated-docs/happn-3/' + protocolVersion + '/' + happnVersion + '/protocol.md)');
+
+    });
+
+    fs.removeSync(__dirname + '/automated-docs/happn-3/automated-links.md');
+
+    fs.appendFileSync(__dirname + '/automated-docs/happn-3/automated-links.md', automatedLinks.join('\r\n'));
+
+    process.exit();
+  })
+
+}
 
 function writeReportToFile(){
 

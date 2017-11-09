@@ -46,3 +46,339 @@ OK: failure to subscribe
 OK: failure to subscribe - access denied
 
 OK: the client sends out a disconnect request, which the server receives - the server then queues the disconnection request, the client the ends the websocket session, and the server cleans up on the other side without sending a disconnection warning
+
+OK: create a client session and login
+
+OK: set a piece of data using a key value pair
+
+OK: merge some new values with an existing record, NB: the merge only goes 1 property level deep
+
+OK: tag some existing data
+
+OK: tag failure
+
+OK: setSibling
+
+OK: fails to do a set
+
+OK: fails to do a set, access denied, unauthorised
+
+OK: removes one data point
+
+OK: call sequence representing a request to remove something that is not there
+
+OK: an error happens when we try and remove an item
+
+OK: an error happens when we try and remove an item, access denied
+
+OK: subscribe to all changes on all data points
+
+OK: set a piece of data, and get the event back based on the subscription in the previous step
+
+OK: unsubscribe from all changes on all data points, NB: will remove all subscriptions
+
+OK: subscribe to only set actions on a specific data point
+
+OK: subscribe to the removal of data at a specified point
+
+OK: remove a piece of data, and get the event back based on the subscription in the previous step
+
+OK: subscribe to a change only once, on the native happn client this is done by specifying the 'count' option, but you can tell from the following sequence how to unsubscribe
+
+OK: perform an action without publishing using the noPublish flag
+
+OK: set a piece of data, and get a response from the server, but no publication because noPublish was set to true
+
+OK: failure to subscribe
+
+OK: failure to subscribe - access denied
+
+OK: the client sends out a disconnect request, which the server receives - the server then queues the disconnection request, the client the ends the websocket session, and the server cleans up on the other side without sending a disconnection warning
+
+OK: create a client session and login
+
+OK: set a piece of data using a key value pair
+
+OK: merge some new values with an existing record, NB: the merge only goes 1 property level deep
+
+OK: tag some existing data
+
+OK: tag failure
+
+OK: setSibling
+
+OK: fails to do a set
+
+OK: fails to do a set, access denied, unauthorised
+
+OK: removes one data point
+
+OK: call sequence representing a request to remove something that is not there
+
+OK: an error happens when we try and remove an item
+
+OK: an error happens when we try and remove an item, access denied
+
+OK: subscribe to all changes on all data points
+
+OK: set a piece of data, and get the event back based on the subscription in the previous step
+
+OK: unsubscribe from all changes on all data points, NB: will remove all subscriptions
+
+OK: subscribe to only set actions on a specific data point
+
+OK: subscribe to the removal of data at a specified point
+
+OK: remove a piece of data, and get the event back based on the subscription in the previous step
+
+OK: subscribe to a change only once, on the native happn client this is done by specifying the 'count' option, but you can tell from the following sequence how to unsubscribe
+
+OK: perform an action without publishing using the noPublish flag
+
+OK: set a piece of data, and get a response from the server, but no publication because noPublish was set to true
+
+OK: failure to subscribe
+
+OK: failure to subscribe - access denied
+
+OK: the client sends out a disconnect request, which the server receives - the server then queues the disconnection request, the client the ends the websocket session, and the server cleans up on the other side without sending a disconnection warning
+
+OK: create a client session and login
+
+OK: set a piece of data using a key value pair
+
+OK: merge some new values with an existing record, NB: the merge only goes 1 property level deep
+
+OK: tag some existing data
+
+OK: tag failure
+
+OK: setSibling
+
+OK: fails to do a set
+
+OK: fails to do a set, access denied, unauthorised
+
+OK: removes one data point
+
+OK: call sequence representing a request to remove something that is not there
+
+OK: an error happens when we try and remove an item
+
+OK: an error happens when we try and remove an item, access denied
+
+OK: subscribe to all changes on all data points
+
+OK: set a piece of data, and get the event back based on the subscription in the previous step
+
+OK: unsubscribe from all changes on all data points, NB: will remove all subscriptions
+
+OK: subscribe to only set actions on a specific data point
+
+OK: subscribe to the removal of data at a specified point
+
+OK: remove a piece of data, and get the event back based on the subscription in the previous step
+
+OK: subscribe to a change only once, on the native happn client this is done by specifying the 'count' option, but you can tell from the following sequence how to unsubscribe
+
+OK: perform an action without publishing using the noPublish flag
+
+OK: set a piece of data, and get a response from the server, but no publication because noPublish was set to true
+
+OK: failure to subscribe
+
+OK: failure to subscribe - access denied
+
+OK: the client sends out a disconnect request, which the server receives - the server then queues the disconnection request, the client the ends the websocket session, and the server cleans up on the other side without sending a disconnection warning
+
+OK: create a client session and login
+
+OK: set a piece of data using a key value pair
+
+OK: merge some new values with an existing record, NB: the merge only goes 1 property level deep
+
+OK: tag some existing data
+
+OK: tag failure
+
+OK: setSibling
+
+OK: fails to do a set
+
+OK: fails to do a set, access denied, unauthorised
+
+OK: removes one data point
+
+OK: call sequence representing a request to remove something that is not there
+
+OK: an error happens when we try and remove an item
+
+OK: an error happens when we try and remove an item, access denied
+
+OK: subscribe to all changes on all data points
+
+OK: set a piece of data, and get the event back based on the subscription in the previous step
+
+OK: unsubscribe from all changes on all data points, NB: will remove all subscriptions
+
+OK: subscribe to only set actions on a specific data point
+
+OK: subscribe to the removal of data at a specified point
+
+OK: remove a piece of data, and get the event back based on the subscription in the previous step
+
+OK: subscribe to a change only once, on the native happn client this is done by specifying the 'count' option, but you can tell from the following sequence how to unsubscribe
+
+OK: perform an action without publishing using the noPublish flag
+
+OK: set a piece of data, and get a response from the server, but no publication because noPublish was set to true
+
+OK: failure to subscribe
+
+OK: failure to subscribe - access denied
+
+OK: the client sends out a disconnect request, which the server receives - the server then queues the disconnection request, the client the ends the websocket session, and the server cleans up on the other side without sending a disconnection warning
+
+OK: create a client session and login
+
+OK: set a piece of data using a key value pair
+
+OK: merge some new values with an existing record, NB: the merge only goes 1 property level deep
+
+OK: tag some existing data
+
+OK: tag failure
+
+OK: setSibling
+
+OK: fails to do a set
+
+OK: fails to do a set, access denied, unauthorised
+
+OK: removes one data point
+
+OK: call sequence representing a request to remove something that is not there
+
+OK: an error happens when we try and remove an item
+
+OK: an error happens when we try and remove an item, access denied
+
+OK: subscribe to all changes on all data points
+
+OK: set a piece of data, and get the event back based on the subscription in the previous step
+
+OK: unsubscribe from all changes on all data points, NB: will remove all subscriptions
+
+OK: subscribe to only set actions on a specific data point
+
+OK: subscribe to the removal of data at a specified point
+
+OK: remove a piece of data, and get the event back based on the subscription in the previous step
+
+OK: subscribe to a change only once, on the native happn client this is done by specifying the 'count' option, but you can tell from the following sequence how to unsubscribe
+
+OK: perform an action without publishing using the noPublish flag
+
+OK: set a piece of data, and get a response from the server, but no publication because noPublish was set to true
+
+OK: failure to subscribe
+
+OK: failure to subscribe - access denied
+
+OK: the client sends out a disconnect request, which the server receives - the server then queues the disconnection request, the client the ends the websocket session, and the server cleans up on the other side without sending a disconnection warning
+
+OK: create a client session and login
+
+OK: set a piece of data using a key value pair
+
+OK: merge some new values with an existing record, NB: the merge only goes 1 property level deep
+
+OK: tag some existing data
+
+OK: tag failure
+
+OK: setSibling
+
+OK: fails to do a set
+
+OK: fails to do a set, access denied, unauthorised
+
+OK: removes one data point
+
+OK: call sequence representing a request to remove something that is not there
+
+OK: an error happens when we try and remove an item
+
+OK: an error happens when we try and remove an item, access denied
+
+OK: subscribe to all changes on all data points
+
+OK: set a piece of data, and get the event back based on the subscription in the previous step
+
+OK: unsubscribe from all changes on all data points, NB: will remove all subscriptions
+
+OK: subscribe to only set actions on a specific data point
+
+OK: subscribe to the removal of data at a specified point
+
+OK: remove a piece of data, and get the event back based on the subscription in the previous step
+
+OK: subscribe to a change only once, on the native happn client this is done by specifying the 'count' option, but you can tell from the following sequence how to unsubscribe
+
+OK: perform an action without publishing using the noPublish flag
+
+OK: set a piece of data, and get a response from the server, but no publication because noPublish was set to true
+
+OK: failure to subscribe
+
+OK: failure to subscribe - access denied
+
+OK: the client sends out a disconnect request, which the server receives - the server then queues the disconnection request, the client the ends the websocket session, and the server cleans up on the other side without sending a disconnection warning
+
+OK: create a client session and login
+
+OK: set a piece of data using a key value pair
+
+OK: merge some new values with an existing record, NB: the merge only goes 1 property level deep
+
+OK: tag some existing data
+
+OK: tag failure
+
+OK: setSibling
+
+OK: fails to do a set
+
+OK: fails to do a set, access denied, unauthorised
+
+OK: removes one data point
+
+OK: call sequence representing a request to remove something that is not there
+
+OK: an error happens when we try and remove an item
+
+OK: an error happens when we try and remove an item, access denied
+
+OK: subscribe to all changes on all data points
+
+OK: set a piece of data, and get the event back based on the subscription in the previous step
+
+OK: unsubscribe from all changes on all data points, NB: will remove all subscriptions
+
+OK: subscribe to only set actions on a specific data point
+
+OK: subscribe to the removal of data at a specified point
+
+OK: remove a piece of data, and get the event back based on the subscription in the previous step
+
+OK: subscribe to a change only once, on the native happn client this is done by specifying the 'count' option, but you can tell from the following sequence how to unsubscribe
+
+OK: perform an action without publishing using the noPublish flag
+
+OK: set a piece of data, and get a response from the server, but no publication because noPublish was set to true
+
+OK: failure to subscribe
+
+OK: failure to subscribe - access denied
+
+OK: the client sends out a disconnect request, which the server receives - the server then queues the disconnection request, the client the ends the websocket session, and the server cleans up on the other side without sending a disconnection warning

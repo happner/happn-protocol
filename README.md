@@ -14,13 +14,10 @@ automated runs:
 
 #### NB happn protocol checking discontinued, only happn-3 is now described and compared
 
-#### automated protocol documents for happn-3
-*in format: protocol version / happn version*
-- begin (do not delete)
-- [1.1.0/1.0.4](https://github.com/happner/happn-protocol/blob/master/automated-docs/happn-3/1.1.0/1.0.4/protocol.md)
-- [1.2.0/1.1.0](https://github.com/happner/happn-protocol/blob/master/automated-docs/happn-3/1.2.0/1.1.0/protocol.md)
-- [2.0.0/5.0.0-alpha.2](https://github.com/happner/happn-protocol/blob/master/automated-docs/happn-3/2.0.0/5.0.0-alpha.2/protocol.md)
-- end (do not delete)
+#### automated protocol documents for happn-3:
+
+####[over here](/automated-docs/happn-3/automated-links.md)
+
 #### protocol documents for happn
 *in format: protocol version / happn version*
 

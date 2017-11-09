@@ -1,7 +1,7 @@
 {
   "name": "happn-protocol",
   "description": "protocol 1.0.0 -> ",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "protocol": "1.1.0",
   "author": "Simon Bishop",
   "license": "MIT",
@@ -17,6 +17,7 @@
     "deep-diff": "0.3.8",
     "expect.js": "0.3.1",
     "fs-extra": "1.0.0",
+    "glob": "^7.1.2",
     "happn": "latest",
     "happn-3": "latest",
     "shortid": "2.2.6",

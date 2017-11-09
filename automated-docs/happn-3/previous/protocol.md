@@ -1,20 +1,20 @@
 #happn protocol specification
 
-##PROTOCOL VERSION: 2.0.0
-###HAPPN VERSION: 5.0.0-alpha.2
-####RUN: 2017 November 09 06:32
+##PROTOCOL VERSION: 1.3.0
+###HAPPN VERSION: 4.0.0
+####RUN: 2017 November 09 07:51
 #connect a client
 
 ###create a client session and login
 
-(existing client with session id: 6eb784bd-4b47-48f7-b377-e89921461101 was already created) ##DIFF_IGNORE
+(existing client with session id: 7a9f610d-1a97-4d77-b6cf-2cc4da01587b was already created) ##DIFF_IGNORE
 ###client -> server
 ```json
 {
   "action": "configure-session",
   "eventId": "{{number, matches handler in client}}",
   "data": {
-    "protocol": "happn_2.0.0"
+    "protocol": "happn_1.3.0"
   }
 }
 ```
@@ -44,7 +44,7 @@
       "_browser": false,
       "_local": false
     },
-    "protocol": "happn_2.0.0",
+    "protocol": "happn_1.3.0",
     "password": "happn"
   },
   "options": {
@@ -54,7 +54,7 @@
 ```
 ###server -> client
 ```json
-"{\n  \"data\": {\n    \"id\": \"{{guid}}\",\n    \"protocol\": \"happn_2.0.0\",\n    \"happn\": {\n      \"name\": \"{{string}}\",\n      \"secure\": true,\n      \"encryptPayloads\": false,\n      \"publicKey\": \"{{ECDSA public key}}\"\n    },\n    \"info\": {\n      \"_browser\": false,\n      \"_local\": false\n    },\n    \"type\": 1,\n    \"user\": {\n      \"custom_data\": {},\n      \"username\": \"_ADMIN\",\n      \"_meta\": {\n        \"created\": \"{{number, utc}}\",\n        \"modified\": \"{{number, utc}}\",\n        \"path\": \"/_SYSTEM/_SECURITY/_USER/_ADMIN\",\n        \"_id\": \"{{matches path if nedb, generated if mongo}}\"\n      },\n      \"groups\": {\n        \"_ADMIN\": {\n          \"data\": {},\n          \"_meta\": {\n            \"created\": \"{{number, utc}}\",\n            \"modified\": \"{{number, utc}}\",\n            \"path\": \"/_SYSTEM/_SECURITY/_USER/_ADMIN/_USER_GROUP/_ADMIN\",\n            \"_id\": \"{{matches path if nedb, generated if mongo}}\"\n          }\n        }\n      }\n    },\n    \"timestamp\": \"{{number, utc}}\",\n    \"isEncrypted\": false,\n    \"origin\": \"{{sessionId}}\",\n    \"policy\": {\n      \"0\": {\n        \"ttl\": 0,\n        \"inactivity_threshold\": null\n      },\n      \"1\": {\n        \"ttl\": 0,\n        \"inactivity_threshold\": null\n      }\n    },\n    \"permissionSetKey\": \"/_ADMIN/\",\n    \"token\": \"{{string, jwt token}}\"\n  },\n  \"_meta\": {\n    \"type\": \"response\",\n    \"status\": \"ok\",\n    \"published\": false,\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"action\": \"login\"\n  },\n  \"protocol\": \"1.3.0\"\n}"
+"{\n  \"data\": {\n    \"id\": \"{{guid}}\",\n    \"protocol\": \"happn_1.3.0\",\n    \"happn\": {\n      \"name\": \"{{string}}\",\n      \"secure\": true,\n      \"encryptPayloads\": false,\n      \"publicKey\": \"{{ECDSA public key}}\"\n    },\n    \"info\": {\n      \"_browser\": false,\n      \"_local\": false\n    },\n    \"type\": 1,\n    \"user\": {\n      \"custom_data\": {},\n      \"username\": \"_ADMIN\",\n      \"_meta\": {\n        \"created\": \"{{number, utc}}\",\n        \"modified\": \"{{number, utc}}\",\n        \"path\": \"/_SYSTEM/_SECURITY/_USER/_ADMIN\",\n        \"_id\": \"{{matches path if nedb, generated if mongo}}\"\n      },\n      \"groups\": {\n        \"_ADMIN\": {\n          \"data\": {},\n          \"_meta\": {\n            \"created\": \"{{number, utc}}\",\n            \"modified\": \"{{number, utc}}\",\n            \"path\": \"/_SYSTEM/_SECURITY/_USER/_ADMIN/_USER_GROUP/_ADMIN\",\n            \"_id\": \"{{matches path if nedb, generated if mongo}}\"\n          }\n        }\n      }\n    },\n    \"timestamp\": \"{{number, utc}}\",\n    \"isEncrypted\": false,\n    \"origin\": \"{{sessionId}}\",\n    \"policy\": {\n      \"0\": {\n        \"ttl\": 0,\n        \"inactivity_threshold\": null\n      },\n      \"1\": {\n        \"ttl\": 0,\n        \"inactivity_threshold\": null\n      }\n    },\n    \"permissionSetKey\": \"/_ADMIN/\",\n    \"token\": \"{{string, jwt token}}\"\n  },\n  \"_meta\": {\n    \"type\": \"response\",\n    \"status\": \"ok\",\n    \"published\": false,\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"action\": \"login\"\n  },\n  \"protocol\": \"1.3.0\"\n}"
 ```
 #set
 
@@ -149,7 +149,7 @@
 ```
 ###server -> client
 ```json
-"{\n  \"data\": {\n    \"data\": {},\n    \"_meta\": {\n      \"path\": \"tag/non-existent\"\n    }\n  },\n  \"_meta\": {\n    \"created\": \"{{number, utc}}\",\n    \"modified\": \"{{number, utc}}\",\n    \"path\": \"/_TAGS/tag/non-existent/O4cLCaf1QQqwazrs13g1JQ-1\",\n    \"tag\": \"MYTAG\",\n    \"published\": true,\n    \"type\": \"response\",\n    \"status\": \"ok\",\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"sessionId\": \"{{guid}}\",\n    \"action\": \"set\"\n  },\n  \"protocol\": \"1.3.0\"\n}"
+"{\n  \"data\": {\n    \"data\": {},\n    \"_meta\": {\n      \"path\": \"tag/non-existent\"\n    }\n  },\n  \"_meta\": {\n    \"created\": \"{{number, utc}}\",\n    \"modified\": \"{{number, utc}}\",\n    \"path\": \"/_TAGS/tag/non-existent/kxbEYKzvQx2DcxO4DmPtTg-1\",\n    \"tag\": \"MYTAG\",\n    \"published\": true,\n    \"type\": \"response\",\n    \"status\": \"ok\",\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"sessionId\": \"{{guid}}\",\n    \"action\": \"set\"\n  },\n  \"protocol\": \"1.3.0\"\n}"
 ```
 ###setSibling
 
@@ -313,13 +313,14 @@
     "event_type": "all",
     "count": 0,
     "listenerId": 0,
+    "refCount": 1,
     "timeout": 60000
   }
 }
 ```
 ###server -> client
 ```json
-"{\n  \"data\": {\n    \"id\": \"{{guid}}\"\n  },\n  \"_meta\": {\n    \"status\": \"ok\",\n    \"type\": \"response\",\n    \"published\": false,\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"sessionId\": \"{{guid}}\",\n    \"action\": \"on\"\n  },\n  \"protocol\": \"1.3.0\"\n}"
+"{\n  \"data\": {},\n  \"_meta\": {\n    \"status\": \"ok\",\n    \"type\": \"response\",\n    \"published\": false,\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"sessionId\": \"{{guid}}\",\n    \"action\": \"on\"\n  },\n  \"protocol\": \"1.3.0\"\n}"
 ```
 ###set a piece of data, and get the event back based on the subscription in the previous step
 
@@ -344,7 +345,7 @@
 ```
 ###server -> client
 ```json
-"{\n  \"data\": {\n    \"data\": {\n      \"was\": \"set\"\n    }\n  },\n  \"_meta\": {\n    \"created\": \"{{number, utc}}\",\n    \"modified\": \"{{number, utc}}\",\n    \"modifiedBy\": \"_ADMIN\",\n    \"path\": \"/subscribe/on/all/events\",\n    \"channel\": \"/ALL@*\",\n    \"action\": \"/SET@/subscribe/on/all/events\",\n    \"type\": \"data\",\n    \"sessionId\": \"{{guid}}\",\n    \"consistency\": 2,\n    \"publicationId\": \"a63affbf-6f1a-4be9-8688-cbac568923c4-15\"\n  },\n  \"__outbound\": true\n}"
+"{\n  \"data\": {\n    \"data\": {\n      \"was\": \"set\"\n    }\n  },\n  \"_meta\": {\n    \"created\": \"{{number, utc}}\",\n    \"modified\": \"{{number, utc}}\",\n    \"modifiedBy\": \"_ADMIN\",\n    \"path\": \"/subscribe/on/all/events\",\n    \"channel\": \"/ALL@*\",\n    \"action\": \"/SET@/subscribe/on/all/events\",\n    \"type\": \"data\",\n    \"sessionId\": \"{{guid}}\",\n    \"consistency\": 2,\n    \"publicationId\": \"53a4df24-0cd7-4af8-a5c7-f64cbac101ab-15\"\n  },\n  \"__outbound\": true\n}"
 ```
 ###server -> client
 ```json
@@ -361,7 +362,8 @@
   "data": null,
   "sessionId": "{{guid}}",
   "options": {
-    "referenceId": 0,
+    "refCount": 0,
+    "listenerId": -1,
     "timeout": 60000
   }
 }
@@ -384,13 +386,14 @@
     "event_type": "set",
     "count": 0,
     "listenerId": 1,
+    "refCount": 1,
     "timeout": 60000
   }
 }
 ```
 ###server -> client
 ```json
-"{\n  \"data\": {\n    \"id\": \"{{guid}}\"\n  },\n  \"_meta\": {\n    \"status\": \"ok\",\n    \"type\": \"response\",\n    \"published\": false,\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"sessionId\": \"{{guid}}\",\n    \"action\": \"on\"\n  },\n  \"protocol\": \"1.3.0\"\n}"
+"{\n  \"data\": {},\n  \"_meta\": {\n    \"status\": \"ok\",\n    \"type\": \"response\",\n    \"published\": false,\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"sessionId\": \"{{guid}}\",\n    \"action\": \"on\"\n  },\n  \"protocol\": \"1.3.0\"\n}"
 ```
 ###set a piece of data, and get the event back based on the subscription in the previous step
 
@@ -415,7 +418,7 @@
 ```
 ###server -> client
 ```json
-"{\n  \"data\": {\n    \"data\": {\n      \"was\": \"set\"\n    }\n  },\n  \"_meta\": {\n    \"created\": \"{{number, utc}}\",\n    \"modified\": \"{{number, utc}}\",\n    \"modifiedBy\": \"_ADMIN\",\n    \"path\": \"/subscribe/on/specific\",\n    \"channel\": \"/SET@/subscribe/on/specific\",\n    \"action\": \"/SET@/subscribe/on/specific\",\n    \"type\": \"data\",\n    \"sessionId\": \"{{guid}}\",\n    \"consistency\": 2,\n    \"publicationId\": \"a63affbf-6f1a-4be9-8688-cbac568923c4-18\"\n  },\n  \"__outbound\": true\n}"
+"{\n  \"data\": {\n    \"data\": {\n      \"was\": \"set\"\n    }\n  },\n  \"_meta\": {\n    \"created\": \"{{number, utc}}\",\n    \"modified\": \"{{number, utc}}\",\n    \"modifiedBy\": \"_ADMIN\",\n    \"path\": \"/subscribe/on/specific\",\n    \"channel\": \"/SET@/subscribe/on/specific\",\n    \"action\": \"/SET@/subscribe/on/specific\",\n    \"type\": \"data\",\n    \"sessionId\": \"{{guid}}\",\n    \"consistency\": 2,\n    \"publicationId\": \"53a4df24-0cd7-4af8-a5c7-f64cbac101ab-18\"\n  },\n  \"__outbound\": true\n}"
 ```
 ###server -> client
 ```json
@@ -436,13 +439,14 @@
     "event_type": "remove",
     "count": 0,
     "listenerId": 2,
+    "refCount": 1,
     "timeout": 60000
   }
 }
 ```
 ###server -> client
 ```json
-"{\n  \"data\": {\n    \"id\": \"{{guid}}\"\n  },\n  \"_meta\": {\n    \"status\": \"ok\",\n    \"type\": \"response\",\n    \"published\": false,\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"sessionId\": \"{{guid}}\",\n    \"action\": \"on\"\n  },\n  \"protocol\": \"1.3.0\"\n}"
+"{\n  \"data\": {},\n  \"_meta\": {\n    \"status\": \"ok\",\n    \"type\": \"response\",\n    \"published\": false,\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"sessionId\": \"{{guid}}\",\n    \"action\": \"on\"\n  },\n  \"protocol\": \"1.3.0\"\n}"
 ```
 ###remove a piece of data, and get the event back based on the subscription in the previous step
 
@@ -463,7 +467,7 @@
 ```
 ###server -> client
 ```json
-"{\n  \"data\": {\n    \"removed\": 1\n  },\n  \"_meta\": {\n    \"timestamp\": \"{{number, utc}}\",\n    \"path\": \"/subscribe/on/remove\",\n    \"channel\": \"/REMOVE@/subscribe/on/remove\",\n    \"action\": \"/REMOVE@/subscribe/on/remove\",\n    \"type\": \"data\",\n    \"sessionId\": \"{{guid}}\",\n    \"consistency\": 2,\n    \"publicationId\": \"a63affbf-6f1a-4be9-8688-cbac568923c4-21\"\n  },\n  \"__outbound\": true\n}"
+"{\n  \"data\": {\n    \"removed\": 1\n  },\n  \"_meta\": {\n    \"timestamp\": \"{{number, utc}}\",\n    \"path\": \"/subscribe/on/remove\",\n    \"channel\": \"/REMOVE@/subscribe/on/remove\",\n    \"action\": \"/REMOVE@/subscribe/on/remove\",\n    \"type\": \"data\",\n    \"sessionId\": \"{{guid}}\",\n    \"consistency\": 2,\n    \"publicationId\": \"53a4df24-0cd7-4af8-a5c7-f64cbac101ab-21\"\n  },\n  \"__outbound\": true\n}"
 ```
 ###server -> client
 ```json
@@ -483,13 +487,14 @@
     "event_type": "all",
     "count": 1,
     "listenerId": 3,
+    "refCount": 1,
     "timeout": 60000
   }
 }
 ```
 ###server -> client
 ```json
-"{\n  \"data\": {\n    \"id\": \"{{guid}}\"\n  },\n  \"_meta\": {\n    \"status\": \"ok\",\n    \"type\": \"response\",\n    \"published\": false,\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"sessionId\": \"{{guid}}\",\n    \"action\": \"on\"\n  },\n  \"protocol\": \"1.3.0\"\n}"
+"{\n  \"data\": {},\n  \"_meta\": {\n    \"status\": \"ok\",\n    \"type\": \"response\",\n    \"published\": false,\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"sessionId\": \"{{guid}}\",\n    \"action\": \"on\"\n  },\n  \"protocol\": \"1.3.0\"\n}"
 ```
 ###set a piece of data, and get the event back based on the subscription in the previous step
 
@@ -514,7 +519,7 @@
 ```
 ###server -> client
 ```json
-"{\n  \"data\": {\n    \"data\": {\n      \"was\": \"set\"\n    }\n  },\n  \"_meta\": {\n    \"created\": \"{{number, utc}}\",\n    \"modified\": \"{{number, utc}}\",\n    \"modifiedBy\": \"_ADMIN\",\n    \"path\": \"/subscribe/once\",\n    \"channel\": \"/ALL@/subscribe/once\",\n    \"action\": \"/SET@/subscribe/once\",\n    \"type\": \"data\",\n    \"sessionId\": \"{{guid}}\",\n    \"consistency\": 2,\n    \"publicationId\": \"a63affbf-6f1a-4be9-8688-cbac568923c4-23\"\n  },\n  \"__outbound\": true\n}"
+"{\n  \"data\": {\n    \"data\": {\n      \"was\": \"set\"\n    }\n  },\n  \"_meta\": {\n    \"created\": \"{{number, utc}}\",\n    \"modified\": \"{{number, utc}}\",\n    \"modifiedBy\": \"_ADMIN\",\n    \"path\": \"/subscribe/once\",\n    \"channel\": \"/ALL@/subscribe/once\",\n    \"action\": \"/SET@/subscribe/once\",\n    \"type\": \"data\",\n    \"sessionId\": \"{{guid}}\",\n    \"consistency\": 2,\n    \"publicationId\": \"53a4df24-0cd7-4af8-a5c7-f64cbac101ab-23\"\n  },\n  \"__outbound\": true\n}"
 ```
 ###server -> client
 ```json
@@ -529,7 +534,8 @@
   "data": null,
   "sessionId": "{{guid}}",
   "options": {
-    "referenceId": "{{unique id (hyperid)}}",
+    "refCount": 1,
+    "listenerId": 3,
     "timeout": 60000
   }
 }
@@ -548,6 +554,7 @@
     "event_type": "all",
     "count": 0,
     "listenerId": 4,
+    "refCount": 1,
     "timeout": 60000
   }
 }
@@ -558,7 +565,7 @@
 ```
 ###server -> client
 ```json
-"{\n  \"data\": {\n    \"id\": \"{{guid}}\"\n  },\n  \"_meta\": {\n    \"status\": \"ok\",\n    \"type\": \"response\",\n    \"published\": false,\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"sessionId\": \"{{guid}}\",\n    \"action\": \"on\"\n  },\n  \"protocol\": \"1.3.0\"\n}"
+"{\n  \"data\": {},\n  \"_meta\": {\n    \"status\": \"ok\",\n    \"type\": \"response\",\n    \"published\": false,\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"sessionId\": \"{{guid}}\",\n    \"action\": \"on\"\n  },\n  \"protocol\": \"1.3.0\"\n}"
 ```
 ###set a piece of data, and get a response from the server, but no publication because noPublish was set to true
 
@@ -600,6 +607,7 @@
     "event_type": "all",
     "count": 0,
     "listenerId": 5,
+    "refCount": 1,
     "timeout": 60000
   }
 }
@@ -622,6 +630,7 @@
     "event_type": "all",
     "count": 0,
     "listenerId": 0,
+    "refCount": 1,
     "timeout": 60000
   }
 }
@@ -653,7 +662,7 @@
 
 *the disconnectAllClients method is called - this method is called on the happn instance shutdown, causing the server to push out a disconnection message to all connected clients*
 
-one connected client remaining, so disconnect warning is sent to it, session id (matches the one stipulated in section 1_1) is:6eb784bd-4b47-48f7-b377-e89921461101  ##DIFF_IGNORE
+one connected client remaining, so disconnect warning is sent to it, session id (matches the one stipulated in section 1_1) is:7a9f610d-1a97-4d77-b6cf-2cc4da01587b  ##DIFF_IGNORE
 ###server -> client
 ```json
 "{\n  \"_meta\": {\n    \"type\": \"system\"\n  },\n  \"eventKey\": \"server-side-disconnect\",\n  \"data\": \"server-side-disconnect\"\n}"
