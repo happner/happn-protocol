@@ -1,0 +1,362 @@
+{
+  "create a client session and login": {
+    "action": "login",
+    "eventId": "{{number, matches handler in client}}",
+    "data": {
+      "username": "_ADMIN",
+      "info": {
+        "_browser": false,
+        "_local": false
+      },
+      "protocol": "happn_2.0.0",
+      "password": "happn"
+    },
+    "options": {
+      "timeout": 60000
+    }
+  },
+  "set a piece of data using a key value pair": {
+    "action": "set",
+    "eventId": "{{number, matches handler in client}}",
+    "path": "/set/some/data",
+    "data": {
+      "data": {
+        "was": "set"
+      }
+    },
+    "sessionId": "{{guid}}",
+    "options": {
+      "timeout": 60000,
+      "modifiedBy": "_ADMIN",
+      "consistency": 2
+    }
+  },
+  "merge some new values with an existing record, NB: the merge only goes 1 property level deep": {
+    "action": "set",
+    "eventId": "{{number, matches handler in client}}",
+    "path": "/set/some/data",
+    "data": {
+      "an": {
+        "additional": "field"
+      },
+      "data": {
+        "was": "set"
+      }
+    },
+    "sessionId": "{{guid}}",
+    "options": {
+      "merge": true,
+      "timeout": 60000,
+      "modifiedBy": "_ADMIN",
+      "consistency": 2
+    }
+  },
+  "tag some existing data": {
+    "action": "set",
+    "eventId": "{{number, matches handler in client}}",
+    "path": "/set/some/data",
+    "data": null,
+    "sessionId": "{{guid}}",
+    "options": {
+      "tag": "MYTAG",
+      "nullValue": true,
+      "timeout": 60000,
+      "modifiedBy": "_ADMIN",
+      "consistency": 2
+    }
+  },
+  "tag failure": {
+    "action": "set",
+    "eventId": "{{number, matches handler in client}}",
+    "path": "tag/non-existent",
+    "data": null,
+    "sessionId": "{{guid}}",
+    "options": {
+      "tag": "MYTAG",
+      "nullValue": true,
+      "timeout": 60000,
+      "modifiedBy": "_ADMIN",
+      "consistency": 2
+    }
+  },
+  "setSibling": {
+    "action": "set",
+    "eventId": "{{number, matches handler in client}}",
+    "path": "set/sibling/data",
+    "data": {
+      "sibling": "data"
+    },
+    "sessionId": "{{guid}}",
+    "options": {
+      "set_type": "sibling",
+      "timeout": 60000,
+      "modifiedBy": "_ADMIN",
+      "consistency": 2
+    }
+  },
+  "fails to do a set": {
+    "action": "set",
+    "eventId": "{{number, matches handler in client}}",
+    "path": "throw/an/error",
+    "data": {
+      "error": {
+        "was": "thrown"
+      }
+    },
+    "sessionId": "{{guid}}",
+    "options": {
+      "timeout": 60000
+    }
+  },
+  "fails to do a set, access denied, unauthorised": {
+    "action": "set",
+    "eventId": "{{number, matches handler in client}}",
+    "path": "try/and/set/no/permission",
+    "data": {
+      "access": {
+        "was": "denied"
+      }
+    },
+    "sessionId": "{{guid}}",
+    "options": {
+      "timeout": 60000
+    }
+  },
+  "removes one data point": {
+    "action": "remove",
+    "eventId": "{{number, matches handler in client}}",
+    "path": "remove/one",
+    "data": null,
+    "sessionId": "{{guid}}",
+    "options": {
+      "timeout": 60000,
+      "consistency": 2
+    }
+  },
+  "call sequence representing a request to remove something that is not there": {
+    "action": "remove",
+    "eventId": "{{number, matches handler in client}}",
+    "path": "remove/non_existant",
+    "data": null,
+    "sessionId": "{{guid}}",
+    "options": {
+      "timeout": 60000,
+      "consistency": 2
+    }
+  },
+  "an error happens when we try and remove an item": {
+    "action": "remove",
+    "eventId": "{{number, matches handler in client}}",
+    "path": "remove/failed",
+    "data": null,
+    "sessionId": "{{guid}}",
+    "options": {
+      "timeout": 60000
+    }
+  },
+  "an error happens when we try and remove an item, access denied": {
+    "action": "remove",
+    "eventId": "{{number, matches handler in client}}",
+    "path": "remove/no/permissions",
+    "data": null,
+    "sessionId": "{{guid}}",
+    "options": {
+      "timeout": 60000
+    }
+  },
+  "subscribe to all changes on all data points": {
+    "action": "on",
+    "eventId": "{{number, matches handler in client}}",
+    "path": "/ALL@*",
+    "data": null,
+    "sessionId": "{{guid}}",
+    "options": {
+      "event_type": "all",
+      "count": 0,
+      "listenerId": 0,
+      "timeout": 60000
+    },
+    "pathData": {
+      "parts": [
+        "/ALL",
+        "*"
+      ],
+      "action": "ALL"
+    },
+    "key": "*"
+  },
+  "set a piece of data, and get the event back based on the subscription in the previous step": {
+    "action": "off",
+    "eventId": "{{number, matches handler in client}}",
+    "path": "/ALL@/subscribe/once",
+    "data": null,
+    "sessionId": "{{guid}}",
+    "options": {
+      "referenceId": "{{unique id (hyperid)}}",
+      "timeout": 60000
+    }
+  },
+  "unsubscribe from all changes on all data points, NB: will remove all subscriptions": {
+    "action": "off",
+    "eventId": "{{number, matches handler in client}}",
+    "path": "*",
+    "data": null,
+    "sessionId": "{{guid}}",
+    "options": {
+      "referenceId": 0,
+      "timeout": 60000
+    },
+    "pathData": {
+      "parts": [
+        "*"
+      ],
+      "action": "*"
+    },
+    "key": "*"
+  },
+  "subscribe to only set actions on a specific data point": {
+    "action": "on",
+    "eventId": "{{number, matches handler in client}}",
+    "path": "/SET@/subscribe/on/specific",
+    "data": null,
+    "sessionId": "{{guid}}",
+    "options": {
+      "event_type": "set",
+      "count": 0,
+      "listenerId": 1,
+      "timeout": 60000
+    },
+    "pathData": {
+      "parts": [
+        "/SET",
+        "/subscribe/on/specific"
+      ],
+      "action": "SET"
+    },
+    "key": "/subscribe/on/specific"
+  },
+  "subscribe to the removal of data at a specified point": {
+    "action": "on",
+    "eventId": "{{number, matches handler in client}}",
+    "path": "/REMOVE@/subscribe/on/remove",
+    "data": null,
+    "sessionId": "{{guid}}",
+    "options": {
+      "event_type": "remove",
+      "count": 0,
+      "listenerId": 2,
+      "timeout": 60000
+    },
+    "pathData": {
+      "parts": [
+        "/REMOVE",
+        "/subscribe/on/remove"
+      ],
+      "action": "REMOVE"
+    },
+    "key": "/subscribe/on/remove"
+  },
+  "remove a piece of data, and get the event back based on the subscription in the previous step": {
+    "action": "remove",
+    "eventId": "{{number, matches handler in client}}",
+    "path": "/subscribe/on/remove",
+    "data": null,
+    "sessionId": "{{guid}}",
+    "options": {
+      "timeout": 60000,
+      "consistency": 2
+    }
+  },
+  "subscribe to a change only once, on the native happn client this is done by specifying the 'count' option, but you can tell from the following sequence how to unsubscribe": {
+    "action": "on",
+    "eventId": "{{number, matches handler in client}}",
+    "path": "/ALL@/subscribe/once",
+    "data": null,
+    "sessionId": "{{guid}}",
+    "options": {
+      "event_type": "all",
+      "count": 1,
+      "listenerId": 3,
+      "timeout": 60000
+    },
+    "pathData": {
+      "parts": [
+        "/ALL",
+        "/subscribe/once"
+      ],
+      "action": "ALL"
+    },
+    "key": "/subscribe/once"
+  },
+  "perform an action without publishing using the noPublish flag": {
+    "action": "on",
+    "eventId": "{{number, matches handler in client}}",
+    "path": "/ALL@/subscribe/noPublish",
+    "data": null,
+    "sessionId": "{{guid}}",
+    "options": {
+      "event_type": "all",
+      "count": 0,
+      "listenerId": 4,
+      "timeout": 60000
+    },
+    "pathData": {
+      "parts": [
+        "/ALL",
+        "/subscribe/noPublish"
+      ],
+      "action": "ALL"
+    },
+    "key": "/subscribe/noPublish"
+  },
+  "set a piece of data, and get a response from the server, but no publication because noPublish was set to true": {
+    "action": "set",
+    "eventId": "{{number, matches handler in client}}",
+    "path": "/subscribe/noPublish",
+    "data": {
+      "data": {
+        "was": "set"
+      }
+    },
+    "sessionId": "{{guid}}",
+    "options": {
+      "noPublish": true,
+      "timeout": 60000,
+      "modifiedBy": "_ADMIN"
+    }
+  },
+  "failure to subscribe": {
+    "action": "on",
+    "eventId": "{{number, matches handler in client}}",
+    "path": "/ALL@/subscription/error",
+    "data": null,
+    "sessionId": "{{guid}}",
+    "options": {
+      "event_type": "all",
+      "count": 0,
+      "listenerId": 5,
+      "timeout": 60000
+    }
+  },
+  "failure to subscribe - access denied": {
+    "action": "on",
+    "eventId": "{{number, matches handler in client}}",
+    "path": "/ALL@/subscription/access/denied",
+    "data": null,
+    "sessionId": "{{guid}}",
+    "options": {
+      "event_type": "all",
+      "count": 0,
+      "listenerId": 0,
+      "timeout": 60000
+    }
+  },
+  "the client sends out a disconnect request, which the server receives - the server then queues the disconnection request, the client the ends the websocket session, and the server cleans up on the other side without sending a disconnection warning": {
+    "action": "disconnect",
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "options": {
+      "timeout": 60000
+    }
+  }
+}

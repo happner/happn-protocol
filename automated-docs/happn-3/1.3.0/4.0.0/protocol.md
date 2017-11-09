@@ -2,12 +2,12 @@
 
 ##PROTOCOL VERSION: 1.3.0
 ###HAPPN VERSION: 4.0.0
-####RUN: 2017 November 09 12:00
+####RUN: 2017 November 09 06:31
 #connect a client
 
 ###create a client session and login
 
-(existing client with session id: e715b017-8dcb-4b35-88d8-009f4d4ecc2b was already created) ##DIFF_IGNORE
+(existing client with session id: aee434e1-fc67-4693-9031-09a877c53ee5 was already created) ##DIFF_IGNORE
 ###client -> server
 ```json
 {
@@ -20,17 +20,7 @@
 ```
 ###server -> client
 ```json
-{
-  "data": null,
-  "_meta": {
-    "type": "response",
-    "status": "ok",
-    "published": false,
-    "eventId": "{{number, matches handler in client}}",
-    "action": "configure-session"
-  },
-  "protocol": "1.3.0"
-}
+"{\n  \"data\": null,\n  \"_meta\": {\n    \"type\": \"response\",\n    \"status\": \"ok\",\n    \"published\": false,\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"action\": \"configure-session\"\n  },\n  \"protocol\": \"1.3.0\"\n}"
 ```
 ###client -> server
 ```json
@@ -41,22 +31,7 @@
 ```
 ###server -> client
 ```json
-{
-  "data": {
-    "name": "{{string, server name - silly if not configured}}",
-    "secure": true,
-    "encryptPayloads": false,
-    "publicKey": "{{ECDSA public key}}"
-  },
-  "_meta": {
-    "type": "response",
-    "status": "ok",
-    "published": false,
-    "eventId": "{{number, matches handler in client}}",
-    "action": "describe"
-  },
-  "protocol": "1.3.0"
-}
+"{\n  \"data\": {\n    \"name\": \"{{string, server name - silly if not configured}}\",\n    \"secure\": true,\n    \"encryptPayloads\": false,\n    \"publicKey\": \"{{ECDSA public key}}\"\n  },\n  \"_meta\": {\n    \"type\": \"response\",\n    \"status\": \"ok\",\n    \"published\": false,\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"action\": \"describe\"\n  },\n  \"protocol\": \"1.3.0\"\n}"
 ```
 ###client -> server
 ```json
@@ -79,67 +54,7 @@
 ```
 ###server -> client
 ```json
-{
-  "data": {
-    "id": "{{guid}}",
-    "protocol": "happn_1.3.0",
-    "happn": {
-      "name": "{{string}}",
-      "secure": true,
-      "encryptPayloads": false,
-      "publicKey": "{{ECDSA public key}}"
-    },
-    "info": {
-      "_browser": false,
-      "_local": false
-    },
-    "type": 1,
-    "user": {
-      "custom_data": {},
-      "username": "_ADMIN",
-      "_meta": {
-        "created": "{{number, utc}}",
-        "modified": "{{number, utc}}",
-        "path": "/_SYSTEM/_SECURITY/_USER/_ADMIN",
-        "_id": "{{matches path if nedb, generated if mongo}}"
-      },
-      "groups": {
-        "_ADMIN": {
-          "data": {},
-          "_meta": {
-            "created": "{{number, utc}}",
-            "modified": "{{number, utc}}",
-            "path": "/_SYSTEM/_SECURITY/_USER/_ADMIN/_USER_GROUP/_ADMIN",
-            "_id": "{{matches path if nedb, generated if mongo}}"
-          }
-        }
-      }
-    },
-    "timestamp": "{{number, utc}}",
-    "isEncrypted": false,
-    "origin": "softcollar_VJtOUzaAm",
-    "policy": {
-      "0": {
-        "ttl": 0,
-        "inactivity_threshold": null
-      },
-      "1": {
-        "ttl": 0,
-        "inactivity_threshold": null
-      }
-    },
-    "permissionSetKey": "/_ADMIN/",
-    "token": "{{string, jwt token}}"
-  },
-  "_meta": {
-    "type": "response",
-    "status": "ok",
-    "published": false,
-    "eventId": "{{number, matches handler in client}}",
-    "action": "login"
-  },
-  "protocol": "1.3.0"
-}
+"{\n  \"data\": {\n    \"id\": \"{{guid}}\",\n    \"protocol\": \"happn_1.3.0\",\n    \"happn\": {\n      \"name\": \"{{string}}\",\n      \"secure\": true,\n      \"encryptPayloads\": false,\n      \"publicKey\": \"{{ECDSA public key}}\"\n    },\n    \"info\": {\n      \"_browser\": false,\n      \"_local\": false\n    },\n    \"type\": 1,\n    \"user\": {\n      \"custom_data\": {},\n      \"username\": \"_ADMIN\",\n      \"_meta\": {\n        \"created\": \"{{number, utc}}\",\n        \"modified\": \"{{number, utc}}\",\n        \"path\": \"/_SYSTEM/_SECURITY/_USER/_ADMIN\",\n        \"_id\": \"{{matches path if nedb, generated if mongo}}\"\n      },\n      \"groups\": {\n        \"_ADMIN\": {\n          \"data\": {},\n          \"_meta\": {\n            \"created\": \"{{number, utc}}\",\n            \"modified\": \"{{number, utc}}\",\n            \"path\": \"/_SYSTEM/_SECURITY/_USER/_ADMIN/_USER_GROUP/_ADMIN\",\n            \"_id\": \"{{matches path if nedb, generated if mongo}}\"\n          }\n        }\n      }\n    },\n    \"timestamp\": \"{{number, utc}}\",\n    \"isEncrypted\": false,\n    \"origin\": \"{{sessionId}}\",\n    \"policy\": {\n      \"0\": {\n        \"ttl\": 0,\n        \"inactivity_threshold\": null\n      },\n      \"1\": {\n        \"ttl\": 0,\n        \"inactivity_threshold\": null\n      }\n    },\n    \"permissionSetKey\": \"/_ADMIN/\",\n    \"token\": \"{{string, jwt token}}\"\n  },\n  \"_meta\": {\n    \"type\": \"response\",\n    \"status\": \"ok\",\n    \"published\": false,\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"action\": \"login\"\n  },\n  \"protocol\": \"1.3.0\"\n}"
 ```
 #set
 
@@ -164,26 +79,7 @@
 ```
 ###server -> client
 ```json
-{
-  "data": {
-    "data": {
-      "was": "set"
-    }
-  },
-  "_meta": {
-    "created": "{{number, utc}}",
-    "modified": "{{number, utc}}",
-    "modifiedBy": "_ADMIN",
-    "path": "/set/some/data",
-    "published": true,
-    "type": "response",
-    "status": "ok",
-    "eventId": "{{number, matches handler in client}}",
-    "sessionId": "{{guid}}",
-    "action": "set"
-  },
-  "protocol": "1.3.0"
-}
+"{\n  \"data\": {\n    \"data\": {\n      \"was\": \"set\"\n    }\n  },\n  \"_meta\": {\n    \"created\": \"{{number, utc}}\",\n    \"modified\": \"{{number, utc}}\",\n    \"modifiedBy\": \"_ADMIN\",\n    \"path\": \"/set/some/data\",\n    \"published\": true,\n    \"type\": \"response\",\n    \"status\": \"ok\",\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"sessionId\": \"{{guid}}\",\n    \"action\": \"set\"\n  },\n  \"protocol\": \"1.3.0\"\n}"
 ```
 ###merge some new values with an existing record, NB: the merge only goes 1 property level deep
 
@@ -207,28 +103,7 @@
 ```
 ###server -> client
 ```json
-{
-  "data": {
-    "an": {
-      "additional": "field"
-    },
-    "data": {
-      "was": "set"
-    }
-  },
-  "_meta": {
-    "created": "{{number, utc}}",
-    "modified": "{{number, utc}}",
-    "path": "/set/some/data",
-    "published": true,
-    "type": "response",
-    "status": "ok",
-    "eventId": "{{number, matches handler in client}}",
-    "sessionId": "{{guid}}",
-    "action": "set"
-  },
-  "protocol": "1.3.0"
-}
+"{\n  \"data\": {\n    \"an\": {\n      \"additional\": \"field\"\n    },\n    \"data\": {\n      \"was\": \"set\"\n    }\n  },\n  \"_meta\": {\n    \"created\": \"{{number, utc}}\",\n    \"modified\": \"{{number, utc}}\",\n    \"path\": \"/set/some/data\",\n    \"published\": true,\n    \"type\": \"response\",\n    \"status\": \"ok\",\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"sessionId\": \"{{guid}}\",\n    \"action\": \"set\"\n  },\n  \"protocol\": \"1.3.0\"\n}"
 ```
 ###tag some existing data
 
@@ -251,37 +126,7 @@
 ```
 ###server -> client
 ```json
-{
-  "data": {
-    "data": {
-      "an": {
-        "additional": "field"
-      },
-      "data": {
-        "was": "set"
-      }
-    },
-    "_meta": {
-      "path": "/set/some/data"
-    },
-    "created": "{{number, utc}}",
-    "modified": "{{number, utc}}",
-    "_id": "{{matches path if nedb, generated if mongo}}"
-  },
-  "_meta": {
-    "created": "{{number, utc}}",
-    "modified": "{{number, utc}}",
-    "path": "{{/_TAGS/set/some/data/[unique generated id]}}",
-    "tag": "MYTAG",
-    "published": true,
-    "type": "response",
-    "status": "ok",
-    "eventId": "{{number, matches handler in client}}",
-    "sessionId": "{{guid}}",
-    "action": "set"
-  },
-  "protocol": "1.3.0"
-}
+"{\n  \"data\": {\n    \"data\": {\n      \"an\": {\n        \"additional\": \"field\"\n      },\n      \"data\": {\n        \"was\": \"set\"\n      }\n    },\n    \"_meta\": {\n      \"path\": \"/set/some/data\"\n    },\n    \"created\": \"{{number, utc}}\",\n    \"modified\": \"{{number, utc}}\",\n    \"_id\": \"{{matches path if nedb, generated if mongo}}\"\n  },\n  \"_meta\": {\n    \"created\": \"{{number, utc}}\",\n    \"modified\": \"{{number, utc}}\",\n    \"path\": \"{{/_TAGS/set/some/data/[unique generated id]}}\",\n    \"tag\": \"MYTAG\",\n    \"published\": true,\n    \"type\": \"response\",\n    \"status\": \"ok\",\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"sessionId\": \"{{guid}}\",\n    \"action\": \"set\"\n  },\n  \"protocol\": \"1.3.0\"\n}"
 ```
 ###tag failure
 
@@ -304,27 +149,7 @@
 ```
 ###server -> client
 ```json
-{
-  "data": {
-    "data": {},
-    "_meta": {
-      "path": "tag/non-existent"
-    }
-  },
-  "_meta": {
-    "created": "{{number, utc}}",
-    "modified": "{{number, utc}}",
-    "path": "/_TAGS/tag/non-existent/u3WATH6NQ4KHjFYyOks36g-1",
-    "tag": "MYTAG",
-    "published": true,
-    "type": "response",
-    "status": "ok",
-    "eventId": "{{number, matches handler in client}}",
-    "sessionId": "{{guid}}",
-    "action": "set"
-  },
-  "protocol": "1.3.0"
-}
+"{\n  \"data\": {\n    \"data\": {},\n    \"_meta\": {\n      \"path\": \"tag/non-existent\"\n    }\n  },\n  \"_meta\": {\n    \"created\": \"{{number, utc}}\",\n    \"modified\": \"{{number, utc}}\",\n    \"path\": \"/_TAGS/tag/non-existent/MTi2b4QVSzu0HGYUEfNthQ-1\",\n    \"tag\": \"MYTAG\",\n    \"published\": true,\n    \"type\": \"response\",\n    \"status\": \"ok\",\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"sessionId\": \"{{guid}}\",\n    \"action\": \"set\"\n  },\n  \"protocol\": \"1.3.0\"\n}"
 ```
 ###setSibling
 
@@ -348,24 +173,7 @@
 ```
 ###server -> client
 ```json
-{
-  "data": {
-    "sibling": "data"
-  },
-  "_meta": {
-    "created": "{{number, utc}}",
-    "modified": "{{number, utc}}",
-    "modifiedBy": "_ADMIN",
-    "path": "set/sibling/data/[unique generated id]",
-    "published": true,
-    "type": "response",
-    "status": "ok",
-    "eventId": "{{number, matches handler in client}}",
-    "sessionId": "{{guid}}",
-    "action": "set"
-  },
-  "protocol": "1.3.0"
-}
+"{\n  \"data\": {\n    \"sibling\": \"data\"\n  },\n  \"_meta\": {\n    \"created\": \"{{number, utc}}\",\n    \"modified\": \"{{number, utc}}\",\n    \"modifiedBy\": \"_ADMIN\",\n    \"path\": \"set/sibling/data/[unique generated id]\",\n    \"published\": true,\n    \"type\": \"response\",\n    \"status\": \"ok\",\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"sessionId\": \"{{guid}}\",\n    \"action\": \"set\"\n  },\n  \"protocol\": \"1.3.0\"\n}"
 ```
 ###fails to do a set
 
@@ -388,22 +196,7 @@
 ```
 ###server -> client
 ```json
-{
-  "data": null,
-  "_meta": {
-    "type": "response",
-    "status": "error",
-    "published": false,
-    "eventId": "{{number, matches handler in client}}",
-    "sessionId": "{{guid}}",
-    "action": "set",
-    "error": {
-      "name": "TestError",
-      "message": "a fly in the ointment"
-    }
-  },
-  "protocol": "1.3.0"
-}
+"{\n  \"data\": null,\n  \"_meta\": {\n    \"type\": \"response\",\n    \"status\": \"error\",\n    \"published\": false,\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"sessionId\": \"{{guid}}\",\n    \"action\": \"set\",\n    \"error\": {\n      \"name\": \"TestError\",\n      \"message\": \"a fly in the ointment\"\n    }\n  },\n  \"protocol\": \"1.3.0\"\n}"
 ```
 ###fails to do a set, access denied, unauthorised
 
@@ -426,23 +219,7 @@
 ```
 ###server -> client
 ```json
-{
-  "data": null,
-  "_meta": {
-    "type": "response",
-    "status": "error",
-    "published": false,
-    "eventId": "{{number, matches handler in client}}",
-    "sessionId": "{{guid}}",
-    "action": "set",
-    "error": {
-      "name": "AccessDenied",
-      "code": 403,
-      "message": "unauthorized"
-    }
-  },
-  "protocol": "1.3.0"
-}
+"{\n  \"data\": null,\n  \"_meta\": {\n    \"type\": \"response\",\n    \"status\": \"error\",\n    \"published\": false,\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"sessionId\": \"{{guid}}\",\n    \"action\": \"set\",\n    \"error\": {\n      \"name\": \"AccessDenied\",\n      \"code\": 403,\n      \"message\": \"unauthorized\"\n    }\n  },\n  \"protocol\": \"1.3.0\"\n}"
 ```
 ###removes one data point
 
@@ -461,56 +238,7 @@
 ```
 ###server -> client
 ```json
-{
-  "data": {
-    "removed": 1
-  },
-  "_meta": {
-    "timestamp": "{{number, utc}}",
-    "path": "remove/one",
-    "published": true,
-    "type": "response",
-    "status": "ok",
-    "eventId": "{{number, matches handler in client}}",
-    "sessionId": "{{guid}}",
-    "action": "remove"
-  },
-  "protocol": "1.3.0"
-}
-```
-###using a wildcard, we remove 2 items in the db keyed like so: remove/multiple/1 and remove/multiple/2 using a single request
-
-###client -> server
-```json
-{
-  "action": "remove",
-  "eventId": "{{number, matches handler in client}}",
-  "path": "remove/multiple/*",
-  "data": null,
-  "sessionId": "{{guid}}",
-  "options": {
-    "timeout": 60000
-  }
-}
-```
-###server -> client
-```json
-{
-  "data": {
-    "removed": 2
-  },
-  "_meta": {
-    "timestamp": "{{number, utc}}",
-    "path": "remove/multiple/*",
-    "published": true,
-    "type": "response",
-    "status": "ok",
-    "eventId": "{{number, matches handler in client}}",
-    "sessionId": "{{guid}}",
-    "action": "remove"
-  },
-  "protocol": "1.3.0"
-}
+"{\n  \"data\": {\n    \"removed\": 1\n  },\n  \"_meta\": {\n    \"timestamp\": \"{{number, utc}}\",\n    \"path\": \"remove/one\",\n    \"published\": true,\n    \"type\": \"response\",\n    \"status\": \"ok\",\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"sessionId\": \"{{guid}}\",\n    \"action\": \"remove\"\n  },\n  \"protocol\": \"1.3.0\"\n}"
 ```
 ###call sequence representing a request to remove something that is not there
 
@@ -529,22 +257,7 @@
 ```
 ###server -> client
 ```json
-{
-  "data": {
-    "removed": 0
-  },
-  "_meta": {
-    "timestamp": "{{number, utc}}",
-    "path": "remove/non_existant",
-    "published": true,
-    "type": "response",
-    "status": "ok",
-    "eventId": "{{number, matches handler in client}}",
-    "sessionId": "{{guid}}",
-    "action": "remove"
-  },
-  "protocol": "1.3.0"
-}
+"{\n  \"data\": {\n    \"removed\": 0\n  },\n  \"_meta\": {\n    \"timestamp\": \"{{number, utc}}\",\n    \"path\": \"remove/non_existant\",\n    \"published\": true,\n    \"type\": \"response\",\n    \"status\": \"ok\",\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"sessionId\": \"{{guid}}\",\n    \"action\": \"remove\"\n  },\n  \"protocol\": \"1.3.0\"\n}"
 ```
 ###an error happens when we try and remove an item
 
@@ -563,22 +276,7 @@
 ```
 ###server -> client
 ```json
-{
-  "data": null,
-  "_meta": {
-    "type": "response",
-    "status": "error",
-    "published": false,
-    "eventId": "{{number, matches handler in client}}",
-    "sessionId": "{{guid}}",
-    "action": "remove",
-    "error": {
-      "name": "TestError",
-      "message": "a fly in the ointment"
-    }
-  },
-  "protocol": "1.3.0"
-}
+"{\n  \"data\": null,\n  \"_meta\": {\n    \"type\": \"response\",\n    \"status\": \"error\",\n    \"published\": false,\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"sessionId\": \"{{guid}}\",\n    \"action\": \"remove\",\n    \"error\": {\n      \"name\": \"TestError\",\n      \"message\": \"a fly in the ointment\"\n    }\n  },\n  \"protocol\": \"1.3.0\"\n}"
 ```
 ###an error happens when we try and remove an item, access denied
 
@@ -597,23 +295,7 @@
 ```
 ###server -> client
 ```json
-{
-  "data": null,
-  "_meta": {
-    "type": "response",
-    "status": "error",
-    "published": false,
-    "eventId": "{{number, matches handler in client}}",
-    "sessionId": "{{guid}}",
-    "action": "remove",
-    "error": {
-      "name": "AccessDenied",
-      "code": 403,
-      "message": "unauthorized"
-    }
-  },
-  "protocol": "1.3.0"
-}
+"{\n  \"data\": null,\n  \"_meta\": {\n    \"type\": \"response\",\n    \"status\": \"error\",\n    \"published\": false,\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"sessionId\": \"{{guid}}\",\n    \"action\": \"remove\",\n    \"error\": {\n      \"name\": \"AccessDenied\",\n      \"code\": 403,\n      \"message\": \"unauthorized\"\n    }\n  },\n  \"protocol\": \"1.3.0\"\n}"
 ```
 #data subscriptions
 
@@ -638,18 +320,7 @@
 ```
 ###server -> client
 ```json
-{
-  "data": {},
-  "_meta": {
-    "status": "ok",
-    "type": "response",
-    "published": false,
-    "eventId": "{{number, matches handler in client}}",
-    "sessionId": "{{guid}}",
-    "action": "on"
-  },
-  "protocol": "1.3.0"
-}
+"{\n  \"data\": {},\n  \"_meta\": {\n    \"status\": \"ok\",\n    \"type\": \"response\",\n    \"published\": false,\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"sessionId\": \"{{guid}}\",\n    \"action\": \"on\"\n  },\n  \"protocol\": \"1.3.0\"\n}"
 ```
 ###set a piece of data, and get the event back based on the subscription in the previous step
 
@@ -674,49 +345,11 @@
 ```
 ###server -> client
 ```json
-{
-  "data": {
-    "data": {
-      "was": "set"
-    }
-  },
-  "_meta": {
-    "created": "{{number, utc}}",
-    "modified": "{{number, utc}}",
-    "modifiedBy": "_ADMIN",
-    "path": "/subscribe/on/all/events",
-    "channel": "/ALL@*",
-    "action": "/SET@/subscribe/on/all/events",
-    "type": "data",
-    "sessionId": "{{guid}}",
-    "consistency": 2,
-    "publicationId": "366d570f-251d-465b-9588-fd1c94c162fd-18"
-  },
-  "__outbound": true
-}
+"{\n  \"data\": {\n    \"data\": {\n      \"was\": \"set\"\n    }\n  },\n  \"_meta\": {\n    \"created\": \"{{number, utc}}\",\n    \"modified\": \"{{number, utc}}\",\n    \"modifiedBy\": \"_ADMIN\",\n    \"path\": \"/subscribe/on/all/events\",\n    \"channel\": \"/ALL@*\",\n    \"action\": \"/SET@/subscribe/on/all/events\",\n    \"type\": \"data\",\n    \"sessionId\": \"{{guid}}\",\n    \"consistency\": 2,\n    \"publicationId\": \"8a755fed-efc6-4a43-8c4a-01d62348b825-15\"\n  },\n  \"__outbound\": true\n}"
 ```
 ###server -> client
 ```json
-{
-  "data": {
-    "data": {
-      "was": "set"
-    }
-  },
-  "_meta": {
-    "created": "{{number, utc}}",
-    "modified": "{{number, utc}}",
-    "modifiedBy": "_ADMIN",
-    "path": "/subscribe/on/all/events",
-    "published": true,
-    "type": "response",
-    "status": "ok",
-    "eventId": "{{number, matches handler in client}}",
-    "sessionId": "{{guid}}",
-    "action": "set"
-  },
-  "protocol": "1.3.0"
-}
+"{\n  \"data\": {\n    \"data\": {\n      \"was\": \"set\"\n    }\n  },\n  \"_meta\": {\n    \"created\": \"{{number, utc}}\",\n    \"modified\": \"{{number, utc}}\",\n    \"modifiedBy\": \"_ADMIN\",\n    \"path\": \"/subscribe/on/all/events\",\n    \"published\": true,\n    \"type\": \"response\",\n    \"status\": \"ok\",\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"sessionId\": \"{{guid}}\",\n    \"action\": \"set\"\n  },\n  \"protocol\": \"1.3.0\"\n}"
 ```
 ###unsubscribe from all changes on all data points, NB: will remove all subscriptions
 
@@ -737,18 +370,7 @@
 ```
 ###server -> client
 ```json
-{
-  "data": {},
-  "_meta": {
-    "status": "ok",
-    "type": "response",
-    "published": false,
-    "eventId": "{{number, matches handler in client}}",
-    "sessionId": "{{guid}}",
-    "action": "off"
-  },
-  "protocol": "1.3.0"
-}
+"{\n  \"data\": {},\n  \"_meta\": {\n    \"status\": \"ok\",\n    \"type\": \"response\",\n    \"published\": false,\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"sessionId\": \"{{guid}}\",\n    \"action\": \"off\"\n  },\n  \"protocol\": \"1.3.0\"\n}"
 ```
 ###subscribe to only set actions on a specific data point
 
@@ -771,18 +393,7 @@
 ```
 ###server -> client
 ```json
-{
-  "data": {},
-  "_meta": {
-    "status": "ok",
-    "type": "response",
-    "published": false,
-    "eventId": "{{number, matches handler in client}}",
-    "sessionId": "{{guid}}",
-    "action": "on"
-  },
-  "protocol": "1.3.0"
-}
+"{\n  \"data\": {},\n  \"_meta\": {\n    \"status\": \"ok\",\n    \"type\": \"response\",\n    \"published\": false,\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"sessionId\": \"{{guid}}\",\n    \"action\": \"on\"\n  },\n  \"protocol\": \"1.3.0\"\n}"
 ```
 ###set a piece of data, and get the event back based on the subscription in the previous step
 
@@ -807,49 +418,11 @@
 ```
 ###server -> client
 ```json
-{
-  "data": {
-    "data": {
-      "was": "set"
-    }
-  },
-  "_meta": {
-    "created": "{{number, utc}}",
-    "modified": "{{number, utc}}",
-    "modifiedBy": "_ADMIN",
-    "path": "/subscribe/on/specific",
-    "channel": "/SET@/subscribe/on/specific",
-    "action": "/SET@/subscribe/on/specific",
-    "type": "data",
-    "sessionId": "{{guid}}",
-    "consistency": 2,
-    "publicationId": "366d570f-251d-465b-9588-fd1c94c162fd-21"
-  },
-  "__outbound": true
-}
+"{\n  \"data\": {\n    \"data\": {\n      \"was\": \"set\"\n    }\n  },\n  \"_meta\": {\n    \"created\": \"{{number, utc}}\",\n    \"modified\": \"{{number, utc}}\",\n    \"modifiedBy\": \"_ADMIN\",\n    \"path\": \"/subscribe/on/specific\",\n    \"channel\": \"/SET@/subscribe/on/specific\",\n    \"action\": \"/SET@/subscribe/on/specific\",\n    \"type\": \"data\",\n    \"sessionId\": \"{{guid}}\",\n    \"consistency\": 2,\n    \"publicationId\": \"8a755fed-efc6-4a43-8c4a-01d62348b825-18\"\n  },\n  \"__outbound\": true\n}"
 ```
 ###server -> client
 ```json
-{
-  "data": {
-    "data": {
-      "was": "set"
-    }
-  },
-  "_meta": {
-    "created": "{{number, utc}}",
-    "modified": "{{number, utc}}",
-    "modifiedBy": "_ADMIN",
-    "path": "/subscribe/on/specific",
-    "published": true,
-    "type": "response",
-    "status": "ok",
-    "eventId": "{{number, matches handler in client}}",
-    "sessionId": "{{guid}}",
-    "action": "set"
-  },
-  "protocol": "1.3.0"
-}
+"{\n  \"data\": {\n    \"data\": {\n      \"was\": \"set\"\n    }\n  },\n  \"_meta\": {\n    \"created\": \"{{number, utc}}\",\n    \"modified\": \"{{number, utc}}\",\n    \"modifiedBy\": \"_ADMIN\",\n    \"path\": \"/subscribe/on/specific\",\n    \"published\": true,\n    \"type\": \"response\",\n    \"status\": \"ok\",\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"sessionId\": \"{{guid}}\",\n    \"action\": \"set\"\n  },\n  \"protocol\": \"1.3.0\"\n}"
 ```
 ###subscribe to the removal of data at a specified point
 
@@ -873,18 +446,7 @@
 ```
 ###server -> client
 ```json
-{
-  "data": {},
-  "_meta": {
-    "status": "ok",
-    "type": "response",
-    "published": false,
-    "eventId": "{{number, matches handler in client}}",
-    "sessionId": "{{guid}}",
-    "action": "on"
-  },
-  "protocol": "1.3.0"
-}
+"{\n  \"data\": {},\n  \"_meta\": {\n    \"status\": \"ok\",\n    \"type\": \"response\",\n    \"published\": false,\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"sessionId\": \"{{guid}}\",\n    \"action\": \"on\"\n  },\n  \"protocol\": \"1.3.0\"\n}"
 ```
 ###remove a piece of data, and get the event back based on the subscription in the previous step
 
@@ -905,41 +467,11 @@
 ```
 ###server -> client
 ```json
-{
-  "data": {
-    "removed": 1
-  },
-  "_meta": {
-    "timestamp": "{{number, utc}}",
-    "path": "/subscribe/on/remove",
-    "channel": "/REMOVE@/subscribe/on/remove",
-    "action": "/REMOVE@/subscribe/on/remove",
-    "type": "data",
-    "sessionId": "{{guid}}",
-    "consistency": 2,
-    "publicationId": "366d570f-251d-465b-9588-fd1c94c162fd-24"
-  },
-  "__outbound": true
-}
+"{\n  \"data\": {\n    \"removed\": 1\n  },\n  \"_meta\": {\n    \"timestamp\": \"{{number, utc}}\",\n    \"path\": \"/subscribe/on/remove\",\n    \"channel\": \"/REMOVE@/subscribe/on/remove\",\n    \"action\": \"/REMOVE@/subscribe/on/remove\",\n    \"type\": \"data\",\n    \"sessionId\": \"{{guid}}\",\n    \"consistency\": 2,\n    \"publicationId\": \"8a755fed-efc6-4a43-8c4a-01d62348b825-21\"\n  },\n  \"__outbound\": true\n}"
 ```
 ###server -> client
 ```json
-{
-  "data": {
-    "removed": 1
-  },
-  "_meta": {
-    "timestamp": "{{number, utc}}",
-    "path": "/subscribe/on/remove",
-    "published": true,
-    "type": "response",
-    "status": "ok",
-    "eventId": "{{number, matches handler in client}}",
-    "sessionId": "{{guid}}",
-    "action": "remove"
-  },
-  "protocol": "1.3.0"
-}
+"{\n  \"data\": {\n    \"removed\": 1\n  },\n  \"_meta\": {\n    \"timestamp\": \"{{number, utc}}\",\n    \"path\": \"/subscribe/on/remove\",\n    \"published\": true,\n    \"type\": \"response\",\n    \"status\": \"ok\",\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"sessionId\": \"{{guid}}\",\n    \"action\": \"remove\"\n  },\n  \"protocol\": \"1.3.0\"\n}"
 ```
 ###subscribe to a change only once, on the native happn client this is done by specifying the 'count' option, but you can tell from the following sequence how to unsubscribe
 
@@ -962,18 +494,7 @@
 ```
 ###server -> client
 ```json
-{
-  "data": {},
-  "_meta": {
-    "status": "ok",
-    "type": "response",
-    "published": false,
-    "eventId": "{{number, matches handler in client}}",
-    "sessionId": "{{guid}}",
-    "action": "on"
-  },
-  "protocol": "1.3.0"
-}
+"{\n  \"data\": {},\n  \"_meta\": {\n    \"status\": \"ok\",\n    \"type\": \"response\",\n    \"published\": false,\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"sessionId\": \"{{guid}}\",\n    \"action\": \"on\"\n  },\n  \"protocol\": \"1.3.0\"\n}"
 ```
 ###set a piece of data, and get the event back based on the subscription in the previous step
 
@@ -998,49 +519,11 @@
 ```
 ###server -> client
 ```json
-{
-  "data": {
-    "data": {
-      "was": "set"
-    }
-  },
-  "_meta": {
-    "created": "{{number, utc}}",
-    "modified": "{{number, utc}}",
-    "modifiedBy": "_ADMIN",
-    "path": "/subscribe/once",
-    "channel": "/ALL@/subscribe/once",
-    "action": "/SET@/subscribe/once",
-    "type": "data",
-    "sessionId": "{{guid}}",
-    "consistency": 2,
-    "publicationId": "366d570f-251d-465b-9588-fd1c94c162fd-26"
-  },
-  "__outbound": true
-}
+"{\n  \"data\": {\n    \"data\": {\n      \"was\": \"set\"\n    }\n  },\n  \"_meta\": {\n    \"created\": \"{{number, utc}}\",\n    \"modified\": \"{{number, utc}}\",\n    \"modifiedBy\": \"_ADMIN\",\n    \"path\": \"/subscribe/once\",\n    \"channel\": \"/ALL@/subscribe/once\",\n    \"action\": \"/SET@/subscribe/once\",\n    \"type\": \"data\",\n    \"sessionId\": \"{{guid}}\",\n    \"consistency\": 2,\n    \"publicationId\": \"8a755fed-efc6-4a43-8c4a-01d62348b825-23\"\n  },\n  \"__outbound\": true\n}"
 ```
 ###server -> client
 ```json
-{
-  "data": {
-    "data": {
-      "was": "set"
-    }
-  },
-  "_meta": {
-    "created": "{{number, utc}}",
-    "modified": "{{number, utc}}",
-    "modifiedBy": "_ADMIN",
-    "path": "/subscribe/once",
-    "published": true,
-    "type": "response",
-    "status": "ok",
-    "eventId": "{{number, matches handler in client}}",
-    "sessionId": "{{guid}}",
-    "action": "set"
-  },
-  "protocol": "1.3.0"
-}
+"{\n  \"data\": {\n    \"data\": {\n      \"was\": \"set\"\n    }\n  },\n  \"_meta\": {\n    \"created\": \"{{number, utc}}\",\n    \"modified\": \"{{number, utc}}\",\n    \"modifiedBy\": \"_ADMIN\",\n    \"path\": \"/subscribe/once\",\n    \"published\": true,\n    \"type\": \"response\",\n    \"status\": \"ok\",\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"sessionId\": \"{{guid}}\",\n    \"action\": \"set\"\n  },\n  \"protocol\": \"1.3.0\"\n}"
 ```
 ###client -> server
 ```json
@@ -1078,33 +561,11 @@
 ```
 ###server -> client
 ```json
-{
-  "data": {},
-  "_meta": {
-    "status": "ok",
-    "type": "response",
-    "published": false,
-    "eventId": "{{number, matches handler in client}}",
-    "sessionId": "{{guid}}",
-    "action": "off"
-  },
-  "protocol": "1.3.0"
-}
+"{\n  \"data\": {},\n  \"_meta\": {\n    \"status\": \"ok\",\n    \"type\": \"response\",\n    \"published\": false,\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"sessionId\": \"{{guid}}\",\n    \"action\": \"off\"\n  },\n  \"protocol\": \"1.3.0\"\n}"
 ```
 ###server -> client
 ```json
-{
-  "data": {},
-  "_meta": {
-    "status": "ok",
-    "type": "response",
-    "published": false,
-    "eventId": "{{number, matches handler in client}}",
-    "sessionId": "{{guid}}",
-    "action": "on"
-  },
-  "protocol": "1.3.0"
-}
+"{\n  \"data\": {},\n  \"_meta\": {\n    \"status\": \"ok\",\n    \"type\": \"response\",\n    \"published\": false,\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"sessionId\": \"{{guid}}\",\n    \"action\": \"on\"\n  },\n  \"protocol\": \"1.3.0\"\n}"
 ```
 ###set a piece of data, and get a response from the server, but no publication because noPublish was set to true
 
@@ -1130,26 +591,7 @@
 ```
 ###server -> client
 ```json
-{
-  "data": {
-    "data": {
-      "was": "set"
-    }
-  },
-  "_meta": {
-    "created": "{{number, utc}}",
-    "modified": "{{number, utc}}",
-    "modifiedBy": "_ADMIN",
-    "path": "/subscribe/noPublish",
-    "type": "response",
-    "status": "ok",
-    "published": false,
-    "eventId": "{{number, matches handler in client}}",
-    "sessionId": "{{guid}}",
-    "action": "set"
-  },
-  "protocol": "1.3.0"
-}
+"{\n  \"data\": {\n    \"data\": {\n      \"was\": \"set\"\n    }\n  },\n  \"_meta\": {\n    \"created\": \"{{number, utc}}\",\n    \"modified\": \"{{number, utc}}\",\n    \"modifiedBy\": \"_ADMIN\",\n    \"path\": \"/subscribe/noPublish\",\n    \"type\": \"response\",\n    \"status\": \"ok\",\n    \"published\": false,\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"sessionId\": \"{{guid}}\",\n    \"action\": \"set\"\n  },\n  \"protocol\": \"1.3.0\"\n}"
 ```
 ###failure to subscribe
 
@@ -1172,22 +614,7 @@
 ```
 ###server -> client
 ```json
-{
-  "data": null,
-  "_meta": {
-    "type": "response",
-    "status": "error",
-    "published": false,
-    "eventId": "{{number, matches handler in client}}",
-    "sessionId": "{{guid}}",
-    "action": "on",
-    "error": {
-      "name": "TestError",
-      "message": "a fly in the ointment"
-    }
-  },
-  "protocol": "1.3.0"
-}
+"{\n  \"data\": null,\n  \"_meta\": {\n    \"type\": \"response\",\n    \"status\": \"error\",\n    \"published\": false,\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"sessionId\": \"{{guid}}\",\n    \"action\": \"on\",\n    \"error\": {\n      \"name\": \"TestError\",\n      \"message\": \"a fly in the ointment\"\n    }\n  },\n  \"protocol\": \"1.3.0\"\n}"
 ```
 ###failure to subscribe - access denied
 
@@ -1210,23 +637,7 @@
 ```
 ###server -> client
 ```json
-{
-  "data": null,
-  "_meta": {
-    "type": "response",
-    "status": "error",
-    "published": false,
-    "eventId": "{{number, matches handler in client}}",
-    "sessionId": "{{guid}}",
-    "action": "on",
-    "error": {
-      "name": "AccessDenied",
-      "code": 403,
-      "message": "unauthorized"
-    }
-  },
-  "protocol": "1.3.0"
-}
+"{\n  \"data\": null,\n  \"_meta\": {\n    \"type\": \"response\",\n    \"status\": \"error\",\n    \"published\": false,\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"sessionId\": \"{{guid}}\",\n    \"action\": \"on\",\n    \"error\": {\n      \"name\": \"AccessDenied\",\n      \"code\": 403,\n      \"message\": \"unauthorized\"\n    }\n  },\n  \"protocol\": \"1.3.0\"\n}"
 ```
 #Disconnection
 
@@ -1245,31 +656,14 @@
 ```
 ###server -> client
 ```json
-{
-  "data": null,
-  "_meta": {
-    "type": "response",
-    "status": "ok",
-    "published": false,
-    "eventId": "{{number, matches handler in client}}",
-    "sessionId": "{{guid}}",
-    "action": "disconnect"
-  },
-  "protocol": "1.3.0"
-}
+"{\n  \"data\": null,\n  \"_meta\": {\n    \"type\": \"response\",\n    \"status\": \"ok\",\n    \"published\": false,\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"sessionId\": \"{{guid}}\",\n    \"action\": \"disconnect\"\n  },\n  \"protocol\": \"1.3.0\"\n}"
 ```
 ###when a client is forcefully diconnected from the server side, or when a service shutdown happens, all clients are notified a disconnection is imminent
 
 *the disconnectAllClients method is called - this method is called on the happn instance shutdown, causing the server to push out a disconnection message to all connected clients*
 
-one connected client remaining, so disconnect warning is sent to it, session id (matches the one stipulated in section 1_1) is:e715b017-8dcb-4b35-88d8-009f4d4ecc2b  ##DIFF_IGNORE
+one connected client remaining, so disconnect warning is sent to it, session id (matches the one stipulated in section 1_1) is:aee434e1-fc67-4693-9031-09a877c53ee5  ##DIFF_IGNORE
 ###server -> client
 ```json
-{
-  "_meta": {
-    "type": "system"
-  },
-  "eventKey": "server-side-disconnect",
-  "data": "server-side-disconnect"
-}
+"{\n  \"_meta\": {\n    \"type\": \"system\"\n  },\n  \"eventKey\": \"server-side-disconnect\",\n  \"data\": \"server-side-disconnect\"\n}"
 ```

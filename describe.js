@@ -53,6 +53,8 @@ var ephemerals = {
   modified:'number, utc',
   token:'string, jwt token',
   sessionId:'guid',
+  referenceId:'unique id (hyperid)',
+  origin:'sessionId',
   path:{
     condition:function(path, property, message){
 
@@ -86,7 +88,7 @@ var cleanJSON = function(json){
 
   });
 
-  return '```json\r\n' + JSON.stringify(cloned, null, 2) + '\r\n```'
+  return JSON.stringify(cloned, null, 2);
 
 };
 
@@ -108,7 +110,9 @@ var inboundLayers = [
 
     currentJob.output.push('###client -> server');
 
-    currentJob.output.push(cleanJSON(message.raw));
+    currentJob.output.push('```json\r\n' + cleanJSON(message.raw) + '\r\n```');
+
+    currentJob.outputJSON = cleanJSON(message.raw);
 
     if (['throw/an/error', '/ALL@/subscription/error', 'remove/failed'].indexOf(message.raw.path) > -1) return cb(new TestError('a fly in the ointment'));
 
@@ -124,14 +128,18 @@ var outboundLayers = [
 
     currentJob.output.push('###server -> client');
 
-    if (message.response) currentJob.output.push(cleanJSON(message.response));
+    var mdJSON;
 
-    else {
-
-      if (message.request && message.request.publication) currentJob.output.push(cleanJSON(message.request.publication, null, 2));
-
-      else currentJob.output.push(cleanJSON(message.raw, null, 2));
+    if (message.raw){
+      currentJob.outputJSON = cleanJSON(message.raw);
+      mdJSON = cleanJSON(message.raw, null, 2);
     }
+
+    if (message.response) mdJSON = cleanJSON(message.response);
+
+    else if (message.request && message.request.publication) mdJSON = cleanJSON(message.request.publication, null, 2);
+
+    currentJob.output.push('```json\r\n' + JSON.stringify(mdJSON) + '\r\n```');
 
     cb(null, message);
   }
@@ -864,6 +872,7 @@ var jobs = [
 ];
 
 var protocolReport = [];
+var jsonReport = {};
 
 async.eachSeries(jobs, function(job, jobCB){
 
@@ -871,7 +880,7 @@ async.eachSeries(jobs, function(job, jobCB){
 
   currentJob = job;
 
-  currentJob.do(currentJob.parameters, function(e, output){
+  currentJob.do(currentJob.parameters, function(e){
 
     if (e) return jobCB(e);
 
@@ -881,6 +890,15 @@ async.eachSeries(jobs, function(job, jobCB){
       if (currentJob.text) protocolReport.push('###' + currentJob.text + '\r\n');
       if (currentJob.description) protocolReport.push('*' + currentJob.description + '*\r\n');
 
+      if (currentJob.outputJSON  && currentJob.text){
+        var json = ['bad'];
+        try{
+          json = JSON.parse(currentJob.outputJSON);
+        }catch(e){
+          //do nothing
+        }
+        jsonReport[currentJob.text] = json;
+      }
       currentJob.output.forEach(function(line){
         protocolReport.push(line);
       });
@@ -892,8 +910,10 @@ async.eachSeries(jobs, function(job, jobCB){
 
   if (e) return console.log('protocol describe failed:::', e);
   var reportFile = writeReportToFile(protocolReport);
+  var jsonreportFile = writeJSONReportToFile(jsonReport);
 
   console.log('protocol described in file: ' + reportFile);
+  console.log('over the wire json described in file: ' + jsonreportFile);
   process.exit();
 
 });
@@ -902,6 +922,7 @@ function writeReportToFile(){
 
   var outputFile = __dirname + path.sep + 'automated-docs' + path.sep + 'happn-3' + path.sep + protocol + path.sep + version + path.sep + 'protocol.md';
   var outputFileCurrent = __dirname + path.sep + 'automated-docs' + path.sep + 'happn-3' + path.sep + 'current' + path.sep + 'protocol.md';
+  var outputFilePrevious = __dirname + path.sep + 'automated-docs' + path.sep + 'happn-3' + path.sep + 'previous' + path.sep + 'protocol.md';
 
   fs.ensureDirSync(__dirname + path.sep + 'automated-docs' + path.sep + 'happn-3' + path.sep + protocol + path.sep + version);
 
@@ -909,6 +930,8 @@ function writeReportToFile(){
 
   try{
 
+    fs.removeSync(outputFilePrevious);
+    fs.appendFileSync(outputFilePrevious, fs.readFileSync(outputFileCurrent));
     fs.unlinkSync(outputFile);
     fs.unlinkSync(outputFileCurrent);
 
@@ -920,5 +943,32 @@ function writeReportToFile(){
     fs.appendFileSync(outputFileCurrent, line + '\r\n');
   });
   
+  return outputFile;
+}
+
+function writeJSONReportToFile(){
+
+  var outputFile = __dirname + path.sep + 'automated-docs' + path.sep + 'happn-3' + path.sep + protocol + path.sep + version + path.sep + 'protocol.json';
+  var outputFileCurrent = __dirname + path.sep + 'automated-docs' + path.sep + 'happn-3' + path.sep + 'current' + path.sep + 'protocol.json';
+  var outputFilePrevious = __dirname + path.sep + 'automated-docs' + path.sep + 'happn-3' + path.sep + 'previous' + path.sep + 'protocol.json';
+
+  fs.ensureDirSync(__dirname + path.sep + 'automated-docs' + path.sep + 'happn-3' + path.sep + protocol + path.sep + version);
+
+  fs.ensureDirSync(__dirname + path.sep + 'automated-docs' + path.sep + 'happn-3' + path.sep + 'current');
+
+  try{
+
+    fs.removeSync(outputFilePrevious);
+    fs.appendFileSync(outputFilePrevious, fs.readFileSync(outputFileCurrent));
+    fs.unlinkSync(outputFile);
+    fs.unlinkSync(outputFileCurrent);
+
+  }catch(e){
+    console.log('err:::', e);
+  }
+
+  fs.appendFileSync(outputFile, JSON.stringify(jsonReport, null, 2));
+  fs.appendFileSync(outputFileCurrent, JSON.stringify(jsonReport, null, 2));
+
   return outputFile;
 }
