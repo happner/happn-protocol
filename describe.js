@@ -910,14 +910,14 @@ async.eachSeries(jobs, function(job, jobCB){
 }, function(e){
 
   if (e) return console.log('protocol describe failed:::', e);
+
   var reportFile = writeReportToFile(protocolReport);
   var jsonreportFile = writeJSONReportToFile(jsonReport);
-
-  updateDocsListMd();
 
   console.log('protocol described in file: ' + reportFile);
   console.log('over the wire json described in file: ' + jsonreportFile);
 
+  updateDocsListMd();
 
 });
 

@@ -16,7 +16,7 @@ automated runs:
 
 #### automated protocol documents for happn-3:
 
-####[over here](/automated-docs/happn-3/automated-links.md)
+#### [click here](/automated-docs/happn-3/automated-links.md)
 
 #### protocol documents for happn
 *in format: protocol version / happn version*
