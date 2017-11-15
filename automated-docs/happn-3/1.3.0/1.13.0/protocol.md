@@ -2,19 +2,19 @@
 
 ##PROTOCOL VERSION: 1.3.0
 ###HAPPN VERSION: 1.13.0
-####RUN: 2017 November 09 04:22
+####RUN: 2017 November 15 09:56
 #connect a client
 
 ###create a client session and login
 
-(existing client with session id: 63597976-9075-415d-acfe-ef12a875227d was already created) ##DIFF_IGNORE
+(existing client with session id: 0dc4d654-be7a-4106-8470-274ba2a1b4df was already created) ##DIFF_IGNORE
 ###client -> server
 ```json
 {
   "action": "configure-session",
   "eventId": "{{number, matches handler in client}}",
   "data": {
-    "protocol": "happn_1.3.0"
+    "protocol": "{{happn protocol}}"
   }
 }
 ```
@@ -44,7 +44,7 @@
       "_browser": false,
       "_local": false
     },
-    "protocol": "happn_1.3.0",
+    "protocol": "{{happn protocol}}",
     "password": "happn"
   },
   "options": {
@@ -54,7 +54,7 @@
 ```
 ###server -> client
 ```json
-"{\n  \"data\": {\n    \"id\": \"{{guid}}\",\n    \"protocol\": \"happn_1.3.0\",\n    \"happn\": {\n      \"name\": \"{{string}}\",\n      \"secure\": true,\n      \"encryptPayloads\": false,\n      \"publicKey\": \"{{ECDSA public key}}\"\n    },\n    \"info\": {\n      \"_browser\": false,\n      \"_local\": false\n    },\n    \"type\": 1,\n    \"user\": {\n      \"custom_data\": {},\n      \"username\": \"_ADMIN\",\n      \"_meta\": {\n        \"created\": \"{{number, utc}}\",\n        \"modified\": \"{{number, utc}}\",\n        \"path\": \"/_SYSTEM/_SECURITY/_USER/_ADMIN\",\n        \"_id\": \"{{matches path if nedb, generated if mongo}}\"\n      },\n      \"groups\": {\n        \"_ADMIN\": {\n          \"data\": {},\n          \"_meta\": {\n            \"created\": \"{{number, utc}}\",\n            \"modified\": \"{{number, utc}}\",\n            \"path\": \"/_SYSTEM/_SECURITY/_USER/_ADMIN/_USER_GROUP/_ADMIN\",\n            \"_id\": \"{{matches path if nedb, generated if mongo}}\"\n          }\n        }\n      }\n    },\n    \"timestamp\": \"{{number, utc}}\",\n    \"isEncrypted\": false,\n    \"origin\": \"{{sessionId}}\",\n    \"policy\": {\n      \"0\": {\n        \"ttl\": 0,\n        \"inactivity_threshold\": null\n      },\n      \"1\": {\n        \"ttl\": 0,\n        \"inactivity_threshold\": null\n      }\n    },\n    \"permissionSetKey\": \"/_ADMIN/\",\n    \"token\": \"{{string, jwt token}}\"\n  },\n  \"_meta\": {\n    \"type\": \"response\",\n    \"status\": \"ok\",\n    \"published\": false,\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"action\": \"login\"\n  }\n}"
+"{\n  \"data\": {\n    \"id\": \"{{guid}}\",\n    \"protocol\": \"{{happn protocol}}\",\n    \"happn\": {\n      \"name\": \"{{string}}\",\n      \"secure\": true,\n      \"encryptPayloads\": false,\n      \"publicKey\": \"{{ECDSA public key}}\"\n    },\n    \"info\": {\n      \"_browser\": false,\n      \"_local\": false\n    },\n    \"type\": 1,\n    \"user\": {\n      \"custom_data\": {},\n      \"username\": \"_ADMIN\",\n      \"_meta\": {\n        \"created\": \"{{number, utc}}\",\n        \"modified\": \"{{number, utc}}\",\n        \"path\": \"/_SYSTEM/_SECURITY/_USER/_ADMIN\",\n        \"_id\": \"{{matches path if nedb, generated if mongo}}\"\n      },\n      \"groups\": {\n        \"_ADMIN\": {\n          \"data\": {},\n          \"_meta\": {\n            \"created\": \"{{number, utc}}\",\n            \"modified\": \"{{number, utc}}\",\n            \"path\": \"/_SYSTEM/_SECURITY/_USER/_ADMIN/_USER_GROUP/_ADMIN\",\n            \"_id\": \"{{matches path if nedb, generated if mongo}}\"\n          }\n        }\n      }\n    },\n    \"timestamp\": \"{{number, utc}}\",\n    \"isEncrypted\": false,\n    \"origin\": \"{{sessionId}}\",\n    \"policy\": {\n      \"0\": {\n        \"ttl\": 0,\n        \"inactivity_threshold\": null\n      },\n      \"1\": {\n        \"ttl\": 0,\n        \"inactivity_threshold\": null\n      }\n    },\n    \"permissionSetKey\": \"/_ADMIN/\",\n    \"token\": \"{{string, jwt token}}\"\n  },\n  \"_meta\": {\n    \"type\": \"response\",\n    \"status\": \"ok\",\n    \"published\": false,\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"action\": \"login\"\n  }\n}"
 ```
 #set
 
@@ -149,7 +149,7 @@
 ```
 ###server -> client
 ```json
-"{\n  \"data\": {\n    \"data\": {},\n    \"_meta\": {\n      \"path\": \"tag/non-existent\"\n    }\n  },\n  \"_meta\": {\n    \"created\": \"{{number, utc}}\",\n    \"modified\": \"{{number, utc}}\",\n    \"path\": \"/_TAGS/tag/non-existent/1510237331746_d03ab8e5a2e649779debfa46c10eb8bb\",\n    \"tag\": \"MYTAG\",\n    \"published\": true,\n    \"type\": \"response\",\n    \"status\": \"ok\",\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"sessionId\": \"{{guid}}\",\n    \"action\": \"set\"\n  }\n}"
+"{\n  \"data\": {\n    \"data\": {},\n    \"_meta\": {\n      \"path\": \"tag/non-existent\"\n    }\n  },\n  \"_meta\": {\n    \"created\": \"{{number, utc}}\",\n    \"modified\": \"{{number, utc}}\",\n    \"path\": \"{{/_TAGS/tag/non-existent/[unique generated id]}}\",\n    \"tag\": \"MYTAG\",\n    \"published\": true,\n    \"type\": \"response\",\n    \"status\": \"ok\",\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"sessionId\": \"{{guid}}\",\n    \"action\": \"set\"\n  }\n}"
 ```
 ###setSibling
 
@@ -345,7 +345,7 @@
 ```
 ###server -> client
 ```json
-"{\n  \"data\": {\n    \"data\": {\n      \"was\": \"set\"\n    }\n  },\n  \"_meta\": {\n    \"created\": \"{{number, utc}}\",\n    \"modified\": \"{{number, utc}}\",\n    \"modifiedBy\": \"_ADMIN\",\n    \"path\": \"/subscribe/on/all/events\",\n    \"channel\": \"/ALL@*\",\n    \"action\": \"/SET@/subscribe/on/all/events\",\n    \"type\": \"data\",\n    \"sessionId\": \"{{guid}}\",\n    \"consistency\": 2,\n    \"publicationId\": \"135c2c1f-e764-4296-abe4-b5ba2169c854-15\"\n  },\n  \"__outbound\": true\n}"
+"{\n  \"data\": {\n    \"data\": {\n      \"was\": \"set\"\n    }\n  },\n  \"_meta\": {\n    \"created\": \"{{number, utc}}\",\n    \"modified\": \"{{number, utc}}\",\n    \"modifiedBy\": \"_ADMIN\",\n    \"path\": \"/subscribe/on/all/events\",\n    \"channel\": \"/ALL@*\",\n    \"action\": \"/SET@/subscribe/on/all/events\",\n    \"type\": \"data\",\n    \"sessionId\": \"{{guid}}\",\n    \"consistency\": 2,\n    \"publicationId\": \"79267bd4-391a-41a3-8025-cb9093b49123-15\"\n  },\n  \"__outbound\": true\n}"
 ```
 ###server -> client
 ```json
@@ -418,7 +418,7 @@
 ```
 ###server -> client
 ```json
-"{\n  \"data\": {\n    \"data\": {\n      \"was\": \"set\"\n    }\n  },\n  \"_meta\": {\n    \"created\": \"{{number, utc}}\",\n    \"modified\": \"{{number, utc}}\",\n    \"modifiedBy\": \"_ADMIN\",\n    \"path\": \"/subscribe/on/specific\",\n    \"channel\": \"/SET@/subscribe/on/specific\",\n    \"action\": \"/SET@/subscribe/on/specific\",\n    \"type\": \"data\",\n    \"sessionId\": \"{{guid}}\",\n    \"consistency\": 2,\n    \"publicationId\": \"135c2c1f-e764-4296-abe4-b5ba2169c854-18\"\n  },\n  \"__outbound\": true\n}"
+"{\n  \"data\": {\n    \"data\": {\n      \"was\": \"set\"\n    }\n  },\n  \"_meta\": {\n    \"created\": \"{{number, utc}}\",\n    \"modified\": \"{{number, utc}}\",\n    \"modifiedBy\": \"_ADMIN\",\n    \"path\": \"/subscribe/on/specific\",\n    \"channel\": \"/SET@/subscribe/on/specific\",\n    \"action\": \"/SET@/subscribe/on/specific\",\n    \"type\": \"data\",\n    \"sessionId\": \"{{guid}}\",\n    \"consistency\": 2,\n    \"publicationId\": \"79267bd4-391a-41a3-8025-cb9093b49123-18\"\n  },\n  \"__outbound\": true\n}"
 ```
 ###server -> client
 ```json
@@ -467,7 +467,7 @@
 ```
 ###server -> client
 ```json
-"{\n  \"data\": {\n    \"removed\": 1\n  },\n  \"_meta\": {\n    \"timestamp\": \"{{number, utc}}\",\n    \"path\": \"/subscribe/on/remove\",\n    \"channel\": \"/REMOVE@/subscribe/on/remove\",\n    \"action\": \"/REMOVE@/subscribe/on/remove\",\n    \"type\": \"data\",\n    \"sessionId\": \"{{guid}}\",\n    \"consistency\": 2,\n    \"publicationId\": \"135c2c1f-e764-4296-abe4-b5ba2169c854-21\"\n  },\n  \"__outbound\": true\n}"
+"{\n  \"data\": {\n    \"removed\": 1\n  },\n  \"_meta\": {\n    \"timestamp\": \"{{number, utc}}\",\n    \"path\": \"/subscribe/on/remove\",\n    \"channel\": \"/REMOVE@/subscribe/on/remove\",\n    \"action\": \"/REMOVE@/subscribe/on/remove\",\n    \"type\": \"data\",\n    \"sessionId\": \"{{guid}}\",\n    \"consistency\": 2,\n    \"publicationId\": \"79267bd4-391a-41a3-8025-cb9093b49123-21\"\n  },\n  \"__outbound\": true\n}"
 ```
 ###server -> client
 ```json
@@ -519,7 +519,7 @@
 ```
 ###server -> client
 ```json
-"{\n  \"data\": {\n    \"data\": {\n      \"was\": \"set\"\n    }\n  },\n  \"_meta\": {\n    \"created\": \"{{number, utc}}\",\n    \"modified\": \"{{number, utc}}\",\n    \"modifiedBy\": \"_ADMIN\",\n    \"path\": \"/subscribe/once\",\n    \"channel\": \"/ALL@/subscribe/once\",\n    \"action\": \"/SET@/subscribe/once\",\n    \"type\": \"data\",\n    \"sessionId\": \"{{guid}}\",\n    \"consistency\": 2,\n    \"publicationId\": \"135c2c1f-e764-4296-abe4-b5ba2169c854-23\"\n  },\n  \"__outbound\": true\n}"
+"{\n  \"data\": {\n    \"data\": {\n      \"was\": \"set\"\n    }\n  },\n  \"_meta\": {\n    \"created\": \"{{number, utc}}\",\n    \"modified\": \"{{number, utc}}\",\n    \"modifiedBy\": \"_ADMIN\",\n    \"path\": \"/subscribe/once\",\n    \"channel\": \"/ALL@/subscribe/once\",\n    \"action\": \"/SET@/subscribe/once\",\n    \"type\": \"data\",\n    \"sessionId\": \"{{guid}}\",\n    \"consistency\": 2,\n    \"publicationId\": \"79267bd4-391a-41a3-8025-cb9093b49123-23\"\n  },\n  \"__outbound\": true\n}"
 ```
 ###server -> client
 ```json
@@ -662,7 +662,7 @@
 
 *the disconnectAllClients method is called - this method is called on the happn instance shutdown, causing the server to push out a disconnection message to all connected clients*
 
-one connected client remaining, so disconnect warning is sent to it, session id (matches the one stipulated in section 1_1) is:63597976-9075-415d-acfe-ef12a875227d  ##DIFF_IGNORE
+one connected client remaining, so disconnect warning is sent to it, session id (matches the one stipulated in section 1_1) is:0dc4d654-be7a-4106-8470-274ba2a1b4df  ##DIFF_IGNORE
 ###server -> client
 ```json
 "{\n  \"_meta\": {\n    \"type\": \"system\"\n  },\n  \"eventKey\": \"server-side-disconnect\",\n  \"data\": \"server-side-disconnect\"\n}"

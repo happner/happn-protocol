@@ -1,13 +1,13 @@
 #happn protocol specification
 
 ##PROTOCOL VERSION: 1.3.0
-###HAPPN VERSION: 3.1.0
-####RUN: 2017 November 15 09:57
+###HAPPN VERSION: 2.0.1
+####RUN: 2017 November 15 09:56
 #connect a client
 
 ###create a client session and login
 
-(existing client with session id: 16f68106-4416-4b99-b7d3-4afa9cf43dad was already created) ##DIFF_IGNORE
+(existing client with session id: 961d5c76-fb2f-4823-85e2-73a2a6b16f4d was already created) ##DIFF_IGNORE
 ###client -> server
 ```json
 {
@@ -345,7 +345,7 @@
 ```
 ###server -> client
 ```json
-"{\n  \"data\": {\n    \"data\": {\n      \"was\": \"set\"\n    }\n  },\n  \"_meta\": {\n    \"created\": \"{{number, utc}}\",\n    \"modified\": \"{{number, utc}}\",\n    \"modifiedBy\": \"_ADMIN\",\n    \"path\": \"/subscribe/on/all/events\",\n    \"channel\": \"/ALL@*\",\n    \"action\": \"/SET@/subscribe/on/all/events\",\n    \"type\": \"data\",\n    \"sessionId\": \"{{guid}}\",\n    \"consistency\": 2,\n    \"publicationId\": \"2c7d026d-51f5-48ef-870b-d08b7b1d8413-15\"\n  },\n  \"__outbound\": true\n}"
+"{\n  \"data\": {\n    \"data\": {\n      \"was\": \"set\"\n    }\n  },\n  \"_meta\": {\n    \"created\": \"{{number, utc}}\",\n    \"modified\": \"{{number, utc}}\",\n    \"modifiedBy\": \"_ADMIN\",\n    \"path\": \"/subscribe/on/all/events\",\n    \"channel\": \"/ALL@*\",\n    \"action\": \"/SET@/subscribe/on/all/events\",\n    \"type\": \"data\",\n    \"sessionId\": \"{{guid}}\",\n    \"consistency\": 2,\n    \"publicationId\": \"fd392dff-b097-4850-992e-c4ff15bbf851-15\"\n  },\n  \"__outbound\": true\n}"
 ```
 ###server -> client
 ```json
@@ -418,7 +418,7 @@
 ```
 ###server -> client
 ```json
-"{\n  \"data\": {\n    \"data\": {\n      \"was\": \"set\"\n    }\n  },\n  \"_meta\": {\n    \"created\": \"{{number, utc}}\",\n    \"modified\": \"{{number, utc}}\",\n    \"modifiedBy\": \"_ADMIN\",\n    \"path\": \"/subscribe/on/specific\",\n    \"channel\": \"/SET@/subscribe/on/specific\",\n    \"action\": \"/SET@/subscribe/on/specific\",\n    \"type\": \"data\",\n    \"sessionId\": \"{{guid}}\",\n    \"consistency\": 2,\n    \"publicationId\": \"2c7d026d-51f5-48ef-870b-d08b7b1d8413-18\"\n  },\n  \"__outbound\": true\n}"
+"{\n  \"data\": {\n    \"data\": {\n      \"was\": \"set\"\n    }\n  },\n  \"_meta\": {\n    \"created\": \"{{number, utc}}\",\n    \"modified\": \"{{number, utc}}\",\n    \"modifiedBy\": \"_ADMIN\",\n    \"path\": \"/subscribe/on/specific\",\n    \"channel\": \"/SET@/subscribe/on/specific\",\n    \"action\": \"/SET@/subscribe/on/specific\",\n    \"type\": \"data\",\n    \"sessionId\": \"{{guid}}\",\n    \"consistency\": 2,\n    \"publicationId\": \"fd392dff-b097-4850-992e-c4ff15bbf851-18\"\n  },\n  \"__outbound\": true\n}"
 ```
 ###server -> client
 ```json
@@ -467,7 +467,7 @@
 ```
 ###server -> client
 ```json
-"{\n  \"data\": {\n    \"removed\": 1\n  },\n  \"_meta\": {\n    \"timestamp\": \"{{number, utc}}\",\n    \"path\": \"/subscribe/on/remove\",\n    \"channel\": \"/REMOVE@/subscribe/on/remove\",\n    \"action\": \"/REMOVE@/subscribe/on/remove\",\n    \"type\": \"data\",\n    \"sessionId\": \"{{guid}}\",\n    \"consistency\": 2,\n    \"publicationId\": \"2c7d026d-51f5-48ef-870b-d08b7b1d8413-21\"\n  },\n  \"__outbound\": true\n}"
+"{\n  \"data\": {\n    \"removed\": 1\n  },\n  \"_meta\": {\n    \"timestamp\": \"{{number, utc}}\",\n    \"path\": \"/subscribe/on/remove\",\n    \"channel\": \"/REMOVE@/subscribe/on/remove\",\n    \"action\": \"/REMOVE@/subscribe/on/remove\",\n    \"type\": \"data\",\n    \"sessionId\": \"{{guid}}\",\n    \"consistency\": 2,\n    \"publicationId\": \"fd392dff-b097-4850-992e-c4ff15bbf851-21\"\n  },\n  \"__outbound\": true\n}"
 ```
 ###server -> client
 ```json
@@ -519,7 +519,7 @@
 ```
 ###server -> client
 ```json
-"{\n  \"data\": {\n    \"data\": {\n      \"was\": \"set\"\n    }\n  },\n  \"_meta\": {\n    \"created\": \"{{number, utc}}\",\n    \"modified\": \"{{number, utc}}\",\n    \"modifiedBy\": \"_ADMIN\",\n    \"path\": \"/subscribe/once\",\n    \"channel\": \"/ALL@/subscribe/once\",\n    \"action\": \"/SET@/subscribe/once\",\n    \"type\": \"data\",\n    \"sessionId\": \"{{guid}}\",\n    \"consistency\": 2,\n    \"publicationId\": \"2c7d026d-51f5-48ef-870b-d08b7b1d8413-23\"\n  },\n  \"__outbound\": true\n}"
+"{\n  \"data\": {\n    \"data\": {\n      \"was\": \"set\"\n    }\n  },\n  \"_meta\": {\n    \"created\": \"{{number, utc}}\",\n    \"modified\": \"{{number, utc}}\",\n    \"modifiedBy\": \"_ADMIN\",\n    \"path\": \"/subscribe/once\",\n    \"channel\": \"/ALL@/subscribe/once\",\n    \"action\": \"/SET@/subscribe/once\",\n    \"type\": \"data\",\n    \"sessionId\": \"{{guid}}\",\n    \"consistency\": 2,\n    \"publicationId\": \"fd392dff-b097-4850-992e-c4ff15bbf851-23\"\n  },\n  \"__outbound\": true\n}"
 ```
 ###server -> client
 ```json
@@ -662,7 +662,7 @@
 
 *the disconnectAllClients method is called - this method is called on the happn instance shutdown, causing the server to push out a disconnection message to all connected clients*
 
-one connected client remaining, so disconnect warning is sent to it, session id (matches the one stipulated in section 1_1) is:16f68106-4416-4b99-b7d3-4afa9cf43dad  ##DIFF_IGNORE
+one connected client remaining, so disconnect warning is sent to it, session id (matches the one stipulated in section 1_1) is:961d5c76-fb2f-4823-85e2-73a2a6b16f4d  ##DIFF_IGNORE
 ###server -> client
 ```json
 "{\n  \"_meta\": {\n    \"type\": \"system\"\n  },\n  \"eventKey\": \"server-side-disconnect\",\n  \"data\": \"server-side-disconnect\"\n}"

@@ -668,9 +668,48 @@ describe('subscriptions', function () {
 
       setTimeout(function () {
 
-        console.log('hits:::', hits);
-
         if (hits != 3) return callback(new Error('hits were over the agreed on 2'));
+
+        callback();
+
+      }, 1500);
+    });
+  });
+
+  it('subscribes with a count - we ensure the event only gets kicked off for the correct amounts', function (callback) {
+
+    var hits = 0;
+    //first listen for the change
+    listenerclient.on('/1_eventemitter_embedded_sanity/' + test_id + '/count/2/*', {
+      event_type: 'set',
+      count: 2
+    }, function (message) {
+      hits++;
+    }, function (e) {
+
+      if (e) return callback(e);
+
+      publisherclient.set('/1_eventemitter_embedded_sanity/' + test_id + '/count/2/1', {
+        property1: 'property1',
+        property2: 'property2',
+        property3: 'property3'
+      });
+
+      publisherclient.set('/1_eventemitter_embedded_sanity/' + test_id + '/count/2/2', {
+        property1: 'property1',
+        property2: 'property2',
+        property3: 'property3'
+      });
+
+      publisherclient.set('/1_eventemitter_embedded_sanity/' + test_id + '/count/2/2', {
+        property1: 'property1',
+        property2: 'property2',
+        property3: 'property3'
+      });
+
+      setTimeout(function () {
+
+        if (hits != 2) return callback(new Error('hits were over the agreed on 2'));
 
         callback();
 

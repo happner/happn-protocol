@@ -14,11 +14,11 @@
     ✓ should unsubscribe from an event
     2) should unsubscribe from a specific event
     ✓ should subscribe to the catch all notification
-    ✓ should unsubscribe from all events (3019ms)
-2017-11-15 07:45:18.854 [ INFO] - 3493ms	(HappnClient) Done setting
-2017-11-15 07:45:18.858 [ INFO] - 5ms	(HappnClient) Done removing
+    ✓ should unsubscribe from all events (3018ms)
+2017-11-15 09:03:39.374 [ INFO] - 3528ms	(HappnClient) Done setting
+2017-11-15 09:03:39.376 [ INFO] - 3ms	(HappnClient) Done removing
     ✓ will do events in the order they are passed (1020ms)
-    ✓ subscribes with a count - we ensure the event only gets kicked off for the correct amounts - negative test (1505ms)
+    ✓ subscribes with a count - we ensure the event only gets kicked off for the correct amounts - negative test (1508ms)
     3) subscribes with a count - we ensure the event only gets kicked off for the correct amounts
     4) subscribes with a count - we ensure the event only gets kicked off for the correct amounts
     5) subscribe, then does an off with a bad handle

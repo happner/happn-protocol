@@ -8,7 +8,7 @@
         "_browser": false,
         "_local": false
       },
-      "protocol": "happn_1.3.0",
+      "protocol": "{{happn protocol}}",
       "password": "happn"
     },
     "options": {
@@ -18,7 +18,7 @@
   "create a client session and login--> out": {
     "data": {
       "id": "{{guid}}",
-      "protocol": "happn_1.3.0",
+      "protocol": "{{happn protocol}}",
       "happn": {
         "name": "{{string}}",
         "secure": true,
@@ -74,7 +74,7 @@
       "eventId": "{{number, matches handler in client}}",
       "action": "login"
     },
-    "protocol": "1.3.0"
+    "protocol": "{{happn protocol}}"
   },
   "set a piece of data using a key value pair--> in": {
     "action": "set",
@@ -108,7 +108,7 @@
       "sessionId": "{{guid}}",
       "action": "set"
     },
-    "protocol": "1.3.0"
+    "protocol": "{{happn protocol}}"
   },
   "merge some new values with an existing record, NB: the merge only goes 1 property level deep--> in": {
     "action": "set",
@@ -145,7 +145,7 @@
       "sessionId": "{{guid}}",
       "action": "set"
     },
-    "protocol": "1.3.0"
+    "protocol": "{{happn protocol}}"
   },
   "tag some existing data--> in": {
     "action": "set",
@@ -188,7 +188,7 @@
       "sessionId": "{{guid}}",
       "action": "set"
     },
-    "protocol": "1.3.0"
+    "protocol": "{{happn protocol}}"
   },
   "tag failure--> in": {
     "action": "set",
@@ -212,7 +212,7 @@
     "_meta": {
       "created": "{{number, utc}}",
       "modified": "{{number, utc}}",
-      "path": "/_TAGS/tag/non-existent/lWkxGfVBQAiJlvpit1-iHA-1",
+      "path": "{{/_TAGS/tag/non-existent/[unique generated id]}}",
       "tag": "MYTAG",
       "published": true,
       "type": "response",
@@ -221,7 +221,7 @@
       "sessionId": "{{guid}}",
       "action": "set"
     },
-    "protocol": "1.3.0"
+    "protocol": "{{happn protocol}}"
   },
   "setSibling--> in": {
     "action": "set",
@@ -252,7 +252,7 @@
       "sessionId": "{{guid}}",
       "action": "set"
     },
-    "protocol": "1.3.0"
+    "protocol": "{{happn protocol}}"
   },
   "fails to do a set--> in": {
     "action": "set",
@@ -282,7 +282,7 @@
         "message": "a fly in the ointment"
       }
     },
-    "protocol": "1.3.0"
+    "protocol": "{{happn protocol}}"
   },
   "fails to do a set, access denied, unauthorised--> in": {
     "action": "set",
@@ -313,7 +313,7 @@
         "message": "unauthorized"
       }
     },
-    "protocol": "1.3.0"
+    "protocol": "{{happn protocol}}"
   },
   "removes one data point--> in": {
     "action": "remove",
@@ -339,7 +339,7 @@
       "sessionId": "{{guid}}",
       "action": "remove"
     },
-    "protocol": "1.3.0"
+    "protocol": "{{happn protocol}}"
   },
   "call sequence representing a request to remove something that is not there--> in": {
     "action": "remove",
@@ -365,7 +365,7 @@
       "sessionId": "{{guid}}",
       "action": "remove"
     },
-    "protocol": "1.3.0"
+    "protocol": "{{happn protocol}}"
   },
   "an error happens when we try and remove an item--> in": {
     "action": "remove",
@@ -391,7 +391,7 @@
         "message": "a fly in the ointment"
       }
     },
-    "protocol": "1.3.0"
+    "protocol": "{{happn protocol}}"
   },
   "an error happens when we try and remove an item, access denied--> in": {
     "action": "remove",
@@ -418,7 +418,7 @@
         "message": "unauthorized"
       }
     },
-    "protocol": "1.3.0"
+    "protocol": "{{happn protocol}}"
   },
   "subscribe to all changes on all data points--> in": {
     "action": "on",
@@ -444,7 +444,7 @@
       "sessionId": "{{guid}}",
       "action": "on"
     },
-    "protocol": "1.3.0"
+    "protocol": "{{happn protocol}}"
   },
   "set a piece of data, and get the event back based on the subscription in the previous step--> in": {
     "action": "off",
@@ -476,7 +476,7 @@
       "sessionId": "{{guid}}",
       "action": "set"
     },
-    "protocol": "1.3.0"
+    "protocol": "{{happn protocol}}"
   },
   "unsubscribe from all changes on all data points, NB: will remove all subscriptions--> in": {
     "action": "off",
@@ -500,7 +500,7 @@
       "sessionId": "{{guid}}",
       "action": "off"
     },
-    "protocol": "1.3.0"
+    "protocol": "{{happn protocol}}"
   },
   "subscribe to only set actions on a specific data point--> in": {
     "action": "on",
@@ -526,7 +526,7 @@
       "sessionId": "{{guid}}",
       "action": "on"
     },
-    "protocol": "1.3.0"
+    "protocol": "{{happn protocol}}"
   },
   "subscribe to the removal of data at a specified point--> in": {
     "action": "on",
@@ -552,7 +552,7 @@
       "sessionId": "{{guid}}",
       "action": "on"
     },
-    "protocol": "1.3.0"
+    "protocol": "{{happn protocol}}"
   },
   "remove a piece of data, and get the event back based on the subscription in the previous step--> in": {
     "action": "remove",
@@ -578,7 +578,7 @@
       "sessionId": "{{guid}}",
       "action": "remove"
     },
-    "protocol": "1.3.0"
+    "protocol": "{{happn protocol}}"
   },
   "subscribe to a change only once, on the native happn client this is done by specifying the 'count' option, but you can tell from the following sequence how to unsubscribe--> in": {
     "action": "on",
@@ -604,7 +604,7 @@
       "sessionId": "{{guid}}",
       "action": "on"
     },
-    "protocol": "1.3.0"
+    "protocol": "{{happn protocol}}"
   },
   "perform an action without publishing using the noPublish flag--> in": {
     "action": "on",
@@ -630,7 +630,7 @@
       "sessionId": "{{guid}}",
       "action": "on"
     },
-    "protocol": "1.3.0"
+    "protocol": "{{happn protocol}}"
   },
   "set a piece of data, and get a response from the server, but no publication because noPublish was set to true--> in": {
     "action": "set",
@@ -665,7 +665,7 @@
       "sessionId": "{{guid}}",
       "action": "set"
     },
-    "protocol": "1.3.0"
+    "protocol": "{{happn protocol}}"
   },
   "failure to subscribe--> in": {
     "action": "on",
@@ -695,7 +695,7 @@
         "message": "a fly in the ointment"
       }
     },
-    "protocol": "1.3.0"
+    "protocol": "{{happn protocol}}"
   },
   "failure to subscribe - access denied--> in": {
     "action": "on",
@@ -726,7 +726,7 @@
         "message": "unauthorized"
       }
     },
-    "protocol": "1.3.0"
+    "protocol": "{{happn protocol}}"
   },
   "the client sends out a disconnect request, which the server receives - the server then queues the disconnection request, the client the ends the websocket session, and the server cleans up on the other side without sending a disconnection warning--> in": {
     "action": "disconnect",
@@ -746,7 +746,7 @@
       "sessionId": "{{guid}}",
       "action": "disconnect"
     },
-    "protocol": "1.3.0"
+    "protocol": "{{happn protocol}}"
   },
   "when a client is forcefully diconnected from the server side, or when a service shutdown happens, all clients are notified a disconnection is imminent--> in": [
     "bad"

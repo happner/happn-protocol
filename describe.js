@@ -964,8 +964,8 @@ function writeReportToFile(){
 
     fs.removeSync(outputFilePrevious);
     fs.appendFileSync(outputFilePrevious, fs.readFileSync(outputFileCurrent));
-    fs.unlinkSync(outputFile);
-    fs.unlinkSync(outputFileCurrent);
+    fs.removeSync(outputFile);
+    fs.removeSync(outputFileCurrent);
 
   }catch(e){}
 
@@ -992,8 +992,8 @@ function writeJSONReportToFile(){
 
     fs.removeSync(outputFilePrevious);
     fs.appendFileSync(outputFilePrevious, fs.readFileSync(outputFileCurrent));
-    fs.unlinkSync(outputFile);
-    fs.unlinkSync(outputFileCurrent);
+    fs.removeSync(outputFile);
+    fs.removeSync(outputFileCurrent);
 
   }catch(e){
     console.log('err:::', e);
