@@ -63,10 +63,11 @@ Object.keys(protocolJSON).forEach(function(action){
       var doneDiff = {};
 
       differences.forEach(function(difference){
+
         var path = difference.path.slice(1).join('/');
         if (doneDiff[path]) return;
         doneDiff[path] = true;
-        console.log(colors.red(path));
+        console.log(colors.red(difference.kind + ': ' + path));
       });
     }
   }

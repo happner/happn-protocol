@@ -2,12 +2,12 @@
 
 ##PROTOCOL VERSION: 2.0.0
 ###HAPPN VERSION: 5.0.0-alpha.2
-####RUN: 2017 November 09 06:38
+####RUN: 2017 November 10 02:40
 #connect a client
 
 ###create a client session and login
 
-(existing client with session id: ce72dcc2-4e15-4d41-99e6-f586683430f3 was already created) ##DIFF_IGNORE
+(existing client with session id: ff2d4883-5695-4cf8-9d92-7be34bcf9b58 was already created) ##DIFF_IGNORE
 ###client -> server
 ```json
 {
@@ -149,7 +149,7 @@
 ```
 ###server -> client
 ```json
-"{\n  \"data\": {\n    \"data\": {},\n    \"_meta\": {\n      \"path\": \"tag/non-existent\"\n    }\n  },\n  \"_meta\": {\n    \"created\": \"{{number, utc}}\",\n    \"modified\": \"{{number, utc}}\",\n    \"path\": \"/_TAGS/tag/non-existent/gSwnpGZjRMCsB4LPgOQK3Q-1\",\n    \"tag\": \"MYTAG\",\n    \"published\": true,\n    \"type\": \"response\",\n    \"status\": \"ok\",\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"sessionId\": \"{{guid}}\",\n    \"action\": \"set\"\n  },\n  \"protocol\": \"1.3.0\"\n}"
+"{\n  \"data\": {\n    \"data\": {},\n    \"_meta\": {\n      \"path\": \"tag/non-existent\"\n    }\n  },\n  \"_meta\": {\n    \"created\": \"{{number, utc}}\",\n    \"modified\": \"{{number, utc}}\",\n    \"path\": \"/_TAGS/tag/non-existent/p2iWrVjgR22oIspev5P0fA-1\",\n    \"tag\": \"MYTAG\",\n    \"published\": true,\n    \"type\": \"response\",\n    \"status\": \"ok\",\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"sessionId\": \"{{guid}}\",\n    \"action\": \"set\"\n  },\n  \"protocol\": \"1.3.0\"\n}"
 ```
 ###setSibling
 
@@ -344,7 +344,7 @@
 ```
 ###server -> client
 ```json
-"{\n  \"data\": {\n    \"data\": {\n      \"was\": \"set\"\n    }\n  },\n  \"_meta\": {\n    \"created\": \"{{number, utc}}\",\n    \"modified\": \"{{number, utc}}\",\n    \"modifiedBy\": \"_ADMIN\",\n    \"path\": \"/subscribe/on/all/events\",\n    \"channel\": \"/ALL@*\",\n    \"action\": \"/SET@/subscribe/on/all/events\",\n    \"type\": \"data\",\n    \"sessionId\": \"{{guid}}\",\n    \"consistency\": 2,\n    \"publicationId\": \"bd61a829-9977-4c96-81d7-778fde7571d8-15\"\n  },\n  \"__outbound\": true\n}"
+"{\n  \"data\": {\n    \"data\": {\n      \"was\": \"set\"\n    }\n  },\n  \"_meta\": {\n    \"created\": \"{{number, utc}}\",\n    \"modified\": \"{{number, utc}}\",\n    \"modifiedBy\": \"_ADMIN\",\n    \"path\": \"/subscribe/on/all/events\",\n    \"channel\": \"/ALL@*\",\n    \"action\": \"/SET@/subscribe/on/all/events\",\n    \"type\": \"data\",\n    \"sessionId\": \"{{guid}}\",\n    \"consistency\": 2,\n    \"publicationId\": \"69fae1da-0426-46be-9d8e-36f44d6a7e5d-15\"\n  },\n  \"__outbound\": true\n}"
 ```
 ###server -> client
 ```json
@@ -415,7 +415,7 @@
 ```
 ###server -> client
 ```json
-"{\n  \"data\": {\n    \"data\": {\n      \"was\": \"set\"\n    }\n  },\n  \"_meta\": {\n    \"created\": \"{{number, utc}}\",\n    \"modified\": \"{{number, utc}}\",\n    \"modifiedBy\": \"_ADMIN\",\n    \"path\": \"/subscribe/on/specific\",\n    \"channel\": \"/SET@/subscribe/on/specific\",\n    \"action\": \"/SET@/subscribe/on/specific\",\n    \"type\": \"data\",\n    \"sessionId\": \"{{guid}}\",\n    \"consistency\": 2,\n    \"publicationId\": \"bd61a829-9977-4c96-81d7-778fde7571d8-18\"\n  },\n  \"__outbound\": true\n}"
+"{\n  \"data\": {\n    \"data\": {\n      \"was\": \"set\"\n    }\n  },\n  \"_meta\": {\n    \"created\": \"{{number, utc}}\",\n    \"modified\": \"{{number, utc}}\",\n    \"modifiedBy\": \"_ADMIN\",\n    \"path\": \"/subscribe/on/specific\",\n    \"channel\": \"/SET@/subscribe/on/specific\",\n    \"action\": \"/SET@/subscribe/on/specific\",\n    \"type\": \"data\",\n    \"sessionId\": \"{{guid}}\",\n    \"consistency\": 2,\n    \"publicationId\": \"69fae1da-0426-46be-9d8e-36f44d6a7e5d-18\"\n  },\n  \"__outbound\": true\n}"
 ```
 ###server -> client
 ```json
@@ -463,7 +463,7 @@
 ```
 ###server -> client
 ```json
-"{\n  \"data\": {\n    \"removed\": 1\n  },\n  \"_meta\": {\n    \"timestamp\": \"{{number, utc}}\",\n    \"path\": \"/subscribe/on/remove\",\n    \"channel\": \"/REMOVE@/subscribe/on/remove\",\n    \"action\": \"/REMOVE@/subscribe/on/remove\",\n    \"type\": \"data\",\n    \"sessionId\": \"{{guid}}\",\n    \"consistency\": 2,\n    \"publicationId\": \"bd61a829-9977-4c96-81d7-778fde7571d8-21\"\n  },\n  \"__outbound\": true\n}"
+"{\n  \"data\": {\n    \"removed\": 1\n  },\n  \"_meta\": {\n    \"timestamp\": \"{{number, utc}}\",\n    \"path\": \"/subscribe/on/remove\",\n    \"channel\": \"/REMOVE@/subscribe/on/remove\",\n    \"action\": \"/REMOVE@/subscribe/on/remove\",\n    \"type\": \"data\",\n    \"sessionId\": \"{{guid}}\",\n    \"consistency\": 2,\n    \"publicationId\": \"69fae1da-0426-46be-9d8e-36f44d6a7e5d-21\"\n  },\n  \"__outbound\": true\n}"
 ```
 ###server -> client
 ```json
@@ -514,7 +514,7 @@
 ```
 ###server -> client
 ```json
-"{\n  \"data\": {\n    \"data\": {\n      \"was\": \"set\"\n    }\n  },\n  \"_meta\": {\n    \"created\": \"{{number, utc}}\",\n    \"modified\": \"{{number, utc}}\",\n    \"modifiedBy\": \"_ADMIN\",\n    \"path\": \"/subscribe/once\",\n    \"channel\": \"/ALL@/subscribe/once\",\n    \"action\": \"/SET@/subscribe/once\",\n    \"type\": \"data\",\n    \"sessionId\": \"{{guid}}\",\n    \"consistency\": 2,\n    \"publicationId\": \"bd61a829-9977-4c96-81d7-778fde7571d8-23\"\n  },\n  \"__outbound\": true\n}"
+"{\n  \"data\": {\n    \"data\": {\n      \"was\": \"set\"\n    }\n  },\n  \"_meta\": {\n    \"created\": \"{{number, utc}}\",\n    \"modified\": \"{{number, utc}}\",\n    \"modifiedBy\": \"_ADMIN\",\n    \"path\": \"/subscribe/once\",\n    \"channel\": \"/ALL@/subscribe/once\",\n    \"action\": \"/SET@/subscribe/once\",\n    \"type\": \"data\",\n    \"sessionId\": \"{{guid}}\",\n    \"consistency\": 2,\n    \"publicationId\": \"69fae1da-0426-46be-9d8e-36f44d6a7e5d-23\"\n  },\n  \"__outbound\": true\n}"
 ```
 ###server -> client
 ```json
@@ -653,7 +653,7 @@
 
 *the disconnectAllClients method is called - this method is called on the happn instance shutdown, causing the server to push out a disconnection message to all connected clients*
 
-one connected client remaining, so disconnect warning is sent to it, session id (matches the one stipulated in section 1_1) is:ce72dcc2-4e15-4d41-99e6-f586683430f3  ##DIFF_IGNORE
+one connected client remaining, so disconnect warning is sent to it, session id (matches the one stipulated in section 1_1) is:ff2d4883-5695-4cf8-9d92-7be34bcf9b58  ##DIFF_IGNORE
 ###server -> client
 ```json
 "{\n  \"_meta\": {\n    \"type\": \"system\"\n  },\n  \"eventKey\": \"server-side-disconnect\",\n  \"data\": \"server-side-disconnect\"\n}"

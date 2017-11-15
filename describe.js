@@ -10,8 +10,6 @@ var protocol = package.protocol;
 
 var version = package.version;
 
-var currentProtocolLog = [];
-
 var currentJob;
 
 var currentClient = null;
@@ -32,6 +30,7 @@ var ephemerals = {
   timestamp:'number, utc',
   _id:'matches path if nedb, generated if mongo',
   eventId:'number, matches handler in client',
+  protocol:'happn protocol',
   name:{
     condition:function(name, property, message){
 
@@ -66,6 +65,10 @@ var ephemerals = {
 
       if (path.indexOf('/_TAGS/set/some/data/') > -1){
         path = '{{/_TAGS/set/some/data/[unique generated id]}}'
+      }
+
+      if (path.indexOf('/_TAGS/tag/non-existent/') > -1){
+        path = '{{/_TAGS/tag/non-existent/[unique generated id]}}'
       }
 
       return path;
@@ -113,7 +116,7 @@ var inboundLayers = [
 
     currentJob.output.push('```json\r\n' + cleanJSON(message.raw) + '\r\n```');
 
-    currentJob.outputJSON = cleanJSON(message.raw);
+    currentJob.inputJSON = cleanJSON(message.raw);
 
     if (['throw/an/error', '/ALL@/subscription/error', 'remove/failed'].indexOf(message.raw.path) > -1) return cb(new TestError('a fly in the ointment'));
 
@@ -131,16 +134,13 @@ var outboundLayers = [
 
     var mdJSON;
 
-    if (message.raw){
-      currentJob.outputJSON = cleanJSON(message.raw);
-      mdJSON = cleanJSON(message.raw, null, 2);
-    }
-
     if (message.response) mdJSON = cleanJSON(message.response);
 
     else if (message.request && message.request.publication) mdJSON = cleanJSON(message.request.publication, null, 2);
 
     currentJob.output.push('```json\r\n' + JSON.stringify(mdJSON) + '\r\n```');
+
+    currentJob.outputJSON = mdJSON;
 
     cb(null, message);
   }
@@ -893,12 +893,15 @@ async.eachSeries(jobs, function(job, jobCB){
 
       if (currentJob.outputJSON  && currentJob.text){
         var json = ['bad'];
+        var jsonOut = ['bad'];
         try{
-          json = JSON.parse(currentJob.outputJSON);
+          jsonOut = JSON.parse(currentJob.outputJSON);
+          json = JSON.parse(currentJob.inputJSON);
         }catch(e){
           //do nothing
         }
-        jsonReport[currentJob.text] = json;
+        jsonReport[currentJob.text + '--> in'] = json;
+        jsonReport[currentJob.text + '--> out'] = jsonOut;
       }
       currentJob.output.forEach(function(line){
         protocolReport.push(line);
