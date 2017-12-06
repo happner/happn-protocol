@@ -1,13 +1,13 @@
 # happn protocol specification
 
-## PROTOCOL VERSION: 2
-### HAPPN VERSION: 6.0.0-alpha.3
-#### RUN: 2017 December 06 11:04
+## PROTOCOL VERSION: 1.3.0
+### HAPPN VERSION: 4.0.0
+#### RUN: 2017 December 06 11:08
 # connect a client
 
 ### create a client session and login
 
-(existing client with session id: 34c51495-8848-41b3-ac09-c032ad5b8946 was already created) ##DIFF_IGNORE
+(existing client with session id: 5baaa5dd-e458-43aa-8691-0800d3c41c9a was already created) ##DIFF_IGNORE
 ### client -> server
 ```json
 {
@@ -597,6 +597,7 @@
     "event_type": "all",
     "count": 0,
     "listenerId": 0,
+    "refCount": 1,
     "timeout": 60000
   }
 }
@@ -604,9 +605,7 @@
 ### server -> client
 ```json
 {
-  "data": {
-    "id": "{{guid}}"
-  },
+  "data": {},
   "_meta": {
     "status": "ok",
     "type": "response",
@@ -657,7 +656,7 @@
     "type": "data",
     "sessionId": "{{guid}}",
     "consistency": 2,
-    "publicationId": "340daa1d-873b-4769-88b7-bc00a9e69d74-15"
+    "publicationId": "15caf124-8d25-42d6-939e-772db1b50c44-15"
   },
   "__outbound": true
 }
@@ -696,7 +695,8 @@
   "data": null,
   "sessionId": "{{guid}}",
   "options": {
-    "referenceId": 0,
+    "refCount": 0,
+    "listenerId": -1,
     "timeout": 60000
   }
 }
@@ -704,34 +704,7 @@
 ### server -> client
 ```json
 {
-  "data": {
-    "id": false,
-    "removed": [
-      {
-        "key": "340daa1d-873b-4769-88b7-bc00a9e69d74",
-        "data": {
-          "options": {
-            "event_type": "all",
-            "count": 0,
-            "listenerId": 0,
-            "timeout": 60000
-          },
-          "session": {
-            "id": "{{guid}}",
-            "protocol": "{{happn protocol}}",
-            "info": {
-              "_browser": false,
-              "_local": false
-            }
-          },
-          "action": "ALL",
-          "path": "*"
-        },
-        "id": "{{guid}}",
-        "path": "*"
-      }
-    ]
-  },
+  "data": {},
   "_meta": {
     "status": "ok",
     "type": "response",
@@ -757,6 +730,7 @@
     "event_type": "set",
     "count": 0,
     "listenerId": 1,
+    "refCount": 1,
     "timeout": 60000
   }
 }
@@ -764,9 +738,7 @@
 ### server -> client
 ```json
 {
-  "data": {
-    "id": "{{guid}}"
-  },
+  "data": {},
   "_meta": {
     "status": "ok",
     "type": "response",
@@ -817,7 +789,7 @@
     "type": "data",
     "sessionId": "{{guid}}",
     "consistency": 2,
-    "publicationId": "340daa1d-873b-4769-88b7-bc00a9e69d74-18"
+    "publicationId": "15caf124-8d25-42d6-939e-772db1b50c44-18"
   },
   "__outbound": true
 }
@@ -860,6 +832,7 @@
     "event_type": "remove",
     "count": 0,
     "listenerId": 2,
+    "refCount": 1,
     "timeout": 60000
   }
 }
@@ -867,9 +840,7 @@
 ### server -> client
 ```json
 {
-  "data": {
-    "id": "{{guid}}"
-  },
+  "data": {},
   "_meta": {
     "status": "ok",
     "type": "response",
@@ -912,7 +883,7 @@
     "type": "data",
     "sessionId": "{{guid}}",
     "consistency": 2,
-    "publicationId": "340daa1d-873b-4769-88b7-bc00a9e69d74-21"
+    "publicationId": "15caf124-8d25-42d6-939e-772db1b50c44-21"
   },
   "__outbound": true
 }
@@ -950,6 +921,7 @@
     "event_type": "all",
     "count": 1,
     "listenerId": 3,
+    "refCount": 1,
     "timeout": 60000
   }
 }
@@ -957,9 +929,7 @@
 ### server -> client
 ```json
 {
-  "data": {
-    "id": "{{guid}}"
-  },
+  "data": {},
   "_meta": {
     "status": "ok",
     "type": "response",
@@ -1010,7 +980,7 @@
     "type": "data",
     "sessionId": "{{guid}}",
     "consistency": 2,
-    "publicationId": "340daa1d-873b-4769-88b7-bc00a9e69d74-23"
+    "publicationId": "15caf124-8d25-42d6-939e-772db1b50c44-23"
   },
   "__outbound": true
 }
@@ -1047,7 +1017,8 @@
   "data": null,
   "sessionId": "{{guid}}",
   "options": {
-    "referenceId": "{{unique id (hyperid)}}",
+    "refCount": 1,
+    "listenerId": 3,
     "timeout": 60000
   }
 }
@@ -1066,6 +1037,7 @@
     "event_type": "all",
     "count": 0,
     "listenerId": 4,
+    "refCount": 1,
     "timeout": 60000
   }
 }
@@ -1073,36 +1045,7 @@
 ### server -> client
 ```json
 {
-  "data": {
-    "id": "{{guid}}",
-    "removed": [
-      {
-        "id": "{{guid}}",
-        "data": {
-          "options": {
-            "event_type": "all",
-            "count": 1,
-            "listenerId": 3,
-            "timeout": 60000
-          },
-          "session": {
-            "id": "{{guid}}",
-            "protocol": "{{happn protocol}}",
-            "info": {
-              "_browser": false,
-              "_local": false
-            }
-          },
-          "action": "ALL",
-          "path": "/subscribe/once"
-        },
-        "key": "340daa1d-873b-4769-88b7-bc00a9e69d74",
-        "path": "/subscribe/once",
-        "segment": "/subscribe/once",
-        "branch": 0
-      }
-    ]
-  },
+  "data": {},
   "_meta": {
     "status": "ok",
     "type": "response",
@@ -1117,9 +1060,7 @@
 ### server -> client
 ```json
 {
-  "data": {
-    "id": "{{guid}}"
-  },
+  "data": {},
   "_meta": {
     "status": "ok",
     "type": "response",
@@ -1190,6 +1131,7 @@
     "event_type": "all",
     "count": 0,
     "listenerId": 5,
+    "refCount": 1,
     "timeout": 60000
   }
 }
@@ -1227,6 +1169,7 @@
     "event_type": "all",
     "count": 0,
     "listenerId": 0,
+    "refCount": 1,
     "timeout": 60000
   }
 }
@@ -1285,7 +1228,7 @@
 
 *the disconnectAllClients method is called - this method is called on the happn instance shutdown, causing the server to push out a disconnection message to all connected clients*
 
-one connected client remaining, so disconnect warning is sent to it, session id (matches the one stipulated in section 1_1) is:34c51495-8848-41b3-ac09-c032ad5b8946  ##DIFF_IGNORE
+one connected client remaining, so disconnect warning is sent to it, session id (matches the one stipulated in section 1_1) is:5baaa5dd-e458-43aa-8691-0800d3c41c9a  ##DIFF_IGNORE
 ### server -> client
 ```json
 {

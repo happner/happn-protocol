@@ -1,14 +1,14 @@
-#happn protocol specification
+# happn protocol specification
 
-##PROTOCOL VERSION: 1.3.0
-###HAPPN VERSION: 4.0.0
-####RUN: 2017 November 15 09:57
-#connect a client
+## PROTOCOL VERSION: 1.3.0
+### HAPPN VERSION: 4.0.0
+#### RUN: 2017 December 06 11:08
+# connect a client
 
-###create a client session and login
+### create a client session and login
 
-(existing client with session id: 447696eb-a3b6-4a63-81e3-72b544eb4b84 was already created) ##DIFF_IGNORE
-###client -> server
+(existing client with session id: 5baaa5dd-e458-43aa-8691-0800d3c41c9a was already created) ##DIFF_IGNORE
+### client -> server
 ```json
 {
   "action": "configure-session",
@@ -18,22 +18,47 @@
   }
 }
 ```
-###server -> client
+### server -> client
 ```json
-"{\n  \"data\": null,\n  \"_meta\": {\n    \"type\": \"response\",\n    \"status\": \"ok\",\n    \"published\": false,\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"action\": \"configure-session\"\n  },\n  \"protocol\": \"{{happn protocol}}\"\n}"
+{
+  "data": null,
+  "_meta": {
+    "type": "response",
+    "status": "ok",
+    "published": false,
+    "eventId": "{{number, matches handler in client}}",
+    "action": "configure-session"
+  },
+  "protocol": "{{happn protocol}}"
+}
 ```
-###client -> server
+### client -> server
 ```json
 {
   "action": "describe",
   "eventId": "{{number, matches handler in client}}"
 }
 ```
-###server -> client
+### server -> client
 ```json
-"{\n  \"data\": {\n    \"name\": \"{{string, server name - silly if not configured}}\",\n    \"secure\": true,\n    \"encryptPayloads\": false,\n    \"publicKey\": \"{{ECDSA public key}}\"\n  },\n  \"_meta\": {\n    \"type\": \"response\",\n    \"status\": \"ok\",\n    \"published\": false,\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"action\": \"describe\"\n  },\n  \"protocol\": \"{{happn protocol}}\"\n}"
+{
+  "data": {
+    "name": "{{string, server name - silly if not configured}}",
+    "secure": true,
+    "encryptPayloads": false,
+    "publicKey": "{{ECDSA public key}}"
+  },
+  "_meta": {
+    "type": "response",
+    "status": "ok",
+    "published": false,
+    "eventId": "{{number, matches handler in client}}",
+    "action": "describe"
+  },
+  "protocol": "{{happn protocol}}"
+}
 ```
-###client -> server
+### client -> server
 ```json
 {
   "action": "login",
@@ -52,15 +77,75 @@
   }
 }
 ```
-###server -> client
+### server -> client
 ```json
-"{\n  \"data\": {\n    \"id\": \"{{guid}}\",\n    \"protocol\": \"{{happn protocol}}\",\n    \"happn\": {\n      \"name\": \"{{string}}\",\n      \"secure\": true,\n      \"encryptPayloads\": false,\n      \"publicKey\": \"{{ECDSA public key}}\"\n    },\n    \"info\": {\n      \"_browser\": false,\n      \"_local\": false\n    },\n    \"type\": 1,\n    \"user\": {\n      \"custom_data\": {},\n      \"username\": \"_ADMIN\",\n      \"_meta\": {\n        \"created\": \"{{number, utc}}\",\n        \"modified\": \"{{number, utc}}\",\n        \"path\": \"/_SYSTEM/_SECURITY/_USER/_ADMIN\",\n        \"_id\": \"{{matches path if nedb, generated if mongo}}\"\n      },\n      \"groups\": {\n        \"_ADMIN\": {\n          \"data\": {},\n          \"_meta\": {\n            \"created\": \"{{number, utc}}\",\n            \"modified\": \"{{number, utc}}\",\n            \"path\": \"/_SYSTEM/_SECURITY/_USER/_ADMIN/_USER_GROUP/_ADMIN\",\n            \"_id\": \"{{matches path if nedb, generated if mongo}}\"\n          }\n        }\n      }\n    },\n    \"timestamp\": \"{{number, utc}}\",\n    \"isEncrypted\": false,\n    \"origin\": \"{{sessionId}}\",\n    \"policy\": {\n      \"0\": {\n        \"ttl\": 0,\n        \"inactivity_threshold\": null\n      },\n      \"1\": {\n        \"ttl\": 0,\n        \"inactivity_threshold\": null\n      }\n    },\n    \"permissionSetKey\": \"/_ADMIN/\",\n    \"token\": \"{{string, jwt token}}\"\n  },\n  \"_meta\": {\n    \"type\": \"response\",\n    \"status\": \"ok\",\n    \"published\": false,\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"action\": \"login\"\n  },\n  \"protocol\": \"{{happn protocol}}\"\n}"
+{
+  "data": {
+    "id": "{{guid}}",
+    "protocol": "{{happn protocol}}",
+    "happn": {
+      "name": "{{string}}",
+      "secure": true,
+      "encryptPayloads": false,
+      "publicKey": "{{ECDSA public key}}"
+    },
+    "info": {
+      "_browser": false,
+      "_local": false
+    },
+    "type": 1,
+    "user": {
+      "custom_data": {},
+      "username": "_ADMIN",
+      "_meta": {
+        "created": "{{number, utc}}",
+        "modified": "{{number, utc}}",
+        "path": "/_SYSTEM/_SECURITY/_USER/_ADMIN",
+        "_id": "{{matches path if nedb, generated if mongo}}"
+      },
+      "groups": {
+        "_ADMIN": {
+          "data": {},
+          "_meta": {
+            "created": "{{number, utc}}",
+            "modified": "{{number, utc}}",
+            "path": "/_SYSTEM/_SECURITY/_USER/_ADMIN/_USER_GROUP/_ADMIN",
+            "_id": "{{matches path if nedb, generated if mongo}}"
+          }
+        }
+      }
+    },
+    "timestamp": "{{number, utc}}",
+    "isEncrypted": false,
+    "origin": "{{sessionId}}",
+    "policy": {
+      "0": {
+        "ttl": 0,
+        "inactivity_threshold": null
+      },
+      "1": {
+        "ttl": 0,
+        "inactivity_threshold": null
+      }
+    },
+    "permissionSetKey": "/_ADMIN/",
+    "token": "{{string, jwt token}}"
+  },
+  "_meta": {
+    "type": "response",
+    "status": "ok",
+    "published": false,
+    "eventId": "{{number, matches handler in client}}",
+    "action": "login"
+  },
+  "protocol": "{{happn protocol}}"
+}
 ```
-#set
+# set
 
-###set a piece of data using a key value pair
+### set a piece of data using a key value pair
 
-###client -> server
+### client -> server
 ```json
 {
   "action": "set",
@@ -77,13 +162,32 @@
   }
 }
 ```
-###server -> client
+### server -> client
 ```json
-"{\n  \"data\": {\n    \"data\": {\n      \"was\": \"set\"\n    }\n  },\n  \"_meta\": {\n    \"created\": \"{{number, utc}}\",\n    \"modified\": \"{{number, utc}}\",\n    \"modifiedBy\": \"_ADMIN\",\n    \"path\": \"/set/some/data\",\n    \"published\": true,\n    \"type\": \"response\",\n    \"status\": \"ok\",\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"sessionId\": \"{{guid}}\",\n    \"action\": \"set\"\n  },\n  \"protocol\": \"{{happn protocol}}\"\n}"
+{
+  "data": {
+    "data": {
+      "was": "set"
+    }
+  },
+  "_meta": {
+    "created": "{{number, utc}}",
+    "modified": "{{number, utc}}",
+    "modifiedBy": "_ADMIN",
+    "path": "/set/some/data",
+    "published": true,
+    "type": "response",
+    "status": "ok",
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "set"
+  },
+  "protocol": "{{happn protocol}}"
+}
 ```
-###merge some new values with an existing record, NB: the merge only goes 1 property level deep
+### merge some new values with an existing record, NB: the merge only goes 1 property level deep
 
-###client -> server
+### client -> server
 ```json
 {
   "action": "set",
@@ -101,15 +205,36 @@
   }
 }
 ```
-###server -> client
+### server -> client
 ```json
-"{\n  \"data\": {\n    \"an\": {\n      \"additional\": \"field\"\n    },\n    \"data\": {\n      \"was\": \"set\"\n    }\n  },\n  \"_meta\": {\n    \"created\": \"{{number, utc}}\",\n    \"modified\": \"{{number, utc}}\",\n    \"path\": \"/set/some/data\",\n    \"published\": true,\n    \"type\": \"response\",\n    \"status\": \"ok\",\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"sessionId\": \"{{guid}}\",\n    \"action\": \"set\"\n  },\n  \"protocol\": \"{{happn protocol}}\"\n}"
+{
+  "data": {
+    "an": {
+      "additional": "field"
+    },
+    "data": {
+      "was": "set"
+    }
+  },
+  "_meta": {
+    "created": "{{number, utc}}",
+    "modified": "{{number, utc}}",
+    "path": "/set/some/data",
+    "published": true,
+    "type": "response",
+    "status": "ok",
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "set"
+  },
+  "protocol": "{{happn protocol}}"
+}
 ```
-###tag some existing data
+### tag some existing data
 
 *tag an existing record, a clone of the record gets stored under /_TAGS/{{tagged record path}}*
 
-###client -> server
+### client -> server
 ```json
 {
   "action": "set",
@@ -124,15 +249,45 @@
   }
 }
 ```
-###server -> client
+### server -> client
 ```json
-"{\n  \"data\": {\n    \"data\": {\n      \"an\": {\n        \"additional\": \"field\"\n      },\n      \"data\": {\n        \"was\": \"set\"\n      }\n    },\n    \"_meta\": {\n      \"path\": \"/set/some/data\"\n    },\n    \"created\": \"{{number, utc}}\",\n    \"modified\": \"{{number, utc}}\",\n    \"_id\": \"{{matches path if nedb, generated if mongo}}\"\n  },\n  \"_meta\": {\n    \"created\": \"{{number, utc}}\",\n    \"modified\": \"{{number, utc}}\",\n    \"path\": \"{{/_TAGS/set/some/data/[unique generated id]}}\",\n    \"tag\": \"MYTAG\",\n    \"published\": true,\n    \"type\": \"response\",\n    \"status\": \"ok\",\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"sessionId\": \"{{guid}}\",\n    \"action\": \"set\"\n  },\n  \"protocol\": \"{{happn protocol}}\"\n}"
+{
+  "data": {
+    "data": {
+      "an": {
+        "additional": "field"
+      },
+      "data": {
+        "was": "set"
+      }
+    },
+    "_meta": {
+      "path": "/set/some/data"
+    },
+    "created": "{{number, utc}}",
+    "modified": "{{number, utc}}",
+    "_id": "{{matches path if nedb, generated if mongo}}"
+  },
+  "_meta": {
+    "created": "{{number, utc}}",
+    "modified": "{{number, utc}}",
+    "path": "{{/_TAGS/set/some/data/[unique generated id]}}",
+    "tag": "MYTAG",
+    "published": true,
+    "type": "response",
+    "status": "ok",
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "set"
+  },
+  "protocol": "{{happn protocol}}"
+}
 ```
-###tag failure
+### tag failure
 
 *fail to tag data that doesnt exist*
 
-###client -> server
+### client -> server
 ```json
 {
   "action": "set",
@@ -147,15 +302,35 @@
   }
 }
 ```
-###server -> client
+### server -> client
 ```json
-"{\n  \"data\": {\n    \"data\": {},\n    \"_meta\": {\n      \"path\": \"tag/non-existent\"\n    }\n  },\n  \"_meta\": {\n    \"created\": \"{{number, utc}}\",\n    \"modified\": \"{{number, utc}}\",\n    \"path\": \"{{/_TAGS/tag/non-existent/[unique generated id]}}\",\n    \"tag\": \"MYTAG\",\n    \"published\": true,\n    \"type\": \"response\",\n    \"status\": \"ok\",\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"sessionId\": \"{{guid}}\",\n    \"action\": \"set\"\n  },\n  \"protocol\": \"{{happn protocol}}\"\n}"
+{
+  "data": {
+    "data": {},
+    "_meta": {
+      "path": "tag/non-existent"
+    }
+  },
+  "_meta": {
+    "created": "{{number, utc}}",
+    "modified": "{{number, utc}}",
+    "path": "{{/_TAGS/tag/non-existent/[unique generated id]}}",
+    "tag": "MYTAG",
+    "published": true,
+    "type": "response",
+    "status": "ok",
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "set"
+  },
+  "protocol": "{{happn protocol}}"
+}
 ```
-###setSibling
+### setSibling
 
 *create sibling records on a base path*
 
-###client -> server
+### client -> server
 ```json
 {
   "action": "set",
@@ -171,13 +346,30 @@
   }
 }
 ```
-###server -> client
+### server -> client
 ```json
-"{\n  \"data\": {\n    \"sibling\": \"data\"\n  },\n  \"_meta\": {\n    \"created\": \"{{number, utc}}\",\n    \"modified\": \"{{number, utc}}\",\n    \"modifiedBy\": \"_ADMIN\",\n    \"path\": \"set/sibling/data/[unique generated id]\",\n    \"published\": true,\n    \"type\": \"response\",\n    \"status\": \"ok\",\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"sessionId\": \"{{guid}}\",\n    \"action\": \"set\"\n  },\n  \"protocol\": \"{{happn protocol}}\"\n}"
+{
+  "data": {
+    "sibling": "data"
+  },
+  "_meta": {
+    "created": "{{number, utc}}",
+    "modified": "{{number, utc}}",
+    "modifiedBy": "_ADMIN",
+    "path": "set/sibling/data/[unique generated id]",
+    "published": true,
+    "type": "response",
+    "status": "ok",
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "set"
+  },
+  "protocol": "{{happn protocol}}"
+}
 ```
-###fails to do a set
+### fails to do a set
 
-###client -> server
+### client -> server
 ```json
 {
   "action": "set",
@@ -194,13 +386,28 @@
   }
 }
 ```
-###server -> client
+### server -> client
 ```json
-"{\n  \"data\": null,\n  \"_meta\": {\n    \"type\": \"response\",\n    \"status\": \"error\",\n    \"published\": false,\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"sessionId\": \"{{guid}}\",\n    \"action\": \"set\",\n    \"error\": {\n      \"name\": \"TestError\",\n      \"message\": \"a fly in the ointment\"\n    }\n  },\n  \"protocol\": \"{{happn protocol}}\"\n}"
+{
+  "data": null,
+  "_meta": {
+    "type": "response",
+    "status": "error",
+    "published": false,
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "set",
+    "error": {
+      "name": "TestError",
+      "message": "a fly in the ointment"
+    }
+  },
+  "protocol": "{{happn protocol}}"
+}
 ```
-###fails to do a set, access denied, unauthorised
+### fails to do a set, access denied, unauthorised
 
-###client -> server
+### client -> server
 ```json
 {
   "action": "set",
@@ -217,13 +424,29 @@
   }
 }
 ```
-###server -> client
+### server -> client
 ```json
-"{\n  \"data\": null,\n  \"_meta\": {\n    \"type\": \"response\",\n    \"status\": \"error\",\n    \"published\": false,\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"sessionId\": \"{{guid}}\",\n    \"action\": \"set\",\n    \"error\": {\n      \"name\": \"AccessDenied\",\n      \"code\": 403,\n      \"message\": \"unauthorized\"\n    }\n  },\n  \"protocol\": \"{{happn protocol}}\"\n}"
+{
+  "data": null,
+  "_meta": {
+    "type": "response",
+    "status": "error",
+    "published": false,
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "set",
+    "error": {
+      "name": "AccessDenied",
+      "code": 403,
+      "message": "unauthorized"
+    }
+  },
+  "protocol": "{{happn protocol}}"
+}
 ```
-###removes one data point
+### removes one data point
 
-###client -> server
+### client -> server
 ```json
 {
   "action": "remove",
@@ -236,13 +459,28 @@
   }
 }
 ```
-###server -> client
+### server -> client
 ```json
-"{\n  \"data\": {\n    \"removed\": 1\n  },\n  \"_meta\": {\n    \"timestamp\": \"{{number, utc}}\",\n    \"path\": \"remove/one\",\n    \"published\": true,\n    \"type\": \"response\",\n    \"status\": \"ok\",\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"sessionId\": \"{{guid}}\",\n    \"action\": \"remove\"\n  },\n  \"protocol\": \"{{happn protocol}}\"\n}"
+{
+  "data": {
+    "removed": 1
+  },
+  "_meta": {
+    "timestamp": "{{number, utc}}",
+    "path": "remove/one",
+    "published": true,
+    "type": "response",
+    "status": "ok",
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "remove"
+  },
+  "protocol": "{{happn protocol}}"
+}
 ```
-###call sequence representing a request to remove something that is not there
+### call sequence representing a request to remove something that is not there
 
-###client -> server
+### client -> server
 ```json
 {
   "action": "remove",
@@ -255,13 +493,28 @@
   }
 }
 ```
-###server -> client
+### server -> client
 ```json
-"{\n  \"data\": {\n    \"removed\": 0\n  },\n  \"_meta\": {\n    \"timestamp\": \"{{number, utc}}\",\n    \"path\": \"remove/non_existant\",\n    \"published\": true,\n    \"type\": \"response\",\n    \"status\": \"ok\",\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"sessionId\": \"{{guid}}\",\n    \"action\": \"remove\"\n  },\n  \"protocol\": \"{{happn protocol}}\"\n}"
+{
+  "data": {
+    "removed": 0
+  },
+  "_meta": {
+    "timestamp": "{{number, utc}}",
+    "path": "remove/non_existant",
+    "published": true,
+    "type": "response",
+    "status": "ok",
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "remove"
+  },
+  "protocol": "{{happn protocol}}"
+}
 ```
-###an error happens when we try and remove an item
+### an error happens when we try and remove an item
 
-###client -> server
+### client -> server
 ```json
 {
   "action": "remove",
@@ -274,13 +527,28 @@
   }
 }
 ```
-###server -> client
+### server -> client
 ```json
-"{\n  \"data\": null,\n  \"_meta\": {\n    \"type\": \"response\",\n    \"status\": \"error\",\n    \"published\": false,\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"sessionId\": \"{{guid}}\",\n    \"action\": \"remove\",\n    \"error\": {\n      \"name\": \"TestError\",\n      \"message\": \"a fly in the ointment\"\n    }\n  },\n  \"protocol\": \"{{happn protocol}}\"\n}"
+{
+  "data": null,
+  "_meta": {
+    "type": "response",
+    "status": "error",
+    "published": false,
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "remove",
+    "error": {
+      "name": "TestError",
+      "message": "a fly in the ointment"
+    }
+  },
+  "protocol": "{{happn protocol}}"
+}
 ```
-###an error happens when we try and remove an item, access denied
+### an error happens when we try and remove an item, access denied
 
-###client -> server
+### client -> server
 ```json
 {
   "action": "remove",
@@ -293,15 +561,31 @@
   }
 }
 ```
-###server -> client
+### server -> client
 ```json
-"{\n  \"data\": null,\n  \"_meta\": {\n    \"type\": \"response\",\n    \"status\": \"error\",\n    \"published\": false,\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"sessionId\": \"{{guid}}\",\n    \"action\": \"remove\",\n    \"error\": {\n      \"name\": \"AccessDenied\",\n      \"code\": 403,\n      \"message\": \"unauthorized\"\n    }\n  },\n  \"protocol\": \"{{happn protocol}}\"\n}"
+{
+  "data": null,
+  "_meta": {
+    "type": "response",
+    "status": "error",
+    "published": false,
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "remove",
+    "error": {
+      "name": "AccessDenied",
+      "code": 403,
+      "message": "unauthorized"
+    }
+  },
+  "protocol": "{{happn protocol}}"
+}
 ```
-#data subscriptions
+# data subscriptions
 
-###subscribe to all changes on all data points
+### subscribe to all changes on all data points
 
-###client -> server
+### client -> server
 ```json
 {
   "action": "on",
@@ -318,15 +602,26 @@
   }
 }
 ```
-###server -> client
+### server -> client
 ```json
-"{\n  \"data\": {},\n  \"_meta\": {\n    \"status\": \"ok\",\n    \"type\": \"response\",\n    \"published\": false,\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"sessionId\": \"{{guid}}\",\n    \"action\": \"on\"\n  },\n  \"protocol\": \"{{happn protocol}}\"\n}"
+{
+  "data": {},
+  "_meta": {
+    "status": "ok",
+    "type": "response",
+    "published": false,
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "on"
+  },
+  "protocol": "{{happn protocol}}"
+}
 ```
-###set a piece of data, and get the event back based on the subscription in the previous step
+### set a piece of data, and get the event back based on the subscription in the previous step
 
 *the item from the server with the _meta.type 'data' is the emitted event - the other server -> client message with _meta.type 'response' is the response on the set action*
 
-###client -> server
+### client -> server
 ```json
 {
   "action": "set",
@@ -343,17 +638,55 @@
   }
 }
 ```
-###server -> client
+### server -> client
 ```json
-"{\n  \"data\": {\n    \"data\": {\n      \"was\": \"set\"\n    }\n  },\n  \"_meta\": {\n    \"created\": \"{{number, utc}}\",\n    \"modified\": \"{{number, utc}}\",\n    \"modifiedBy\": \"_ADMIN\",\n    \"path\": \"/subscribe/on/all/events\",\n    \"channel\": \"/ALL@*\",\n    \"action\": \"/SET@/subscribe/on/all/events\",\n    \"type\": \"data\",\n    \"sessionId\": \"{{guid}}\",\n    \"consistency\": 2,\n    \"publicationId\": \"22b5e832-89c7-4f99-acb7-bf56c8ad8d36-15\"\n  },\n  \"__outbound\": true\n}"
+{
+  "data": {
+    "data": {
+      "was": "set"
+    }
+  },
+  "_meta": {
+    "created": "{{number, utc}}",
+    "modified": "{{number, utc}}",
+    "modifiedBy": "_ADMIN",
+    "path": "/subscribe/on/all/events",
+    "channel": "/ALL@*",
+    "action": "/SET@/subscribe/on/all/events",
+    "type": "data",
+    "sessionId": "{{guid}}",
+    "consistency": 2,
+    "publicationId": "15caf124-8d25-42d6-939e-772db1b50c44-15"
+  },
+  "__outbound": true
+}
 ```
-###server -> client
+### server -> client
 ```json
-"{\n  \"data\": {\n    \"data\": {\n      \"was\": \"set\"\n    }\n  },\n  \"_meta\": {\n    \"created\": \"{{number, utc}}\",\n    \"modified\": \"{{number, utc}}\",\n    \"modifiedBy\": \"_ADMIN\",\n    \"path\": \"/subscribe/on/all/events\",\n    \"published\": true,\n    \"type\": \"response\",\n    \"status\": \"ok\",\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"sessionId\": \"{{guid}}\",\n    \"action\": \"set\"\n  },\n  \"protocol\": \"{{happn protocol}}\"\n}"
+{
+  "data": {
+    "data": {
+      "was": "set"
+    }
+  },
+  "_meta": {
+    "created": "{{number, utc}}",
+    "modified": "{{number, utc}}",
+    "modifiedBy": "_ADMIN",
+    "path": "/subscribe/on/all/events",
+    "published": true,
+    "type": "response",
+    "status": "ok",
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "set"
+  },
+  "protocol": "{{happn protocol}}"
+}
 ```
-###unsubscribe from all changes on all data points, NB: will remove all subscriptions
+### unsubscribe from all changes on all data points, NB: will remove all subscriptions
 
-###client -> server
+### client -> server
 ```json
 {
   "action": "off",
@@ -368,13 +701,24 @@
   }
 }
 ```
-###server -> client
+### server -> client
 ```json
-"{\n  \"data\": {},\n  \"_meta\": {\n    \"status\": \"ok\",\n    \"type\": \"response\",\n    \"published\": false,\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"sessionId\": \"{{guid}}\",\n    \"action\": \"off\"\n  },\n  \"protocol\": \"{{happn protocol}}\"\n}"
+{
+  "data": {},
+  "_meta": {
+    "status": "ok",
+    "type": "response",
+    "published": false,
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "off"
+  },
+  "protocol": "{{happn protocol}}"
+}
 ```
-###subscribe to only set actions on a specific data point
+### subscribe to only set actions on a specific data point
 
-###client -> server
+### client -> server
 ```json
 {
   "action": "on",
@@ -391,15 +735,26 @@
   }
 }
 ```
-###server -> client
+### server -> client
 ```json
-"{\n  \"data\": {},\n  \"_meta\": {\n    \"status\": \"ok\",\n    \"type\": \"response\",\n    \"published\": false,\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"sessionId\": \"{{guid}}\",\n    \"action\": \"on\"\n  },\n  \"protocol\": \"{{happn protocol}}\"\n}"
+{
+  "data": {},
+  "_meta": {
+    "status": "ok",
+    "type": "response",
+    "published": false,
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "on"
+  },
+  "protocol": "{{happn protocol}}"
+}
 ```
-###set a piece of data, and get the event back based on the subscription in the previous step
+### set a piece of data, and get the event back based on the subscription in the previous step
 
 *the item from the server with the _meta.type 'data' is the emitted event - the other server -> client message with _meta.type 'response' is the response on the set action*
 
-###client -> server
+### client -> server
 ```json
 {
   "action": "set",
@@ -416,18 +771,56 @@
   }
 }
 ```
-###server -> client
+### server -> client
 ```json
-"{\n  \"data\": {\n    \"data\": {\n      \"was\": \"set\"\n    }\n  },\n  \"_meta\": {\n    \"created\": \"{{number, utc}}\",\n    \"modified\": \"{{number, utc}}\",\n    \"modifiedBy\": \"_ADMIN\",\n    \"path\": \"/subscribe/on/specific\",\n    \"channel\": \"/SET@/subscribe/on/specific\",\n    \"action\": \"/SET@/subscribe/on/specific\",\n    \"type\": \"data\",\n    \"sessionId\": \"{{guid}}\",\n    \"consistency\": 2,\n    \"publicationId\": \"22b5e832-89c7-4f99-acb7-bf56c8ad8d36-18\"\n  },\n  \"__outbound\": true\n}"
+{
+  "data": {
+    "data": {
+      "was": "set"
+    }
+  },
+  "_meta": {
+    "created": "{{number, utc}}",
+    "modified": "{{number, utc}}",
+    "modifiedBy": "_ADMIN",
+    "path": "/subscribe/on/specific",
+    "channel": "/SET@/subscribe/on/specific",
+    "action": "/SET@/subscribe/on/specific",
+    "type": "data",
+    "sessionId": "{{guid}}",
+    "consistency": 2,
+    "publicationId": "15caf124-8d25-42d6-939e-772db1b50c44-18"
+  },
+  "__outbound": true
+}
 ```
-###server -> client
+### server -> client
 ```json
-"{\n  \"data\": {\n    \"data\": {\n      \"was\": \"set\"\n    }\n  },\n  \"_meta\": {\n    \"created\": \"{{number, utc}}\",\n    \"modified\": \"{{number, utc}}\",\n    \"modifiedBy\": \"_ADMIN\",\n    \"path\": \"/subscribe/on/specific\",\n    \"published\": true,\n    \"type\": \"response\",\n    \"status\": \"ok\",\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"sessionId\": \"{{guid}}\",\n    \"action\": \"set\"\n  },\n  \"protocol\": \"{{happn protocol}}\"\n}"
+{
+  "data": {
+    "data": {
+      "was": "set"
+    }
+  },
+  "_meta": {
+    "created": "{{number, utc}}",
+    "modified": "{{number, utc}}",
+    "modifiedBy": "_ADMIN",
+    "path": "/subscribe/on/specific",
+    "published": true,
+    "type": "response",
+    "status": "ok",
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "set"
+  },
+  "protocol": "{{happn protocol}}"
+}
 ```
-###subscribe to the removal of data at a specified point
+### subscribe to the removal of data at a specified point
 
 (an item with the path /subscribe/on/remove was previously added)
-###client -> server
+### client -> server
 ```json
 {
   "action": "on",
@@ -444,15 +837,26 @@
   }
 }
 ```
-###server -> client
+### server -> client
 ```json
-"{\n  \"data\": {},\n  \"_meta\": {\n    \"status\": \"ok\",\n    \"type\": \"response\",\n    \"published\": false,\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"sessionId\": \"{{guid}}\",\n    \"action\": \"on\"\n  },\n  \"protocol\": \"{{happn protocol}}\"\n}"
+{
+  "data": {},
+  "_meta": {
+    "status": "ok",
+    "type": "response",
+    "published": false,
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "on"
+  },
+  "protocol": "{{happn protocol}}"
+}
 ```
-###remove a piece of data, and get the event back based on the subscription in the previous step
+### remove a piece of data, and get the event back based on the subscription in the previous step
 
 *the item from the server with the _meta.type 'data' is the emitted event - the other server -> client message with _meta.type 'response' is the response on the remove action*
 
-###client -> server
+### client -> server
 ```json
 {
   "action": "remove",
@@ -465,17 +869,47 @@
   }
 }
 ```
-###server -> client
+### server -> client
 ```json
-"{\n  \"data\": {\n    \"removed\": 1\n  },\n  \"_meta\": {\n    \"timestamp\": \"{{number, utc}}\",\n    \"path\": \"/subscribe/on/remove\",\n    \"channel\": \"/REMOVE@/subscribe/on/remove\",\n    \"action\": \"/REMOVE@/subscribe/on/remove\",\n    \"type\": \"data\",\n    \"sessionId\": \"{{guid}}\",\n    \"consistency\": 2,\n    \"publicationId\": \"22b5e832-89c7-4f99-acb7-bf56c8ad8d36-21\"\n  },\n  \"__outbound\": true\n}"
+{
+  "data": {
+    "removed": 1
+  },
+  "_meta": {
+    "timestamp": "{{number, utc}}",
+    "path": "/subscribe/on/remove",
+    "channel": "/REMOVE@/subscribe/on/remove",
+    "action": "/REMOVE@/subscribe/on/remove",
+    "type": "data",
+    "sessionId": "{{guid}}",
+    "consistency": 2,
+    "publicationId": "15caf124-8d25-42d6-939e-772db1b50c44-21"
+  },
+  "__outbound": true
+}
 ```
-###server -> client
+### server -> client
 ```json
-"{\n  \"data\": {\n    \"removed\": 1\n  },\n  \"_meta\": {\n    \"timestamp\": \"{{number, utc}}\",\n    \"path\": \"/subscribe/on/remove\",\n    \"published\": true,\n    \"type\": \"response\",\n    \"status\": \"ok\",\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"sessionId\": \"{{guid}}\",\n    \"action\": \"remove\"\n  },\n  \"protocol\": \"{{happn protocol}}\"\n}"
+{
+  "data": {
+    "removed": 1
+  },
+  "_meta": {
+    "timestamp": "{{number, utc}}",
+    "path": "/subscribe/on/remove",
+    "published": true,
+    "type": "response",
+    "status": "ok",
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "remove"
+  },
+  "protocol": "{{happn protocol}}"
+}
 ```
-###subscribe to a change only once, on the native happn client this is done by specifying the 'count' option, but you can tell from the following sequence how to unsubscribe
+### subscribe to a change only once, on the native happn client this is done by specifying the 'count' option, but you can tell from the following sequence how to unsubscribe
 
-###client -> server
+### client -> server
 ```json
 {
   "action": "on",
@@ -492,15 +926,26 @@
   }
 }
 ```
-###server -> client
+### server -> client
 ```json
-"{\n  \"data\": {},\n  \"_meta\": {\n    \"status\": \"ok\",\n    \"type\": \"response\",\n    \"published\": false,\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"sessionId\": \"{{guid}}\",\n    \"action\": \"on\"\n  },\n  \"protocol\": \"{{happn protocol}}\"\n}"
+{
+  "data": {},
+  "_meta": {
+    "status": "ok",
+    "type": "response",
+    "published": false,
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "on"
+  },
+  "protocol": "{{happn protocol}}"
+}
 ```
-###set a piece of data, and get the event back based on the subscription in the previous step
+### set a piece of data, and get the event back based on the subscription in the previous step
 
 *the item from the server with the _meta.type 'data' is the emitted event - the other server -> client message with _meta.type 'response' is the response on the set action*
 
-###client -> server
+### client -> server
 ```json
 {
   "action": "set",
@@ -517,15 +962,53 @@
   }
 }
 ```
-###server -> client
+### server -> client
 ```json
-"{\n  \"data\": {\n    \"data\": {\n      \"was\": \"set\"\n    }\n  },\n  \"_meta\": {\n    \"created\": \"{{number, utc}}\",\n    \"modified\": \"{{number, utc}}\",\n    \"modifiedBy\": \"_ADMIN\",\n    \"path\": \"/subscribe/once\",\n    \"channel\": \"/ALL@/subscribe/once\",\n    \"action\": \"/SET@/subscribe/once\",\n    \"type\": \"data\",\n    \"sessionId\": \"{{guid}}\",\n    \"consistency\": 2,\n    \"publicationId\": \"22b5e832-89c7-4f99-acb7-bf56c8ad8d36-23\"\n  },\n  \"__outbound\": true\n}"
+{
+  "data": {
+    "data": {
+      "was": "set"
+    }
+  },
+  "_meta": {
+    "created": "{{number, utc}}",
+    "modified": "{{number, utc}}",
+    "modifiedBy": "_ADMIN",
+    "path": "/subscribe/once",
+    "channel": "/ALL@/subscribe/once",
+    "action": "/SET@/subscribe/once",
+    "type": "data",
+    "sessionId": "{{guid}}",
+    "consistency": 2,
+    "publicationId": "15caf124-8d25-42d6-939e-772db1b50c44-23"
+  },
+  "__outbound": true
+}
 ```
-###server -> client
+### server -> client
 ```json
-"{\n  \"data\": {\n    \"data\": {\n      \"was\": \"set\"\n    }\n  },\n  \"_meta\": {\n    \"created\": \"{{number, utc}}\",\n    \"modified\": \"{{number, utc}}\",\n    \"modifiedBy\": \"_ADMIN\",\n    \"path\": \"/subscribe/once\",\n    \"published\": true,\n    \"type\": \"response\",\n    \"status\": \"ok\",\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"sessionId\": \"{{guid}}\",\n    \"action\": \"set\"\n  },\n  \"protocol\": \"{{happn protocol}}\"\n}"
+{
+  "data": {
+    "data": {
+      "was": "set"
+    }
+  },
+  "_meta": {
+    "created": "{{number, utc}}",
+    "modified": "{{number, utc}}",
+    "modifiedBy": "_ADMIN",
+    "path": "/subscribe/once",
+    "published": true,
+    "type": "response",
+    "status": "ok",
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "set"
+  },
+  "protocol": "{{happn protocol}}"
+}
 ```
-###client -> server
+### client -> server
 ```json
 {
   "action": "off",
@@ -540,9 +1023,9 @@
   }
 }
 ```
-###perform an action without publishing using the noPublish flag
+### perform an action without publishing using the noPublish flag
 
-###client -> server
+### client -> server
 ```json
 {
   "action": "on",
@@ -559,19 +1042,41 @@
   }
 }
 ```
-###server -> client
+### server -> client
 ```json
-"{\n  \"data\": {},\n  \"_meta\": {\n    \"status\": \"ok\",\n    \"type\": \"response\",\n    \"published\": false,\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"sessionId\": \"{{guid}}\",\n    \"action\": \"off\"\n  },\n  \"protocol\": \"{{happn protocol}}\"\n}"
+{
+  "data": {},
+  "_meta": {
+    "status": "ok",
+    "type": "response",
+    "published": false,
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "off"
+  },
+  "protocol": "{{happn protocol}}"
+}
 ```
-###server -> client
+### server -> client
 ```json
-"{\n  \"data\": {},\n  \"_meta\": {\n    \"status\": \"ok\",\n    \"type\": \"response\",\n    \"published\": false,\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"sessionId\": \"{{guid}}\",\n    \"action\": \"on\"\n  },\n  \"protocol\": \"{{happn protocol}}\"\n}"
+{
+  "data": {},
+  "_meta": {
+    "status": "ok",
+    "type": "response",
+    "published": false,
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "on"
+  },
+  "protocol": "{{happn protocol}}"
+}
 ```
-###set a piece of data, and get a response from the server, but no publication because noPublish was set to true
+### set a piece of data, and get a response from the server, but no publication because noPublish was set to true
 
 *the item from the server with the _meta.type 'data' is the emitted event - the other server -> client message with _meta.type 'response' is the response on the set action*
 
-###client -> server
+### client -> server
 ```json
 {
   "action": "set",
@@ -589,13 +1094,32 @@
   }
 }
 ```
-###server -> client
+### server -> client
 ```json
-"{\n  \"data\": {\n    \"data\": {\n      \"was\": \"set\"\n    }\n  },\n  \"_meta\": {\n    \"created\": \"{{number, utc}}\",\n    \"modified\": \"{{number, utc}}\",\n    \"modifiedBy\": \"_ADMIN\",\n    \"path\": \"/subscribe/noPublish\",\n    \"type\": \"response\",\n    \"status\": \"ok\",\n    \"published\": false,\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"sessionId\": \"{{guid}}\",\n    \"action\": \"set\"\n  },\n  \"protocol\": \"{{happn protocol}}\"\n}"
+{
+  "data": {
+    "data": {
+      "was": "set"
+    }
+  },
+  "_meta": {
+    "created": "{{number, utc}}",
+    "modified": "{{number, utc}}",
+    "modifiedBy": "_ADMIN",
+    "path": "/subscribe/noPublish",
+    "type": "response",
+    "status": "ok",
+    "published": false,
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "set"
+  },
+  "protocol": "{{happn protocol}}"
+}
 ```
-###failure to subscribe
+### failure to subscribe
 
-###client -> server
+### client -> server
 ```json
 {
   "action": "on",
@@ -612,13 +1136,28 @@
   }
 }
 ```
-###server -> client
+### server -> client
 ```json
-"{\n  \"data\": null,\n  \"_meta\": {\n    \"type\": \"response\",\n    \"status\": \"error\",\n    \"published\": false,\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"sessionId\": \"{{guid}}\",\n    \"action\": \"on\",\n    \"error\": {\n      \"name\": \"TestError\",\n      \"message\": \"a fly in the ointment\"\n    }\n  },\n  \"protocol\": \"{{happn protocol}}\"\n}"
+{
+  "data": null,
+  "_meta": {
+    "type": "response",
+    "status": "error",
+    "published": false,
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "on",
+    "error": {
+      "name": "TestError",
+      "message": "a fly in the ointment"
+    }
+  },
+  "protocol": "{{happn protocol}}"
+}
 ```
-###failure to subscribe - access denied
+### failure to subscribe - access denied
 
-###client -> server
+### client -> server
 ```json
 {
   "action": "on",
@@ -635,15 +1174,31 @@
   }
 }
 ```
-###server -> client
+### server -> client
 ```json
-"{\n  \"data\": null,\n  \"_meta\": {\n    \"type\": \"response\",\n    \"status\": \"error\",\n    \"published\": false,\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"sessionId\": \"{{guid}}\",\n    \"action\": \"on\",\n    \"error\": {\n      \"name\": \"AccessDenied\",\n      \"code\": 403,\n      \"message\": \"unauthorized\"\n    }\n  },\n  \"protocol\": \"{{happn protocol}}\"\n}"
+{
+  "data": null,
+  "_meta": {
+    "type": "response",
+    "status": "error",
+    "published": false,
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "on",
+    "error": {
+      "name": "AccessDenied",
+      "code": 403,
+      "message": "unauthorized"
+    }
+  },
+  "protocol": "{{happn protocol}}"
+}
 ```
-#Disconnection
+# Disconnection
 
-###the client sends out a disconnect request, which the server receives - the server then queues the disconnection request, the client the ends the websocket session, and the server cleans up on the other side without sending a disconnection warning
+### the client sends out a disconnect request, which the server receives - the server then queues the disconnection request, the client the ends the websocket session, and the server cleans up on the other side without sending a disconnection warning
 
-###client -> server
+### client -> server
 ```json
 {
   "action": "disconnect",
@@ -654,16 +1209,33 @@
   }
 }
 ```
-###server -> client
+### server -> client
 ```json
-"{\n  \"data\": null,\n  \"_meta\": {\n    \"type\": \"response\",\n    \"status\": \"ok\",\n    \"published\": false,\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"sessionId\": \"{{guid}}\",\n    \"action\": \"disconnect\"\n  },\n  \"protocol\": \"{{happn protocol}}\"\n}"
+{
+  "data": null,
+  "_meta": {
+    "type": "response",
+    "status": "ok",
+    "published": false,
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "disconnect"
+  },
+  "protocol": "{{happn protocol}}"
+}
 ```
-###when a client is forcefully diconnected from the server side, or when a service shutdown happens, all clients are notified a disconnection is imminent
+### when a client is forcefully diconnected from the server side, or when a service shutdown happens, all clients are notified a disconnection is imminent
 
 *the disconnectAllClients method is called - this method is called on the happn instance shutdown, causing the server to push out a disconnection message to all connected clients*
 
-one connected client remaining, so disconnect warning is sent to it, session id (matches the one stipulated in section 1_1) is:447696eb-a3b6-4a63-81e3-72b544eb4b84  ##DIFF_IGNORE
-###server -> client
+one connected client remaining, so disconnect warning is sent to it, session id (matches the one stipulated in section 1_1) is:5baaa5dd-e458-43aa-8691-0800d3c41c9a  ##DIFF_IGNORE
+### server -> client
 ```json
-"{\n  \"_meta\": {\n    \"type\": \"system\"\n  },\n  \"eventKey\": \"server-side-disconnect\",\n  \"data\": \"server-side-disconnect\"\n}"
+{
+  "_meta": {
+    "type": "system"
+  },
+  "eventKey": "server-side-disconnect",
+  "data": "server-side-disconnect"
+}
 ```

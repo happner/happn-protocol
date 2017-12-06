@@ -430,13 +430,12 @@
       "event_type": "all",
       "count": 0,
       "listenerId": 0,
+      "refCount": 1,
       "timeout": 60000
     }
   },
   "subscribe to all changes on all data points--> out": {
-    "data": {
-      "id": "{{guid}}"
-    },
+    "data": {},
     "_meta": {
       "status": "ok",
       "type": "response",
@@ -454,7 +453,8 @@
     "data": null,
     "sessionId": "{{guid}}",
     "options": {
-      "referenceId": "{{unique id (hyperid)}}",
+      "refCount": 1,
+      "listenerId": 3,
       "timeout": 60000
     }
   },
@@ -485,39 +485,13 @@
     "data": null,
     "sessionId": "{{guid}}",
     "options": {
-      "referenceId": 0,
+      "refCount": 0,
+      "listenerId": -1,
       "timeout": 60000
     }
   },
   "unsubscribe from all changes on all data points, NB: will remove all subscriptions--> out": {
-    "data": {
-      "id": false,
-      "removed": [
-        {
-          "key": "340daa1d-873b-4769-88b7-bc00a9e69d74",
-          "data": {
-            "options": {
-              "event_type": "all",
-              "count": 0,
-              "listenerId": 0,
-              "timeout": 60000
-            },
-            "session": {
-              "id": "{{guid}}",
-              "protocol": "{{happn protocol}}",
-              "info": {
-                "_browser": false,
-                "_local": false
-              }
-            },
-            "action": "ALL",
-            "path": "*"
-          },
-          "id": "{{guid}}",
-          "path": "*"
-        }
-      ]
-    },
+    "data": {},
     "_meta": {
       "status": "ok",
       "type": "response",
@@ -538,13 +512,12 @@
       "event_type": "set",
       "count": 0,
       "listenerId": 1,
+      "refCount": 1,
       "timeout": 60000
     }
   },
   "subscribe to only set actions on a specific data point--> out": {
-    "data": {
-      "id": "{{guid}}"
-    },
+    "data": {},
     "_meta": {
       "status": "ok",
       "type": "response",
@@ -565,13 +538,12 @@
       "event_type": "remove",
       "count": 0,
       "listenerId": 2,
+      "refCount": 1,
       "timeout": 60000
     }
   },
   "subscribe to the removal of data at a specified point--> out": {
-    "data": {
-      "id": "{{guid}}"
-    },
+    "data": {},
     "_meta": {
       "status": "ok",
       "type": "response",
@@ -618,13 +590,12 @@
       "event_type": "all",
       "count": 1,
       "listenerId": 3,
+      "refCount": 1,
       "timeout": 60000
     }
   },
   "subscribe to a change only once, on the native happn client this is done by specifying the 'count' option, but you can tell from the following sequence how to unsubscribe--> out": {
-    "data": {
-      "id": "{{guid}}"
-    },
+    "data": {},
     "_meta": {
       "status": "ok",
       "type": "response",
@@ -645,13 +616,12 @@
       "event_type": "all",
       "count": 0,
       "listenerId": 4,
+      "refCount": 1,
       "timeout": 60000
     }
   },
   "perform an action without publishing using the noPublish flag--> out": {
-    "data": {
-      "id": "{{guid}}"
-    },
+    "data": {},
     "_meta": {
       "status": "ok",
       "type": "response",
@@ -707,6 +677,7 @@
       "event_type": "all",
       "count": 0,
       "listenerId": 5,
+      "refCount": 1,
       "timeout": 60000
     }
   },
@@ -736,6 +707,7 @@
       "event_type": "all",
       "count": 0,
       "listenerId": 0,
+      "refCount": 1,
       "timeout": 60000
     }
   },

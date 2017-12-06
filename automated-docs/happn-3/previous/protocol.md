@@ -1,13 +1,13 @@
-#happn protocol specification
+# happn protocol specification
 
-##PROTOCOL VERSION: 2
-###HAPPN VERSION: 6.0.0-alpha.3
-####RUN: 2017 December 06 11:00
-#connect a client
+## PROTOCOL VERSION: 2
+### HAPPN VERSION: 6.0.0-alpha.3
+#### RUN: 2017 December 06 11:04
+# connect a client
 
-###create a client session and login
+### create a client session and login
 
-(existing client with session id: ca5480a3-b509-4625-be2c-78df8d40796c was already created) ##DIFF_IGNORE
+(existing client with session id: 34c51495-8848-41b3-ac09-c032ad5b8946 was already created) ##DIFF_IGNORE
 ### client -> server
 ```json
 {
@@ -141,9 +141,9 @@
   "protocol": "{{happn protocol}}"
 }
 ```
-#set
+# set
 
-###set a piece of data using a key value pair
+### set a piece of data using a key value pair
 
 ### client -> server
 ```json
@@ -185,7 +185,7 @@
   "protocol": "{{happn protocol}}"
 }
 ```
-###merge some new values with an existing record, NB: the merge only goes 1 property level deep
+### merge some new values with an existing record, NB: the merge only goes 1 property level deep
 
 ### client -> server
 ```json
@@ -230,7 +230,7 @@
   "protocol": "{{happn protocol}}"
 }
 ```
-###tag some existing data
+### tag some existing data
 
 *tag an existing record, a clone of the record gets stored under /_TAGS/{{tagged record path}}*
 
@@ -283,7 +283,7 @@
   "protocol": "{{happn protocol}}"
 }
 ```
-###tag failure
+### tag failure
 
 *fail to tag data that doesnt exist*
 
@@ -326,7 +326,7 @@
   "protocol": "{{happn protocol}}"
 }
 ```
-###setSibling
+### setSibling
 
 *create sibling records on a base path*
 
@@ -367,7 +367,7 @@
   "protocol": "{{happn protocol}}"
 }
 ```
-###fails to do a set
+### fails to do a set
 
 ### client -> server
 ```json
@@ -405,7 +405,7 @@
   "protocol": "{{happn protocol}}"
 }
 ```
-###fails to do a set, access denied, unauthorised
+### fails to do a set, access denied, unauthorised
 
 ### client -> server
 ```json
@@ -444,7 +444,7 @@
   "protocol": "{{happn protocol}}"
 }
 ```
-###removes one data point
+### removes one data point
 
 ### client -> server
 ```json
@@ -478,7 +478,7 @@
   "protocol": "{{happn protocol}}"
 }
 ```
-###call sequence representing a request to remove something that is not there
+### call sequence representing a request to remove something that is not there
 
 ### client -> server
 ```json
@@ -512,7 +512,7 @@
   "protocol": "{{happn protocol}}"
 }
 ```
-###an error happens when we try and remove an item
+### an error happens when we try and remove an item
 
 ### client -> server
 ```json
@@ -546,7 +546,7 @@
   "protocol": "{{happn protocol}}"
 }
 ```
-###an error happens when we try and remove an item, access denied
+### an error happens when we try and remove an item, access denied
 
 ### client -> server
 ```json
@@ -581,9 +581,9 @@
   "protocol": "{{happn protocol}}"
 }
 ```
-#data subscriptions
+# data subscriptions
 
-###subscribe to all changes on all data points
+### subscribe to all changes on all data points
 
 ### client -> server
 ```json
@@ -618,7 +618,7 @@
   "protocol": "{{happn protocol}}"
 }
 ```
-###set a piece of data, and get the event back based on the subscription in the previous step
+### set a piece of data, and get the event back based on the subscription in the previous step
 
 *the item from the server with the _meta.type 'data' is the emitted event - the other server -> client message with _meta.type 'response' is the response on the set action*
 
@@ -657,7 +657,7 @@
     "type": "data",
     "sessionId": "{{guid}}",
     "consistency": 2,
-    "publicationId": "76a4edeb-28f5-4da8-9964-08db92222b91-15"
+    "publicationId": "340daa1d-873b-4769-88b7-bc00a9e69d74-15"
   },
   "__outbound": true
 }
@@ -685,7 +685,7 @@
   "protocol": "{{happn protocol}}"
 }
 ```
-###unsubscribe from all changes on all data points, NB: will remove all subscriptions
+### unsubscribe from all changes on all data points, NB: will remove all subscriptions
 
 ### client -> server
 ```json
@@ -708,7 +708,7 @@
     "id": false,
     "removed": [
       {
-        "key": "76a4edeb-28f5-4da8-9964-08db92222b91",
+        "key": "340daa1d-873b-4769-88b7-bc00a9e69d74",
         "data": {
           "options": {
             "event_type": "all",
@@ -743,7 +743,7 @@
   "protocol": "{{happn protocol}}"
 }
 ```
-###subscribe to only set actions on a specific data point
+### subscribe to only set actions on a specific data point
 
 ### client -> server
 ```json
@@ -778,7 +778,7 @@
   "protocol": "{{happn protocol}}"
 }
 ```
-###set a piece of data, and get the event back based on the subscription in the previous step
+### set a piece of data, and get the event back based on the subscription in the previous step
 
 *the item from the server with the _meta.type 'data' is the emitted event - the other server -> client message with _meta.type 'response' is the response on the set action*
 
@@ -817,7 +817,7 @@
     "type": "data",
     "sessionId": "{{guid}}",
     "consistency": 2,
-    "publicationId": "76a4edeb-28f5-4da8-9964-08db92222b91-18"
+    "publicationId": "340daa1d-873b-4769-88b7-bc00a9e69d74-18"
   },
   "__outbound": true
 }
@@ -845,7 +845,7 @@
   "protocol": "{{happn protocol}}"
 }
 ```
-###subscribe to the removal of data at a specified point
+### subscribe to the removal of data at a specified point
 
 (an item with the path /subscribe/on/remove was previously added)
 ### client -> server
@@ -881,7 +881,7 @@
   "protocol": "{{happn protocol}}"
 }
 ```
-###remove a piece of data, and get the event back based on the subscription in the previous step
+### remove a piece of data, and get the event back based on the subscription in the previous step
 
 *the item from the server with the _meta.type 'data' is the emitted event - the other server -> client message with _meta.type 'response' is the response on the remove action*
 
@@ -912,7 +912,7 @@
     "type": "data",
     "sessionId": "{{guid}}",
     "consistency": 2,
-    "publicationId": "76a4edeb-28f5-4da8-9964-08db92222b91-21"
+    "publicationId": "340daa1d-873b-4769-88b7-bc00a9e69d74-21"
   },
   "__outbound": true
 }
@@ -936,7 +936,7 @@
   "protocol": "{{happn protocol}}"
 }
 ```
-###subscribe to a change only once, on the native happn client this is done by specifying the 'count' option, but you can tell from the following sequence how to unsubscribe
+### subscribe to a change only once, on the native happn client this is done by specifying the 'count' option, but you can tell from the following sequence how to unsubscribe
 
 ### client -> server
 ```json
@@ -971,7 +971,7 @@
   "protocol": "{{happn protocol}}"
 }
 ```
-###set a piece of data, and get the event back based on the subscription in the previous step
+### set a piece of data, and get the event back based on the subscription in the previous step
 
 *the item from the server with the _meta.type 'data' is the emitted event - the other server -> client message with _meta.type 'response' is the response on the set action*
 
@@ -1010,7 +1010,7 @@
     "type": "data",
     "sessionId": "{{guid}}",
     "consistency": 2,
-    "publicationId": "76a4edeb-28f5-4da8-9964-08db92222b91-23"
+    "publicationId": "340daa1d-873b-4769-88b7-bc00a9e69d74-23"
   },
   "__outbound": true
 }
@@ -1052,7 +1052,7 @@
   }
 }
 ```
-###perform an action without publishing using the noPublish flag
+### perform an action without publishing using the noPublish flag
 
 ### client -> server
 ```json
@@ -1096,7 +1096,7 @@
           "action": "ALL",
           "path": "/subscribe/once"
         },
-        "key": "76a4edeb-28f5-4da8-9964-08db92222b91",
+        "key": "340daa1d-873b-4769-88b7-bc00a9e69d74",
         "path": "/subscribe/once",
         "segment": "/subscribe/once",
         "branch": 0
@@ -1131,7 +1131,7 @@
   "protocol": "{{happn protocol}}"
 }
 ```
-###set a piece of data, and get a response from the server, but no publication because noPublish was set to true
+### set a piece of data, and get a response from the server, but no publication because noPublish was set to true
 
 *the item from the server with the _meta.type 'data' is the emitted event - the other server -> client message with _meta.type 'response' is the response on the set action*
 
@@ -1176,7 +1176,7 @@
   "protocol": "{{happn protocol}}"
 }
 ```
-###failure to subscribe
+### failure to subscribe
 
 ### client -> server
 ```json
@@ -1213,7 +1213,7 @@
   "protocol": "{{happn protocol}}"
 }
 ```
-###failure to subscribe - access denied
+### failure to subscribe - access denied
 
 ### client -> server
 ```json
@@ -1251,9 +1251,9 @@
   "protocol": "{{happn protocol}}"
 }
 ```
-#Disconnection
+# Disconnection
 
-###the client sends out a disconnect request, which the server receives - the server then queues the disconnection request, the client the ends the websocket session, and the server cleans up on the other side without sending a disconnection warning
+### the client sends out a disconnect request, which the server receives - the server then queues the disconnection request, the client the ends the websocket session, and the server cleans up on the other side without sending a disconnection warning
 
 ### client -> server
 ```json
@@ -1281,11 +1281,11 @@
   "protocol": "{{happn protocol}}"
 }
 ```
-###when a client is forcefully diconnected from the server side, or when a service shutdown happens, all clients are notified a disconnection is imminent
+### when a client is forcefully diconnected from the server side, or when a service shutdown happens, all clients are notified a disconnection is imminent
 
 *the disconnectAllClients method is called - this method is called on the happn instance shutdown, causing the server to push out a disconnection message to all connected clients*
 
-one connected client remaining, so disconnect warning is sent to it, session id (matches the one stipulated in section 1_1) is:ca5480a3-b509-4625-be2c-78df8d40796c  ##DIFF_IGNORE
+one connected client remaining, so disconnect warning is sent to it, session id (matches the one stipulated in section 1_1) is:34c51495-8848-41b3-ac09-c032ad5b8946  ##DIFF_IGNORE
 ### server -> client
 ```json
 {
