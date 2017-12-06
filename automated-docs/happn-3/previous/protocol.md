@@ -1,13 +1,13 @@
 #happn protocol specification
 
 ##PROTOCOL VERSION: 2
-###HAPPN VERSION: 5.1.2
-####RUN: 2017 December 04 02:04
+###HAPPN VERSION: 6.0.0-alpha.3
+####RUN: 2017 December 06 10:52
 #connect a client
 
 ###create a client session and login
 
-(existing client with session id: 4f5d9edd-8ed7-4315-a6c3-adce0c24d055 was already created) ##DIFF_IGNORE
+(existing client with session id: 0c8215cf-e8dd-4c83-8262-d698a70e2365 was already created) ##DIFF_IGNORE
 ###client -> server
 ```json
 {
@@ -344,7 +344,7 @@
 ```
 ###server -> client
 ```json
-"{\n  \"data\": {\n    \"data\": {\n      \"was\": \"set\"\n    }\n  },\n  \"_meta\": {\n    \"created\": \"{{number, utc}}\",\n    \"modified\": \"{{number, utc}}\",\n    \"modifiedBy\": \"_ADMIN\",\n    \"path\": \"/subscribe/on/all/events\",\n    \"channel\": \"/ALL@*\",\n    \"action\": \"/SET@/subscribe/on/all/events\",\n    \"type\": \"data\",\n    \"sessionId\": \"{{guid}}\",\n    \"consistency\": 2,\n    \"publicationId\": \"6f84c142-d200-4d1e-86be-1d0ac73670b5-15\"\n  },\n  \"__outbound\": true\n}"
+"{\n  \"data\": {\n    \"data\": {\n      \"was\": \"set\"\n    }\n  },\n  \"_meta\": {\n    \"created\": \"{{number, utc}}\",\n    \"modified\": \"{{number, utc}}\",\n    \"modifiedBy\": \"_ADMIN\",\n    \"path\": \"/subscribe/on/all/events\",\n    \"channel\": \"/ALL@*\",\n    \"action\": \"/SET@/subscribe/on/all/events\",\n    \"type\": \"data\",\n    \"sessionId\": \"{{guid}}\",\n    \"consistency\": 2,\n    \"publicationId\": \"9a9f375b-efa5-4009-80f3-420459d8d2c6-15\"\n  },\n  \"__outbound\": true\n}"
 ```
 ###server -> client
 ```json
@@ -368,7 +368,7 @@
 ```
 ###server -> client
 ```json
-"{\n  \"data\": {\n    \"id\": false,\n    \"removed\": [\n      {\n        \"key\": \"6f84c142-d200-4d1e-86be-1d0ac73670b5\",\n        \"data\": {\n          \"options\": {\n            \"event_type\": \"all\",\n            \"count\": 0,\n            \"listenerId\": 0,\n            \"timeout\": 60000\n          },\n          \"session\": {\n            \"id\": \"{{guid}}\",\n            \"protocol\": \"{{happn protocol}}\",\n            \"info\": {\n              \"_browser\": false,\n              \"_local\": false\n            }\n          },\n          \"action\": \"ALL\",\n          \"path\": \"*\"\n        },\n        \"id\": \"{{guid}}\",\n        \"path\": \"*\"\n      }\n    ]\n  },\n  \"_meta\": {\n    \"status\": \"ok\",\n    \"type\": \"response\",\n    \"published\": false,\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"sessionId\": \"{{guid}}\",\n    \"action\": \"off\"\n  },\n  \"protocol\": \"{{happn protocol}}\"\n}"
+"{\n  \"data\": {\n    \"id\": false,\n    \"removed\": [\n      {\n        \"key\": \"9a9f375b-efa5-4009-80f3-420459d8d2c6\",\n        \"data\": {\n          \"options\": {\n            \"event_type\": \"all\",\n            \"count\": 0,\n            \"listenerId\": 0,\n            \"timeout\": 60000\n          },\n          \"session\": {\n            \"id\": \"{{guid}}\",\n            \"protocol\": \"{{happn protocol}}\",\n            \"info\": {\n              \"_browser\": false,\n              \"_local\": false\n            }\n          },\n          \"action\": \"ALL\",\n          \"path\": \"*\"\n        },\n        \"id\": \"{{guid}}\",\n        \"path\": \"*\"\n      }\n    ]\n  },\n  \"_meta\": {\n    \"status\": \"ok\",\n    \"type\": \"response\",\n    \"published\": false,\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"sessionId\": \"{{guid}}\",\n    \"action\": \"off\"\n  },\n  \"protocol\": \"{{happn protocol}}\"\n}"
 ```
 ###subscribe to only set actions on a specific data point
 
@@ -415,7 +415,7 @@
 ```
 ###server -> client
 ```json
-"{\n  \"data\": {\n    \"data\": {\n      \"was\": \"set\"\n    }\n  },\n  \"_meta\": {\n    \"created\": \"{{number, utc}}\",\n    \"modified\": \"{{number, utc}}\",\n    \"modifiedBy\": \"_ADMIN\",\n    \"path\": \"/subscribe/on/specific\",\n    \"channel\": \"/SET@/subscribe/on/specific\",\n    \"action\": \"/SET@/subscribe/on/specific\",\n    \"type\": \"data\",\n    \"sessionId\": \"{{guid}}\",\n    \"consistency\": 2,\n    \"publicationId\": \"6f84c142-d200-4d1e-86be-1d0ac73670b5-18\"\n  },\n  \"__outbound\": true\n}"
+"{\n  \"data\": {\n    \"data\": {\n      \"was\": \"set\"\n    }\n  },\n  \"_meta\": {\n    \"created\": \"{{number, utc}}\",\n    \"modified\": \"{{number, utc}}\",\n    \"modifiedBy\": \"_ADMIN\",\n    \"path\": \"/subscribe/on/specific\",\n    \"channel\": \"/SET@/subscribe/on/specific\",\n    \"action\": \"/SET@/subscribe/on/specific\",\n    \"type\": \"data\",\n    \"sessionId\": \"{{guid}}\",\n    \"consistency\": 2,\n    \"publicationId\": \"9a9f375b-efa5-4009-80f3-420459d8d2c6-18\"\n  },\n  \"__outbound\": true\n}"
 ```
 ###server -> client
 ```json
@@ -463,7 +463,7 @@
 ```
 ###server -> client
 ```json
-"{\n  \"data\": {\n    \"removed\": 1\n  },\n  \"_meta\": {\n    \"timestamp\": \"{{number, utc}}\",\n    \"path\": \"/subscribe/on/remove\",\n    \"channel\": \"/REMOVE@/subscribe/on/remove\",\n    \"action\": \"/REMOVE@/subscribe/on/remove\",\n    \"type\": \"data\",\n    \"sessionId\": \"{{guid}}\",\n    \"consistency\": 2,\n    \"publicationId\": \"6f84c142-d200-4d1e-86be-1d0ac73670b5-21\"\n  },\n  \"__outbound\": true\n}"
+"{\n  \"data\": {\n    \"removed\": 1\n  },\n  \"_meta\": {\n    \"timestamp\": \"{{number, utc}}\",\n    \"path\": \"/subscribe/on/remove\",\n    \"channel\": \"/REMOVE@/subscribe/on/remove\",\n    \"action\": \"/REMOVE@/subscribe/on/remove\",\n    \"type\": \"data\",\n    \"sessionId\": \"{{guid}}\",\n    \"consistency\": 2,\n    \"publicationId\": \"9a9f375b-efa5-4009-80f3-420459d8d2c6-21\"\n  },\n  \"__outbound\": true\n}"
 ```
 ###server -> client
 ```json
@@ -514,7 +514,7 @@
 ```
 ###server -> client
 ```json
-"{\n  \"data\": {\n    \"data\": {\n      \"was\": \"set\"\n    }\n  },\n  \"_meta\": {\n    \"created\": \"{{number, utc}}\",\n    \"modified\": \"{{number, utc}}\",\n    \"modifiedBy\": \"_ADMIN\",\n    \"path\": \"/subscribe/once\",\n    \"channel\": \"/ALL@/subscribe/once\",\n    \"action\": \"/SET@/subscribe/once\",\n    \"type\": \"data\",\n    \"sessionId\": \"{{guid}}\",\n    \"consistency\": 2,\n    \"publicationId\": \"6f84c142-d200-4d1e-86be-1d0ac73670b5-23\"\n  },\n  \"__outbound\": true\n}"
+"{\n  \"data\": {\n    \"data\": {\n      \"was\": \"set\"\n    }\n  },\n  \"_meta\": {\n    \"created\": \"{{number, utc}}\",\n    \"modified\": \"{{number, utc}}\",\n    \"modifiedBy\": \"_ADMIN\",\n    \"path\": \"/subscribe/once\",\n    \"channel\": \"/ALL@/subscribe/once\",\n    \"action\": \"/SET@/subscribe/once\",\n    \"type\": \"data\",\n    \"sessionId\": \"{{guid}}\",\n    \"consistency\": 2,\n    \"publicationId\": \"9a9f375b-efa5-4009-80f3-420459d8d2c6-23\"\n  },\n  \"__outbound\": true\n}"
 ```
 ###server -> client
 ```json
@@ -554,7 +554,7 @@
 ```
 ###server -> client
 ```json
-"{\n  \"data\": {\n    \"id\": \"{{guid}}\",\n    \"removed\": [\n      {\n        \"id\": \"{{guid}}\",\n        \"data\": {\n          \"options\": {\n            \"event_type\": \"all\",\n            \"count\": 1,\n            \"listenerId\": 3,\n            \"timeout\": 60000\n          },\n          \"session\": {\n            \"id\": \"{{guid}}\",\n            \"protocol\": \"{{happn protocol}}\",\n            \"info\": {\n              \"_browser\": false,\n              \"_local\": false\n            }\n          },\n          \"action\": \"ALL\",\n          \"path\": \"/subscribe/once\"\n        },\n        \"key\": \"6f84c142-d200-4d1e-86be-1d0ac73670b5\",\n        \"path\": \"/subscribe/once\",\n        \"segment\": \"/subscribe/once\",\n        \"branch\": 0\n      }\n    ]\n  },\n  \"_meta\": {\n    \"status\": \"ok\",\n    \"type\": \"response\",\n    \"published\": false,\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"sessionId\": \"{{guid}}\",\n    \"action\": \"off\"\n  },\n  \"protocol\": \"{{happn protocol}}\"\n}"
+"{\n  \"data\": {\n    \"id\": \"{{guid}}\",\n    \"removed\": [\n      {\n        \"id\": \"{{guid}}\",\n        \"data\": {\n          \"options\": {\n            \"event_type\": \"all\",\n            \"count\": 1,\n            \"listenerId\": 3,\n            \"timeout\": 60000\n          },\n          \"session\": {\n            \"id\": \"{{guid}}\",\n            \"protocol\": \"{{happn protocol}}\",\n            \"info\": {\n              \"_browser\": false,\n              \"_local\": false\n            }\n          },\n          \"action\": \"ALL\",\n          \"path\": \"/subscribe/once\"\n        },\n        \"key\": \"9a9f375b-efa5-4009-80f3-420459d8d2c6\",\n        \"path\": \"/subscribe/once\",\n        \"segment\": \"/subscribe/once\",\n        \"branch\": 0\n      }\n    ]\n  },\n  \"_meta\": {\n    \"status\": \"ok\",\n    \"type\": \"response\",\n    \"published\": false,\n    \"eventId\": \"{{number, matches handler in client}}\",\n    \"sessionId\": \"{{guid}}\",\n    \"action\": \"off\"\n  },\n  \"protocol\": \"{{happn protocol}}\"\n}"
 ```
 ###server -> client
 ```json
@@ -653,7 +653,7 @@
 
 *the disconnectAllClients method is called - this method is called on the happn instance shutdown, causing the server to push out a disconnection message to all connected clients*
 
-one connected client remaining, so disconnect warning is sent to it, session id (matches the one stipulated in section 1_1) is:4f5d9edd-8ed7-4315-a6c3-adce0c24d055  ##DIFF_IGNORE
+one connected client remaining, so disconnect warning is sent to it, session id (matches the one stipulated in section 1_1) is:0c8215cf-e8dd-4c83-8262-d698a70e2365  ##DIFF_IGNORE
 ###server -> client
 ```json
 "{\n  \"_meta\": {\n    \"type\": \"system\"\n  },\n  \"eventKey\": \"server-side-disconnect\",\n  \"data\": \"server-side-disconnect\"\n}"

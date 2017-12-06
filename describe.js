@@ -112,7 +112,7 @@ var inboundLayers = [
 
     if (!currentJob) return cb(null, message);
 
-    currentJob.output.push('###client -> server');
+    currentJob.output.push('### client -> server');
 
     currentJob.output.push('```json\r\n' + cleanJSON(message.raw) + '\r\n```');
 
@@ -130,7 +130,7 @@ var outboundLayers = [
 
     if (!currentJob) return cb(null, message);
 
-    currentJob.output.push('###server -> client');
+    currentJob.output.push('### server -> client');
 
     var mdJSON;
 
@@ -138,7 +138,7 @@ var outboundLayers = [
 
     else if (message.request && message.request.publication) mdJSON = cleanJSON(message.request.publication, null, 2);
 
-    currentJob.output.push('```json\r\n' + JSON.stringify(mdJSON) + '\r\n```');
+    currentJob.output.push('```json\r\n' + mdJSON + '\r\n```');
 
     currentJob.outputJSON = mdJSON;
 
