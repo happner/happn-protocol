@@ -174,9 +174,9 @@ var jobs = [
 
         currentService = service;
 
-        _this.output.push('##PROTOCOL VERSION: ' + protocol);
-        _this.output.push('###HAPPN VERSION: ' + version);
-        _this.output.push('####RUN: ' + dateFormat(now, "yyyy mmmm dd hh:MM"));
+        _this.output.push('## PROTOCOL VERSION: ' + protocol);
+        _this.output.push('### HAPPN VERSION: ' + version);
+        _this.output.push('#### RUN: ' + dateFormat(now, "yyyy mmmm dd hh:MM"));
 
         cb(null, _this.output);
       });
@@ -887,8 +887,8 @@ async.eachSeries(jobs, function(job, jobCB){
 
     if (currentJob.output){
 
-      if (currentJob.heading) protocolReport.push('#' + currentJob.heading + '\r\n');
-      if (currentJob.text) protocolReport.push('###' + currentJob.text + '\r\n');
+      if (currentJob.heading) protocolReport.push('# ' + currentJob.heading + '\r\n');
+      if (currentJob.text) protocolReport.push('### ' + currentJob.text + '\r\n');
       if (currentJob.description) protocolReport.push('*' + currentJob.description + '*\r\n');
 
       if (currentJob.outputJSON  && currentJob.text){
