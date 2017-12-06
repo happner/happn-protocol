@@ -5473,3 +5473,184 @@ OK: the client sends out a disconnect request, which the server receives - the s
 OK: when a client is forcefully diconnected from the server side, or when a service shutdown happens, all clients are notified a disconnection is imminent--> in
 
 OK: when a client is forcefully diconnected from the server side, or when a service shutdown happens, all clients are notified a disconnection is imminent--> out
+
+OK: create a client session and login--> in
+
+OK: create a client session and login--> out
+
+OK: set a piece of data using a key value pair--> in
+
+OK: set a piece of data using a key value pair--> out
+
+OK: merge some new values with an existing record, NB: the merge only goes 1 property level deep--> in
+
+OK: merge some new values with an existing record, NB: the merge only goes 1 property level deep--> out
+
+OK: tag some existing data--> in
+
+OK: tag some existing data--> out
+
+OK: tag failure--> in
+
+OK: tag failure--> out
+
+OK: setSibling--> in
+
+OK: setSibling--> out
+
+OK: fails to do a set--> in
+
+OK: fails to do a set--> out
+
+OK: fails to do a set, access denied, unauthorised--> in
+
+OK: fails to do a set, access denied, unauthorised--> out
+
+OK: removes one data point--> in
+
+OK: removes one data point--> out
+
+OK: call sequence representing a request to remove something that is not there--> in
+
+OK: call sequence representing a request to remove something that is not there--> out
+
+OK: an error happens when we try and remove an item--> in
+
+OK: an error happens when we try and remove an item--> out
+
+OK: an error happens when we try and remove an item, access denied--> in
+
+OK: an error happens when we try and remove an item, access denied--> out
+
+OK: subscribe to all changes on all data points--> in
+
+OK: subscribe to all changes on all data points--> out
+
+OK: set a piece of data, and get the event back based on the subscription in the previous step--> in
+
+OK: set a piece of data, and get the event back based on the subscription in the previous step--> out
+
+OK: unsubscribe from all changes on all data points, NB: will remove all subscriptions--> in
+
+COMPARE FAILURE: unsubscribe from all changes on all data points, NB: will remove all subscriptions--> out
+EXPECTED:::
+{
+  "data": {
+    "id": false,
+    "removed": [
+      {
+        "key": "6f84c142-d200-4d1e-86be-1d0ac73670b5",
+        "data": {
+          "options": {
+            "event_type": "all",
+            "count": 0,
+            "listenerId": 0,
+            "timeout": 60000
+          },
+          "session": {
+            "id": "{{guid}}",
+            "protocol": "{{happn protocol}}",
+            "info": {
+              "_browser": false,
+              "_local": false
+            }
+          },
+          "action": "ALL",
+          "path": "*"
+        },
+        "id": "{{guid}}",
+        "path": "*"
+      }
+    ]
+  },
+  "_meta": {
+    "status": "ok",
+    "type": "response",
+    "published": false,
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "off"
+  },
+  "protocol": "{{happn protocol}}"
+}
+ACTUAL:::
+{
+  "data": {
+    "id": false,
+    "removed": [
+      {
+        "key": "9a9f375b-efa5-4009-80f3-420459d8d2c6",
+        "data": {
+          "options": {
+            "event_type": "all",
+            "count": 0,
+            "listenerId": 0,
+            "timeout": 60000
+          },
+          "session": {
+            "id": "{{guid}}",
+            "protocol": "{{happn protocol}}",
+            "info": {
+              "_browser": false,
+              "_local": false
+            }
+          },
+          "action": "ALL",
+          "path": "*"
+        },
+        "id": "{{guid}}",
+        "path": "*"
+      }
+    ]
+  },
+  "_meta": {
+    "status": "ok",
+    "type": "response",
+    "published": false,
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "off"
+  },
+  "protocol": "{{happn protocol}}"
+}
+E: removed/0/key
+
+OK: subscribe to only set actions on a specific data point--> in
+
+OK: subscribe to only set actions on a specific data point--> out
+
+OK: subscribe to the removal of data at a specified point--> in
+
+OK: subscribe to the removal of data at a specified point--> out
+
+OK: remove a piece of data, and get the event back based on the subscription in the previous step--> in
+
+OK: remove a piece of data, and get the event back based on the subscription in the previous step--> out
+
+OK: subscribe to a change only once, on the native happn client this is done by specifying the 'count' option, but you can tell from the following sequence how to unsubscribe--> in
+
+OK: subscribe to a change only once, on the native happn client this is done by specifying the 'count' option, but you can tell from the following sequence how to unsubscribe--> out
+
+OK: perform an action without publishing using the noPublish flag--> in
+
+OK: perform an action without publishing using the noPublish flag--> out
+
+OK: set a piece of data, and get a response from the server, but no publication because noPublish was set to true--> in
+
+OK: set a piece of data, and get a response from the server, but no publication because noPublish was set to true--> out
+
+OK: failure to subscribe--> in
+
+OK: failure to subscribe--> out
+
+OK: failure to subscribe - access denied--> in
+
+OK: failure to subscribe - access denied--> out
+
+OK: the client sends out a disconnect request, which the server receives - the server then queues the disconnection request, the client the ends the websocket session, and the server cleans up on the other side without sending a disconnection warning--> in
+
+OK: the client sends out a disconnect request, which the server receives - the server then queues the disconnection request, the client the ends the websocket session, and the server cleans up on the other side without sending a disconnection warning--> out
+
+OK: when a client is forcefully diconnected from the server side, or when a service shutdown happens, all clients are notified a disconnection is imminent--> in
+
+OK: when a client is forcefully diconnected from the server side, or when a service shutdown happens, all clients are notified a disconnection is imminent--> out

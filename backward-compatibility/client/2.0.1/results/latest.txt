@@ -14,29 +14,29 @@
     ✓ should unsubscribe from an event
     ✓ should unsubscribe from a specific event
     ✓ should subscribe to the catch all notification
-    ✓ should unsubscribe from all events (3008ms)
-2017-11-15 09:13:42.643 [ INFO] - 3361ms	(HappnClient) Done setting
-2017-11-15 09:13:42.646 [ INFO] - 3ms	(HappnClient) Done removing
-    ✓ will do events in the order they are passed (1015ms)
-    ✓ subscribes with a count - we ensure the event only gets kicked off for the correct amounts - negative test (1502ms)
-    ✓ subscribes with a count - we ensure the event only gets kicked off for the correct amounts (1504ms)
-    ✓ subscribes with a count - we ensure the event only gets kicked off for the correct amounts (1504ms)
+    ✓ should unsubscribe from all events (3010ms)
+2017-11-20 14:30:21.216 [ INFO] - 3381ms	(HappnClient) Done setting
+2017-11-20 14:30:21.219 [ INFO] - 3ms	(HappnClient) Done removing
+    ✓ will do events in the order they are passed (1012ms)
+hits::: 3
+    ✓ subscribes with a count - we ensure the event only gets kicked off for the correct amounts - negative test (1503ms)
+    ✓ subscribes with a count - we ensure the event only gets kicked off for the correct amounts (1506ms)
     1) subscribe, then does an off with a bad handle
     ✓ should subscribe and get initial values on the callback
     ✓ should subscribe and get initial values emitted immediately
 
 
-  20 passing (10s)
+  19 passing (9s)
   1 failing
 
   1) subscriptions
        subscribe, then does an off with a bad handle:
      Uncaught TypeError: Cannot read property 'toString' of undefined
-      at backward-compatibility/client/2.0.1/tests/subscriptions.js:798:19
+      at backward-compatibility/client/2.0.1/tests/subscriptions.js:759:19
       at HappnClient._offPath (backward-compatibility/client/2.0.1/node_modules/happn-3/lib/client.js:1626:33)
       at HappnClient.<anonymous> (backward-compatibility/client/2.0.1/node_modules/happn-3/lib/client.js:1662:17)
       at HappnClient.off (backward-compatibility/client/2.0.1/node_modules/happn-3/lib/client.js:52:33)
-      at Timeout._onTimeout (backward-compatibility/client/2.0.1/tests/subscriptions.js:796:25)
+      at Timeout._onTimeout (backward-compatibility/client/2.0.1/tests/subscriptions.js:757:25)
 
 
 
