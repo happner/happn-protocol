@@ -30,7 +30,6 @@ var ephemerals = {
   timestamp:'number, utc',
   _id:'matches path if nedb, generated if mongo',
   eventId:'number, matches handler in client',
-  protocol:'happn protocol',
   name:{
     condition:function(name, property, message){
 

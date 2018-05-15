@@ -8,7 +8,7 @@
         "_browser": false,
         "_local": false
       },
-      "protocol": "{{happn protocol}}",
+      "protocol": "happn_2",
       "password": "happn"
     },
     "options": {
@@ -18,7 +18,7 @@
   "create a client session and login--> out": {
     "data": {
       "id": "{{guid}}",
-      "protocol": "{{happn protocol}}",
+      "protocol": "happn_2",
       "happn": {
         "name": "{{string}}",
         "secure": true,
@@ -74,7 +74,7 @@
       "eventId": "{{number, matches handler in client}}",
       "action": "login"
     },
-    "protocol": "{{happn protocol}}"
+    "protocol": "happn_2"
   },
   "set a piece of data using a key value pair--> in": {
     "action": "set",
@@ -108,7 +108,7 @@
       "sessionId": "{{guid}}",
       "action": "set"
     },
-    "protocol": "{{happn protocol}}"
+    "protocol": "happn_2"
   },
   "merge some new values with an existing record, NB: the merge only goes 1 property level deep--> in": {
     "action": "set",
@@ -145,7 +145,7 @@
       "sessionId": "{{guid}}",
       "action": "set"
     },
-    "protocol": "{{happn protocol}}"
+    "protocol": "happn_2"
   },
   "tag some existing data--> in": {
     "action": "set",
@@ -188,7 +188,7 @@
       "sessionId": "{{guid}}",
       "action": "set"
     },
-    "protocol": "{{happn protocol}}"
+    "protocol": "happn_2"
   },
   "tag failure--> in": {
     "action": "set",
@@ -221,7 +221,7 @@
       "sessionId": "{{guid}}",
       "action": "set"
     },
-    "protocol": "{{happn protocol}}"
+    "protocol": "happn_2"
   },
   "setSibling--> in": {
     "action": "set",
@@ -252,7 +252,7 @@
       "sessionId": "{{guid}}",
       "action": "set"
     },
-    "protocol": "{{happn protocol}}"
+    "protocol": "happn_2"
   },
   "fails to do a set--> in": {
     "action": "set",
@@ -282,7 +282,7 @@
         "message": "a fly in the ointment"
       }
     },
-    "protocol": "{{happn protocol}}"
+    "protocol": "happn_2"
   },
   "fails to do a set, access denied, unauthorised--> in": {
     "action": "set",
@@ -313,7 +313,7 @@
         "message": "unauthorized"
       }
     },
-    "protocol": "{{happn protocol}}"
+    "protocol": "happn_2"
   },
   "removes one data point--> in": {
     "action": "remove",
@@ -339,7 +339,7 @@
       "sessionId": "{{guid}}",
       "action": "remove"
     },
-    "protocol": "{{happn protocol}}"
+    "protocol": "happn_2"
   },
   "call sequence representing a request to remove something that is not there--> in": {
     "action": "remove",
@@ -365,7 +365,7 @@
       "sessionId": "{{guid}}",
       "action": "remove"
     },
-    "protocol": "{{happn protocol}}"
+    "protocol": "happn_2"
   },
   "an error happens when we try and remove an item--> in": {
     "action": "remove",
@@ -391,7 +391,7 @@
         "message": "a fly in the ointment"
       }
     },
-    "protocol": "{{happn protocol}}"
+    "protocol": "happn_2"
   },
   "an error happens when we try and remove an item, access denied--> in": {
     "action": "remove",
@@ -418,7 +418,7 @@
         "message": "unauthorized"
       }
     },
-    "protocol": "{{happn protocol}}"
+    "protocol": "happn_2"
   },
   "subscribe to all changes on all data points--> in": {
     "action": "on",
@@ -445,7 +445,7 @@
       "sessionId": "{{guid}}",
       "action": "on"
     },
-    "protocol": "{{happn protocol}}"
+    "protocol": "happn_2"
   },
   "set a piece of data, and get the event back based on the subscription in the previous step--> in": {
     "action": "off",
@@ -476,7 +476,7 @@
       "sessionId": "{{guid}}",
       "action": "set"
     },
-    "protocol": "{{happn protocol}}"
+    "protocol": "happn_2"
   },
   "unsubscribe from all changes on all data points, NB: will remove all subscriptions--> in": {
     "action": "off",
@@ -494,7 +494,7 @@
       "id": false,
       "removed": [
         {
-          "key": "340daa1d-873b-4769-88b7-bc00a9e69d74",
+          "key": "49ca8135-7404-4904-8f8f-aed0eea88633",
           "data": {
             "options": {
               "event_type": "all",
@@ -504,7 +504,7 @@
             },
             "session": {
               "id": "{{guid}}",
-              "protocol": "{{happn protocol}}",
+              "protocol": "happn_2",
               "info": {
                 "_browser": false,
                 "_local": false
@@ -526,7 +526,7 @@
       "sessionId": "{{guid}}",
       "action": "off"
     },
-    "protocol": "{{happn protocol}}"
+    "protocol": "happn_2"
   },
   "subscribe to only set actions on a specific data point--> in": {
     "action": "on",
@@ -553,7 +553,7 @@
       "sessionId": "{{guid}}",
       "action": "on"
     },
-    "protocol": "{{happn protocol}}"
+    "protocol": "happn_2"
   },
   "subscribe to the removal of data at a specified point--> in": {
     "action": "on",
@@ -580,7 +580,7 @@
       "sessionId": "{{guid}}",
       "action": "on"
     },
-    "protocol": "{{happn protocol}}"
+    "protocol": "happn_2"
   },
   "remove a piece of data, and get the event back based on the subscription in the previous step--> in": {
     "action": "remove",
@@ -606,7 +606,7 @@
       "sessionId": "{{guid}}",
       "action": "remove"
     },
-    "protocol": "{{happn protocol}}"
+    "protocol": "happn_2"
   },
   "subscribe to a change only once, on the native happn client this is done by specifying the 'count' option, but you can tell from the following sequence how to unsubscribe--> in": {
     "action": "on",
@@ -633,7 +633,7 @@
       "sessionId": "{{guid}}",
       "action": "on"
     },
-    "protocol": "{{happn protocol}}"
+    "protocol": "happn_2"
   },
   "perform an action without publishing using the noPublish flag--> in": {
     "action": "on",
@@ -660,7 +660,7 @@
       "sessionId": "{{guid}}",
       "action": "on"
     },
-    "protocol": "{{happn protocol}}"
+    "protocol": "happn_2"
   },
   "set a piece of data, and get a response from the server, but no publication because noPublish was set to true--> in": {
     "action": "set",
@@ -695,7 +695,7 @@
       "sessionId": "{{guid}}",
       "action": "set"
     },
-    "protocol": "{{happn protocol}}"
+    "protocol": "happn_2"
   },
   "failure to subscribe--> in": {
     "action": "on",
@@ -724,7 +724,7 @@
         "message": "a fly in the ointment"
       }
     },
-    "protocol": "{{happn protocol}}"
+    "protocol": "happn_2"
   },
   "failure to subscribe - access denied--> in": {
     "action": "on",
@@ -754,7 +754,7 @@
         "message": "unauthorized"
       }
     },
-    "protocol": "{{happn protocol}}"
+    "protocol": "happn_2"
   },
   "the client sends out a disconnect request, which the server receives - the server then queues the disconnection request, the client the ends the websocket session, and the server cleans up on the other side without sending a disconnection warning--> in": {
     "action": "disconnect",
@@ -774,7 +774,7 @@
       "sessionId": "{{guid}}",
       "action": "disconnect"
     },
-    "protocol": "{{happn protocol}}"
+    "protocol": "happn_2"
   },
   "when a client is forcefully diconnected from the server side, or when a service shutdown happens, all clients are notified a disconnection is imminent--> in": [
     "bad"

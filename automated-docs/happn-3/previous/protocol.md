@@ -2,19 +2,19 @@
 
 ## PROTOCOL VERSION: 2
 ### HAPPN VERSION: 6.0.0-alpha.3
-#### RUN: 2017 December 06 11:04
+#### RUN: 2017 December 06 11:15
 # connect a client
 
 ### create a client session and login
 
-(existing client with session id: 34c51495-8848-41b3-ac09-c032ad5b8946 was already created) ##DIFF_IGNORE
+(existing client with session id: 6bfd4421-1ade-43be-aa83-1c82e83756c3 was already created) ##DIFF_IGNORE
 ### client -> server
 ```json
 {
   "action": "configure-session",
   "eventId": "{{number, matches handler in client}}",
   "data": {
-    "protocol": "{{happn protocol}}"
+    "protocol": "happn_2"
   }
 }
 ```
@@ -29,7 +29,7 @@
     "eventId": "{{number, matches handler in client}}",
     "action": "configure-session"
   },
-  "protocol": "{{happn protocol}}"
+  "protocol": "happn_2"
 }
 ```
 ### client -> server
@@ -55,7 +55,7 @@
     "eventId": "{{number, matches handler in client}}",
     "action": "describe"
   },
-  "protocol": "{{happn protocol}}"
+  "protocol": "happn_2"
 }
 ```
 ### client -> server
@@ -69,7 +69,7 @@
       "_browser": false,
       "_local": false
     },
-    "protocol": "{{happn protocol}}",
+    "protocol": "happn_2",
     "password": "happn"
   },
   "options": {
@@ -82,7 +82,7 @@
 {
   "data": {
     "id": "{{guid}}",
-    "protocol": "{{happn protocol}}",
+    "protocol": "happn_2",
     "happn": {
       "name": "{{string}}",
       "secure": true,
@@ -138,7 +138,7 @@
     "eventId": "{{number, matches handler in client}}",
     "action": "login"
   },
-  "protocol": "{{happn protocol}}"
+  "protocol": "happn_2"
 }
 ```
 # set
@@ -182,7 +182,7 @@
     "sessionId": "{{guid}}",
     "action": "set"
   },
-  "protocol": "{{happn protocol}}"
+  "protocol": "happn_2"
 }
 ```
 ### merge some new values with an existing record, NB: the merge only goes 1 property level deep
@@ -227,7 +227,7 @@
     "sessionId": "{{guid}}",
     "action": "set"
   },
-  "protocol": "{{happn protocol}}"
+  "protocol": "happn_2"
 }
 ```
 ### tag some existing data
@@ -280,7 +280,7 @@
     "sessionId": "{{guid}}",
     "action": "set"
   },
-  "protocol": "{{happn protocol}}"
+  "protocol": "happn_2"
 }
 ```
 ### tag failure
@@ -323,7 +323,7 @@
     "sessionId": "{{guid}}",
     "action": "set"
   },
-  "protocol": "{{happn protocol}}"
+  "protocol": "happn_2"
 }
 ```
 ### setSibling
@@ -364,7 +364,7 @@
     "sessionId": "{{guid}}",
     "action": "set"
   },
-  "protocol": "{{happn protocol}}"
+  "protocol": "happn_2"
 }
 ```
 ### fails to do a set
@@ -402,7 +402,7 @@
       "message": "a fly in the ointment"
     }
   },
-  "protocol": "{{happn protocol}}"
+  "protocol": "happn_2"
 }
 ```
 ### fails to do a set, access denied, unauthorised
@@ -441,7 +441,7 @@
       "message": "unauthorized"
     }
   },
-  "protocol": "{{happn protocol}}"
+  "protocol": "happn_2"
 }
 ```
 ### removes one data point
@@ -475,7 +475,7 @@
     "sessionId": "{{guid}}",
     "action": "remove"
   },
-  "protocol": "{{happn protocol}}"
+  "protocol": "happn_2"
 }
 ```
 ### call sequence representing a request to remove something that is not there
@@ -509,7 +509,7 @@
     "sessionId": "{{guid}}",
     "action": "remove"
   },
-  "protocol": "{{happn protocol}}"
+  "protocol": "happn_2"
 }
 ```
 ### an error happens when we try and remove an item
@@ -543,7 +543,7 @@
       "message": "a fly in the ointment"
     }
   },
-  "protocol": "{{happn protocol}}"
+  "protocol": "happn_2"
 }
 ```
 ### an error happens when we try and remove an item, access denied
@@ -578,7 +578,7 @@
       "message": "unauthorized"
     }
   },
-  "protocol": "{{happn protocol}}"
+  "protocol": "happn_2"
 }
 ```
 # data subscriptions
@@ -615,7 +615,7 @@
     "sessionId": "{{guid}}",
     "action": "on"
   },
-  "protocol": "{{happn protocol}}"
+  "protocol": "happn_2"
 }
 ```
 ### set a piece of data, and get the event back based on the subscription in the previous step
@@ -657,7 +657,7 @@
     "type": "data",
     "sessionId": "{{guid}}",
     "consistency": 2,
-    "publicationId": "340daa1d-873b-4769-88b7-bc00a9e69d74-15"
+    "publicationId": "49ca8135-7404-4904-8f8f-aed0eea88633-15"
   },
   "__outbound": true
 }
@@ -682,7 +682,7 @@
     "sessionId": "{{guid}}",
     "action": "set"
   },
-  "protocol": "{{happn protocol}}"
+  "protocol": "happn_2"
 }
 ```
 ### unsubscribe from all changes on all data points, NB: will remove all subscriptions
@@ -708,7 +708,7 @@
     "id": false,
     "removed": [
       {
-        "key": "340daa1d-873b-4769-88b7-bc00a9e69d74",
+        "key": "49ca8135-7404-4904-8f8f-aed0eea88633",
         "data": {
           "options": {
             "event_type": "all",
@@ -718,7 +718,7 @@
           },
           "session": {
             "id": "{{guid}}",
-            "protocol": "{{happn protocol}}",
+            "protocol": "happn_2",
             "info": {
               "_browser": false,
               "_local": false
@@ -740,7 +740,7 @@
     "sessionId": "{{guid}}",
     "action": "off"
   },
-  "protocol": "{{happn protocol}}"
+  "protocol": "happn_2"
 }
 ```
 ### subscribe to only set actions on a specific data point
@@ -775,7 +775,7 @@
     "sessionId": "{{guid}}",
     "action": "on"
   },
-  "protocol": "{{happn protocol}}"
+  "protocol": "happn_2"
 }
 ```
 ### set a piece of data, and get the event back based on the subscription in the previous step
@@ -817,7 +817,7 @@
     "type": "data",
     "sessionId": "{{guid}}",
     "consistency": 2,
-    "publicationId": "340daa1d-873b-4769-88b7-bc00a9e69d74-18"
+    "publicationId": "49ca8135-7404-4904-8f8f-aed0eea88633-18"
   },
   "__outbound": true
 }
@@ -842,7 +842,7 @@
     "sessionId": "{{guid}}",
     "action": "set"
   },
-  "protocol": "{{happn protocol}}"
+  "protocol": "happn_2"
 }
 ```
 ### subscribe to the removal of data at a specified point
@@ -878,7 +878,7 @@
     "sessionId": "{{guid}}",
     "action": "on"
   },
-  "protocol": "{{happn protocol}}"
+  "protocol": "happn_2"
 }
 ```
 ### remove a piece of data, and get the event back based on the subscription in the previous step
@@ -912,7 +912,7 @@
     "type": "data",
     "sessionId": "{{guid}}",
     "consistency": 2,
-    "publicationId": "340daa1d-873b-4769-88b7-bc00a9e69d74-21"
+    "publicationId": "49ca8135-7404-4904-8f8f-aed0eea88633-21"
   },
   "__outbound": true
 }
@@ -933,7 +933,7 @@
     "sessionId": "{{guid}}",
     "action": "remove"
   },
-  "protocol": "{{happn protocol}}"
+  "protocol": "happn_2"
 }
 ```
 ### subscribe to a change only once, on the native happn client this is done by specifying the 'count' option, but you can tell from the following sequence how to unsubscribe
@@ -968,7 +968,7 @@
     "sessionId": "{{guid}}",
     "action": "on"
   },
-  "protocol": "{{happn protocol}}"
+  "protocol": "happn_2"
 }
 ```
 ### set a piece of data, and get the event back based on the subscription in the previous step
@@ -1010,7 +1010,7 @@
     "type": "data",
     "sessionId": "{{guid}}",
     "consistency": 2,
-    "publicationId": "340daa1d-873b-4769-88b7-bc00a9e69d74-23"
+    "publicationId": "49ca8135-7404-4904-8f8f-aed0eea88633-23"
   },
   "__outbound": true
 }
@@ -1035,7 +1035,7 @@
     "sessionId": "{{guid}}",
     "action": "set"
   },
-  "protocol": "{{happn protocol}}"
+  "protocol": "happn_2"
 }
 ```
 ### client -> server
@@ -1087,7 +1087,7 @@
           },
           "session": {
             "id": "{{guid}}",
-            "protocol": "{{happn protocol}}",
+            "protocol": "happn_2",
             "info": {
               "_browser": false,
               "_local": false
@@ -1096,7 +1096,7 @@
           "action": "ALL",
           "path": "/subscribe/once"
         },
-        "key": "340daa1d-873b-4769-88b7-bc00a9e69d74",
+        "key": "49ca8135-7404-4904-8f8f-aed0eea88633",
         "path": "/subscribe/once",
         "segment": "/subscribe/once",
         "branch": 0
@@ -1111,7 +1111,7 @@
     "sessionId": "{{guid}}",
     "action": "off"
   },
-  "protocol": "{{happn protocol}}"
+  "protocol": "happn_2"
 }
 ```
 ### server -> client
@@ -1128,7 +1128,7 @@
     "sessionId": "{{guid}}",
     "action": "on"
   },
-  "protocol": "{{happn protocol}}"
+  "protocol": "happn_2"
 }
 ```
 ### set a piece of data, and get a response from the server, but no publication because noPublish was set to true
@@ -1173,7 +1173,7 @@
     "sessionId": "{{guid}}",
     "action": "set"
   },
-  "protocol": "{{happn protocol}}"
+  "protocol": "happn_2"
 }
 ```
 ### failure to subscribe
@@ -1210,7 +1210,7 @@
       "message": "a fly in the ointment"
     }
   },
-  "protocol": "{{happn protocol}}"
+  "protocol": "happn_2"
 }
 ```
 ### failure to subscribe - access denied
@@ -1248,7 +1248,7 @@
       "message": "unauthorized"
     }
   },
-  "protocol": "{{happn protocol}}"
+  "protocol": "happn_2"
 }
 ```
 # Disconnection
@@ -1278,14 +1278,14 @@
     "sessionId": "{{guid}}",
     "action": "disconnect"
   },
-  "protocol": "{{happn protocol}}"
+  "protocol": "happn_2"
 }
 ```
 ### when a client is forcefully diconnected from the server side, or when a service shutdown happens, all clients are notified a disconnection is imminent
 
 *the disconnectAllClients method is called - this method is called on the happn instance shutdown, causing the server to push out a disconnection message to all connected clients*
 
-one connected client remaining, so disconnect warning is sent to it, session id (matches the one stipulated in section 1_1) is:34c51495-8848-41b3-ac09-c032ad5b8946  ##DIFF_IGNORE
+one connected client remaining, so disconnect warning is sent to it, session id (matches the one stipulated in section 1_1) is:6bfd4421-1ade-43be-aa83-1c82e83756c3  ##DIFF_IGNORE
 ### server -> client
 ```json
 {

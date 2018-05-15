@@ -6582,3 +6582,1705 @@ OK: the client sends out a disconnect request, which the server receives - the s
 OK: when a client is forcefully diconnected from the server side, or when a service shutdown happens, all clients are notified a disconnection is imminent--> in
 
 OK: when a client is forcefully diconnected from the server side, or when a service shutdown happens, all clients are notified a disconnection is imminent--> out
+
+COMPARE FAILURE: create a client session and login--> in
+EXPECTED:::
+{
+  "action": "login",
+  "eventId": "{{number, matches handler in client}}",
+  "data": {
+    "username": "_ADMIN",
+    "info": {
+      "_browser": false,
+      "_local": false
+    },
+    "protocol": "{{happn protocol}}",
+    "password": "happn"
+  },
+  "options": {
+    "timeout": 60000
+  }
+}
+ACTUAL:::
+{
+  "action": "login",
+  "eventId": "{{number, matches handler in client}}",
+  "data": {
+    "username": "_ADMIN",
+    "info": {
+      "_browser": false,
+      "_local": false
+    },
+    "protocol": "happn_2",
+    "password": "happn"
+  },
+  "options": {
+    "timeout": 60000
+  }
+}
+E: protocol
+
+COMPARE FAILURE: create a client session and login--> out
+EXPECTED:::
+{
+  "data": {
+    "id": "{{guid}}",
+    "protocol": "{{happn protocol}}",
+    "happn": {
+      "name": "{{string}}",
+      "secure": true,
+      "encryptPayloads": false,
+      "publicKey": "{{ECDSA public key}}"
+    },
+    "info": {
+      "_browser": false,
+      "_local": false
+    },
+    "type": 1,
+    "user": {
+      "custom_data": {},
+      "username": "_ADMIN",
+      "_meta": {
+        "created": "{{number, utc}}",
+        "modified": "{{number, utc}}",
+        "path": "/_SYSTEM/_SECURITY/_USER/_ADMIN",
+        "_id": "{{matches path if nedb, generated if mongo}}"
+      },
+      "groups": {
+        "_ADMIN": {
+          "data": {},
+          "_meta": {
+            "created": "{{number, utc}}",
+            "modified": "{{number, utc}}",
+            "path": "/_SYSTEM/_SECURITY/_USER/_ADMIN/_USER_GROUP/_ADMIN",
+            "_id": "{{matches path if nedb, generated if mongo}}"
+          }
+        }
+      }
+    },
+    "timestamp": "{{number, utc}}",
+    "isEncrypted": false,
+    "origin": "{{sessionId}}",
+    "policy": {
+      "0": {
+        "ttl": 0,
+        "inactivity_threshold": null
+      },
+      "1": {
+        "ttl": 0,
+        "inactivity_threshold": null
+      }
+    },
+    "permissionSetKey": "/_ADMIN/",
+    "token": "{{string, jwt token}}"
+  },
+  "_meta": {
+    "type": "response",
+    "status": "ok",
+    "published": false,
+    "eventId": "{{number, matches handler in client}}",
+    "action": "login"
+  },
+  "protocol": "{{happn protocol}}"
+}
+ACTUAL:::
+{
+  "data": {
+    "id": "{{guid}}",
+    "protocol": "happn_2",
+    "happn": {
+      "name": "{{string}}",
+      "secure": true,
+      "encryptPayloads": false,
+      "publicKey": "{{ECDSA public key}}"
+    },
+    "info": {
+      "_browser": false,
+      "_local": false
+    },
+    "type": 1,
+    "user": {
+      "custom_data": {},
+      "username": "_ADMIN",
+      "_meta": {
+        "created": "{{number, utc}}",
+        "modified": "{{number, utc}}",
+        "path": "/_SYSTEM/_SECURITY/_USER/_ADMIN",
+        "_id": "{{matches path if nedb, generated if mongo}}"
+      },
+      "groups": {
+        "_ADMIN": {
+          "data": {},
+          "_meta": {
+            "created": "{{number, utc}}",
+            "modified": "{{number, utc}}",
+            "path": "/_SYSTEM/_SECURITY/_USER/_ADMIN/_USER_GROUP/_ADMIN",
+            "_id": "{{matches path if nedb, generated if mongo}}"
+          }
+        }
+      }
+    },
+    "timestamp": "{{number, utc}}",
+    "isEncrypted": false,
+    "origin": "{{sessionId}}",
+    "policy": {
+      "0": {
+        "ttl": 0,
+        "inactivity_threshold": null
+      },
+      "1": {
+        "ttl": 0,
+        "inactivity_threshold": null
+      }
+    },
+    "permissionSetKey": "/_ADMIN/",
+    "token": "{{string, jwt token}}"
+  },
+  "_meta": {
+    "type": "response",
+    "status": "ok",
+    "published": false,
+    "eventId": "{{number, matches handler in client}}",
+    "action": "login"
+  },
+  "protocol": "happn_2"
+}
+E: protocol
+E: 
+
+OK: set a piece of data using a key value pair--> in
+
+COMPARE FAILURE: set a piece of data using a key value pair--> out
+EXPECTED:::
+{
+  "data": {
+    "data": {
+      "was": "set"
+    }
+  },
+  "_meta": {
+    "created": "{{number, utc}}",
+    "modified": "{{number, utc}}",
+    "modifiedBy": "_ADMIN",
+    "path": "/set/some/data",
+    "published": true,
+    "type": "response",
+    "status": "ok",
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "set"
+  },
+  "protocol": "{{happn protocol}}"
+}
+ACTUAL:::
+{
+  "data": {
+    "data": {
+      "was": "set"
+    }
+  },
+  "_meta": {
+    "created": "{{number, utc}}",
+    "modified": "{{number, utc}}",
+    "modifiedBy": "_ADMIN",
+    "path": "/set/some/data",
+    "published": true,
+    "type": "response",
+    "status": "ok",
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "set"
+  },
+  "protocol": "happn_2"
+}
+E: 
+
+OK: merge some new values with an existing record, NB: the merge only goes 1 property level deep--> in
+
+COMPARE FAILURE: merge some new values with an existing record, NB: the merge only goes 1 property level deep--> out
+EXPECTED:::
+{
+  "data": {
+    "an": {
+      "additional": "field"
+    },
+    "data": {
+      "was": "set"
+    }
+  },
+  "_meta": {
+    "created": "{{number, utc}}",
+    "modified": "{{number, utc}}",
+    "path": "/set/some/data",
+    "published": true,
+    "type": "response",
+    "status": "ok",
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "set"
+  },
+  "protocol": "{{happn protocol}}"
+}
+ACTUAL:::
+{
+  "data": {
+    "an": {
+      "additional": "field"
+    },
+    "data": {
+      "was": "set"
+    }
+  },
+  "_meta": {
+    "created": "{{number, utc}}",
+    "modified": "{{number, utc}}",
+    "path": "/set/some/data",
+    "published": true,
+    "type": "response",
+    "status": "ok",
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "set"
+  },
+  "protocol": "happn_2"
+}
+E: 
+
+OK: tag some existing data--> in
+
+COMPARE FAILURE: tag some existing data--> out
+EXPECTED:::
+{
+  "data": {
+    "data": {
+      "an": {
+        "additional": "field"
+      },
+      "data": {
+        "was": "set"
+      }
+    },
+    "_meta": {
+      "path": "/set/some/data"
+    },
+    "created": "{{number, utc}}",
+    "modified": "{{number, utc}}",
+    "_id": "{{matches path if nedb, generated if mongo}}"
+  },
+  "_meta": {
+    "created": "{{number, utc}}",
+    "modified": "{{number, utc}}",
+    "path": "{{/_TAGS/set/some/data/[unique generated id]}}",
+    "tag": "MYTAG",
+    "published": true,
+    "type": "response",
+    "status": "ok",
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "set"
+  },
+  "protocol": "{{happn protocol}}"
+}
+ACTUAL:::
+{
+  "data": {
+    "data": {
+      "an": {
+        "additional": "field"
+      },
+      "data": {
+        "was": "set"
+      }
+    },
+    "_meta": {
+      "path": "/set/some/data"
+    },
+    "created": "{{number, utc}}",
+    "modified": "{{number, utc}}",
+    "_id": "{{matches path if nedb, generated if mongo}}"
+  },
+  "_meta": {
+    "created": "{{number, utc}}",
+    "modified": "{{number, utc}}",
+    "path": "{{/_TAGS/set/some/data/[unique generated id]}}",
+    "tag": "MYTAG",
+    "published": true,
+    "type": "response",
+    "status": "ok",
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "set"
+  },
+  "protocol": "happn_2"
+}
+E: 
+
+OK: tag failure--> in
+
+COMPARE FAILURE: tag failure--> out
+EXPECTED:::
+{
+  "data": {
+    "data": {},
+    "_meta": {
+      "path": "tag/non-existent"
+    }
+  },
+  "_meta": {
+    "created": "{{number, utc}}",
+    "modified": "{{number, utc}}",
+    "path": "{{/_TAGS/tag/non-existent/[unique generated id]}}",
+    "tag": "MYTAG",
+    "published": true,
+    "type": "response",
+    "status": "ok",
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "set"
+  },
+  "protocol": "{{happn protocol}}"
+}
+ACTUAL:::
+{
+  "data": {
+    "data": {},
+    "_meta": {
+      "path": "tag/non-existent"
+    }
+  },
+  "_meta": {
+    "created": "{{number, utc}}",
+    "modified": "{{number, utc}}",
+    "path": "{{/_TAGS/tag/non-existent/[unique generated id]}}",
+    "tag": "MYTAG",
+    "published": true,
+    "type": "response",
+    "status": "ok",
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "set"
+  },
+  "protocol": "happn_2"
+}
+E: 
+
+OK: setSibling--> in
+
+COMPARE FAILURE: setSibling--> out
+EXPECTED:::
+{
+  "data": {
+    "sibling": "data"
+  },
+  "_meta": {
+    "created": "{{number, utc}}",
+    "modified": "{{number, utc}}",
+    "modifiedBy": "_ADMIN",
+    "path": "set/sibling/data/[unique generated id]",
+    "published": true,
+    "type": "response",
+    "status": "ok",
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "set"
+  },
+  "protocol": "{{happn protocol}}"
+}
+ACTUAL:::
+{
+  "data": {
+    "sibling": "data"
+  },
+  "_meta": {
+    "created": "{{number, utc}}",
+    "modified": "{{number, utc}}",
+    "modifiedBy": "_ADMIN",
+    "path": "set/sibling/data/[unique generated id]",
+    "published": true,
+    "type": "response",
+    "status": "ok",
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "set"
+  },
+  "protocol": "happn_2"
+}
+E: 
+
+OK: fails to do a set--> in
+
+COMPARE FAILURE: fails to do a set--> out
+EXPECTED:::
+{
+  "data": null,
+  "_meta": {
+    "type": "response",
+    "status": "error",
+    "published": false,
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "set",
+    "error": {
+      "name": "TestError",
+      "message": "a fly in the ointment"
+    }
+  },
+  "protocol": "{{happn protocol}}"
+}
+ACTUAL:::
+{
+  "data": null,
+  "_meta": {
+    "type": "response",
+    "status": "error",
+    "published": false,
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "set",
+    "error": {
+      "name": "TestError",
+      "message": "a fly in the ointment"
+    }
+  },
+  "protocol": "happn_2"
+}
+E: 
+
+OK: fails to do a set, access denied, unauthorised--> in
+
+COMPARE FAILURE: fails to do a set, access denied, unauthorised--> out
+EXPECTED:::
+{
+  "data": null,
+  "_meta": {
+    "type": "response",
+    "status": "error",
+    "published": false,
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "set",
+    "error": {
+      "name": "AccessDenied",
+      "code": 403,
+      "message": "unauthorized"
+    }
+  },
+  "protocol": "{{happn protocol}}"
+}
+ACTUAL:::
+{
+  "data": null,
+  "_meta": {
+    "type": "response",
+    "status": "error",
+    "published": false,
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "set",
+    "error": {
+      "name": "AccessDenied",
+      "code": 403,
+      "message": "unauthorized"
+    }
+  },
+  "protocol": "happn_2"
+}
+E: 
+
+OK: removes one data point--> in
+
+COMPARE FAILURE: removes one data point--> out
+EXPECTED:::
+{
+  "data": {
+    "removed": 1
+  },
+  "_meta": {
+    "timestamp": "{{number, utc}}",
+    "path": "remove/one",
+    "published": true,
+    "type": "response",
+    "status": "ok",
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "remove"
+  },
+  "protocol": "{{happn protocol}}"
+}
+ACTUAL:::
+{
+  "data": {
+    "removed": 1
+  },
+  "_meta": {
+    "timestamp": "{{number, utc}}",
+    "path": "remove/one",
+    "published": true,
+    "type": "response",
+    "status": "ok",
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "remove"
+  },
+  "protocol": "happn_2"
+}
+E: 
+
+OK: call sequence representing a request to remove something that is not there--> in
+
+COMPARE FAILURE: call sequence representing a request to remove something that is not there--> out
+EXPECTED:::
+{
+  "data": {
+    "removed": 0
+  },
+  "_meta": {
+    "timestamp": "{{number, utc}}",
+    "path": "remove/non_existant",
+    "published": true,
+    "type": "response",
+    "status": "ok",
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "remove"
+  },
+  "protocol": "{{happn protocol}}"
+}
+ACTUAL:::
+{
+  "data": {
+    "removed": 0
+  },
+  "_meta": {
+    "timestamp": "{{number, utc}}",
+    "path": "remove/non_existant",
+    "published": true,
+    "type": "response",
+    "status": "ok",
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "remove"
+  },
+  "protocol": "happn_2"
+}
+E: 
+
+OK: an error happens when we try and remove an item--> in
+
+COMPARE FAILURE: an error happens when we try and remove an item--> out
+EXPECTED:::
+{
+  "data": null,
+  "_meta": {
+    "type": "response",
+    "status": "error",
+    "published": false,
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "remove",
+    "error": {
+      "name": "TestError",
+      "message": "a fly in the ointment"
+    }
+  },
+  "protocol": "{{happn protocol}}"
+}
+ACTUAL:::
+{
+  "data": null,
+  "_meta": {
+    "type": "response",
+    "status": "error",
+    "published": false,
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "remove",
+    "error": {
+      "name": "TestError",
+      "message": "a fly in the ointment"
+    }
+  },
+  "protocol": "happn_2"
+}
+E: 
+
+OK: an error happens when we try and remove an item, access denied--> in
+
+COMPARE FAILURE: an error happens when we try and remove an item, access denied--> out
+EXPECTED:::
+{
+  "data": null,
+  "_meta": {
+    "type": "response",
+    "status": "error",
+    "published": false,
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "remove",
+    "error": {
+      "name": "AccessDenied",
+      "code": 403,
+      "message": "unauthorized"
+    }
+  },
+  "protocol": "{{happn protocol}}"
+}
+ACTUAL:::
+{
+  "data": null,
+  "_meta": {
+    "type": "response",
+    "status": "error",
+    "published": false,
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "remove",
+    "error": {
+      "name": "AccessDenied",
+      "code": 403,
+      "message": "unauthorized"
+    }
+  },
+  "protocol": "happn_2"
+}
+E: 
+
+COMPARE FAILURE: subscribe to all changes on all data points--> in
+EXPECTED:::
+{
+  "action": "on",
+  "eventId": "{{number, matches handler in client}}",
+  "path": "/ALL@*",
+  "data": null,
+  "sessionId": "{{guid}}",
+  "options": {
+    "event_type": "all",
+    "count": 0,
+    "listenerId": 0,
+    "refCount": 1,
+    "timeout": 60000
+  }
+}
+ACTUAL:::
+{
+  "action": "on",
+  "eventId": "{{number, matches handler in client}}",
+  "path": "/ALL@*",
+  "data": null,
+  "sessionId": "{{guid}}",
+  "options": {
+    "event_type": "all",
+    "count": 0,
+    "listenerId": 0,
+    "timeout": 60000
+  }
+}
+N: refCount
+
+COMPARE FAILURE: subscribe to all changes on all data points--> out
+EXPECTED:::
+{
+  "data": {},
+  "_meta": {
+    "status": "ok",
+    "type": "response",
+    "published": false,
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "on"
+  },
+  "protocol": "{{happn protocol}}"
+}
+ACTUAL:::
+{
+  "data": {
+    "id": "{{guid}}"
+  },
+  "_meta": {
+    "status": "ok",
+    "type": "response",
+    "published": false,
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "on"
+  },
+  "protocol": "happn_2"
+}
+D: id
+E: 
+
+COMPARE FAILURE: set a piece of data, and get the event back based on the subscription in the previous step--> in
+EXPECTED:::
+{
+  "action": "off",
+  "eventId": "{{number, matches handler in client}}",
+  "path": "/ALL@/subscribe/once",
+  "data": null,
+  "sessionId": "{{guid}}",
+  "options": {
+    "refCount": 1,
+    "listenerId": 3,
+    "timeout": 60000
+  }
+}
+ACTUAL:::
+{
+  "action": "off",
+  "eventId": "{{number, matches handler in client}}",
+  "path": "/ALL@/subscribe/once",
+  "data": null,
+  "sessionId": "{{guid}}",
+  "options": {
+    "referenceId": "{{unique id (hyperid)}}",
+    "timeout": 60000
+  }
+}
+D: referenceId
+N: refCount
+N: listenerId
+
+COMPARE FAILURE: set a piece of data, and get the event back based on the subscription in the previous step--> out
+EXPECTED:::
+{
+  "data": {
+    "data": {
+      "was": "set"
+    }
+  },
+  "_meta": {
+    "created": "{{number, utc}}",
+    "modified": "{{number, utc}}",
+    "modifiedBy": "_ADMIN",
+    "path": "/subscribe/once",
+    "published": true,
+    "type": "response",
+    "status": "ok",
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "set"
+  },
+  "protocol": "{{happn protocol}}"
+}
+ACTUAL:::
+{
+  "data": {
+    "data": {
+      "was": "set"
+    }
+  },
+  "_meta": {
+    "created": "{{number, utc}}",
+    "modified": "{{number, utc}}",
+    "modifiedBy": "_ADMIN",
+    "path": "/subscribe/once",
+    "published": true,
+    "type": "response",
+    "status": "ok",
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "set"
+  },
+  "protocol": "happn_2"
+}
+E: 
+
+COMPARE FAILURE: unsubscribe from all changes on all data points, NB: will remove all subscriptions--> in
+EXPECTED:::
+{
+  "action": "off",
+  "eventId": "{{number, matches handler in client}}",
+  "path": "*",
+  "data": null,
+  "sessionId": "{{guid}}",
+  "options": {
+    "refCount": 0,
+    "listenerId": -1,
+    "timeout": 60000
+  }
+}
+ACTUAL:::
+{
+  "action": "off",
+  "eventId": "{{number, matches handler in client}}",
+  "path": "*",
+  "data": null,
+  "sessionId": "{{guid}}",
+  "options": {
+    "referenceId": 0,
+    "timeout": 60000
+  }
+}
+D: referenceId
+N: refCount
+N: listenerId
+
+COMPARE FAILURE: unsubscribe from all changes on all data points, NB: will remove all subscriptions--> out
+EXPECTED:::
+{
+  "data": {},
+  "_meta": {
+    "status": "ok",
+    "type": "response",
+    "published": false,
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "off"
+  },
+  "protocol": "{{happn protocol}}"
+}
+ACTUAL:::
+{
+  "data": {
+    "id": false,
+    "removed": [
+      {
+        "key": "49ca8135-7404-4904-8f8f-aed0eea88633",
+        "data": {
+          "options": {
+            "event_type": "all",
+            "count": 0,
+            "listenerId": 0,
+            "timeout": 60000
+          },
+          "session": {
+            "id": "{{guid}}",
+            "protocol": "happn_2",
+            "info": {
+              "_browser": false,
+              "_local": false
+            }
+          },
+          "action": "ALL",
+          "path": "*"
+        },
+        "id": "{{guid}}",
+        "path": "*"
+      }
+    ]
+  },
+  "_meta": {
+    "status": "ok",
+    "type": "response",
+    "published": false,
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "off"
+  },
+  "protocol": "happn_2"
+}
+D: id
+D: removed
+E: 
+
+COMPARE FAILURE: subscribe to only set actions on a specific data point--> in
+EXPECTED:::
+{
+  "action": "on",
+  "eventId": "{{number, matches handler in client}}",
+  "path": "/SET@/subscribe/on/specific",
+  "data": null,
+  "sessionId": "{{guid}}",
+  "options": {
+    "event_type": "set",
+    "count": 0,
+    "listenerId": 1,
+    "refCount": 1,
+    "timeout": 60000
+  }
+}
+ACTUAL:::
+{
+  "action": "on",
+  "eventId": "{{number, matches handler in client}}",
+  "path": "/SET@/subscribe/on/specific",
+  "data": null,
+  "sessionId": "{{guid}}",
+  "options": {
+    "event_type": "set",
+    "count": 0,
+    "listenerId": 1,
+    "timeout": 60000
+  }
+}
+N: refCount
+
+COMPARE FAILURE: subscribe to only set actions on a specific data point--> out
+EXPECTED:::
+{
+  "data": {},
+  "_meta": {
+    "status": "ok",
+    "type": "response",
+    "published": false,
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "on"
+  },
+  "protocol": "{{happn protocol}}"
+}
+ACTUAL:::
+{
+  "data": {
+    "id": "{{guid}}"
+  },
+  "_meta": {
+    "status": "ok",
+    "type": "response",
+    "published": false,
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "on"
+  },
+  "protocol": "happn_2"
+}
+D: id
+E: 
+
+COMPARE FAILURE: subscribe to the removal of data at a specified point--> in
+EXPECTED:::
+{
+  "action": "on",
+  "eventId": "{{number, matches handler in client}}",
+  "path": "/REMOVE@/subscribe/on/remove",
+  "data": null,
+  "sessionId": "{{guid}}",
+  "options": {
+    "event_type": "remove",
+    "count": 0,
+    "listenerId": 2,
+    "refCount": 1,
+    "timeout": 60000
+  }
+}
+ACTUAL:::
+{
+  "action": "on",
+  "eventId": "{{number, matches handler in client}}",
+  "path": "/REMOVE@/subscribe/on/remove",
+  "data": null,
+  "sessionId": "{{guid}}",
+  "options": {
+    "event_type": "remove",
+    "count": 0,
+    "listenerId": 2,
+    "timeout": 60000
+  }
+}
+N: refCount
+
+COMPARE FAILURE: subscribe to the removal of data at a specified point--> out
+EXPECTED:::
+{
+  "data": {},
+  "_meta": {
+    "status": "ok",
+    "type": "response",
+    "published": false,
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "on"
+  },
+  "protocol": "{{happn protocol}}"
+}
+ACTUAL:::
+{
+  "data": {
+    "id": "{{guid}}"
+  },
+  "_meta": {
+    "status": "ok",
+    "type": "response",
+    "published": false,
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "on"
+  },
+  "protocol": "happn_2"
+}
+D: id
+E: 
+
+OK: remove a piece of data, and get the event back based on the subscription in the previous step--> in
+
+COMPARE FAILURE: remove a piece of data, and get the event back based on the subscription in the previous step--> out
+EXPECTED:::
+{
+  "data": {
+    "removed": 1
+  },
+  "_meta": {
+    "timestamp": "{{number, utc}}",
+    "path": "/subscribe/on/remove",
+    "published": true,
+    "type": "response",
+    "status": "ok",
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "remove"
+  },
+  "protocol": "{{happn protocol}}"
+}
+ACTUAL:::
+{
+  "data": {
+    "removed": 1
+  },
+  "_meta": {
+    "timestamp": "{{number, utc}}",
+    "path": "/subscribe/on/remove",
+    "published": true,
+    "type": "response",
+    "status": "ok",
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "remove"
+  },
+  "protocol": "happn_2"
+}
+E: 
+
+COMPARE FAILURE: subscribe to a change only once, on the native happn client this is done by specifying the 'count' option, but you can tell from the following sequence how to unsubscribe--> in
+EXPECTED:::
+{
+  "action": "on",
+  "eventId": "{{number, matches handler in client}}",
+  "path": "/ALL@/subscribe/once",
+  "data": null,
+  "sessionId": "{{guid}}",
+  "options": {
+    "event_type": "all",
+    "count": 1,
+    "listenerId": 3,
+    "refCount": 1,
+    "timeout": 60000
+  }
+}
+ACTUAL:::
+{
+  "action": "on",
+  "eventId": "{{number, matches handler in client}}",
+  "path": "/ALL@/subscribe/once",
+  "data": null,
+  "sessionId": "{{guid}}",
+  "options": {
+    "event_type": "all",
+    "count": 1,
+    "listenerId": 3,
+    "timeout": 60000
+  }
+}
+N: refCount
+
+COMPARE FAILURE: subscribe to a change only once, on the native happn client this is done by specifying the 'count' option, but you can tell from the following sequence how to unsubscribe--> out
+EXPECTED:::
+{
+  "data": {},
+  "_meta": {
+    "status": "ok",
+    "type": "response",
+    "published": false,
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "on"
+  },
+  "protocol": "{{happn protocol}}"
+}
+ACTUAL:::
+{
+  "data": {
+    "id": "{{guid}}"
+  },
+  "_meta": {
+    "status": "ok",
+    "type": "response",
+    "published": false,
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "on"
+  },
+  "protocol": "happn_2"
+}
+D: id
+E: 
+
+COMPARE FAILURE: perform an action without publishing using the noPublish flag--> in
+EXPECTED:::
+{
+  "action": "on",
+  "eventId": "{{number, matches handler in client}}",
+  "path": "/ALL@/subscribe/noPublish",
+  "data": null,
+  "sessionId": "{{guid}}",
+  "options": {
+    "event_type": "all",
+    "count": 0,
+    "listenerId": 4,
+    "refCount": 1,
+    "timeout": 60000
+  }
+}
+ACTUAL:::
+{
+  "action": "on",
+  "eventId": "{{number, matches handler in client}}",
+  "path": "/ALL@/subscribe/noPublish",
+  "data": null,
+  "sessionId": "{{guid}}",
+  "options": {
+    "event_type": "all",
+    "count": 0,
+    "listenerId": 4,
+    "timeout": 60000
+  }
+}
+N: refCount
+
+COMPARE FAILURE: perform an action without publishing using the noPublish flag--> out
+EXPECTED:::
+{
+  "data": {},
+  "_meta": {
+    "status": "ok",
+    "type": "response",
+    "published": false,
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "on"
+  },
+  "protocol": "{{happn protocol}}"
+}
+ACTUAL:::
+{
+  "data": {
+    "id": "{{guid}}"
+  },
+  "_meta": {
+    "status": "ok",
+    "type": "response",
+    "published": false,
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "on"
+  },
+  "protocol": "happn_2"
+}
+D: id
+E: 
+
+OK: set a piece of data, and get a response from the server, but no publication because noPublish was set to true--> in
+
+COMPARE FAILURE: set a piece of data, and get a response from the server, but no publication because noPublish was set to true--> out
+EXPECTED:::
+{
+  "data": {
+    "data": {
+      "was": "set"
+    }
+  },
+  "_meta": {
+    "created": "{{number, utc}}",
+    "modified": "{{number, utc}}",
+    "modifiedBy": "_ADMIN",
+    "path": "/subscribe/noPublish",
+    "type": "response",
+    "status": "ok",
+    "published": false,
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "set"
+  },
+  "protocol": "{{happn protocol}}"
+}
+ACTUAL:::
+{
+  "data": {
+    "data": {
+      "was": "set"
+    }
+  },
+  "_meta": {
+    "created": "{{number, utc}}",
+    "modified": "{{number, utc}}",
+    "modifiedBy": "_ADMIN",
+    "path": "/subscribe/noPublish",
+    "type": "response",
+    "status": "ok",
+    "published": false,
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "set"
+  },
+  "protocol": "happn_2"
+}
+E: 
+
+COMPARE FAILURE: failure to subscribe--> in
+EXPECTED:::
+{
+  "action": "on",
+  "eventId": "{{number, matches handler in client}}",
+  "path": "/ALL@/subscription/error",
+  "data": null,
+  "sessionId": "{{guid}}",
+  "options": {
+    "event_type": "all",
+    "count": 0,
+    "listenerId": 5,
+    "refCount": 1,
+    "timeout": 60000
+  }
+}
+ACTUAL:::
+{
+  "action": "on",
+  "eventId": "{{number, matches handler in client}}",
+  "path": "/ALL@/subscription/error",
+  "data": null,
+  "sessionId": "{{guid}}",
+  "options": {
+    "event_type": "all",
+    "count": 0,
+    "listenerId": 5,
+    "timeout": 60000
+  }
+}
+N: refCount
+
+COMPARE FAILURE: failure to subscribe--> out
+EXPECTED:::
+{
+  "data": null,
+  "_meta": {
+    "type": "response",
+    "status": "error",
+    "published": false,
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "on",
+    "error": {
+      "name": "TestError",
+      "message": "a fly in the ointment"
+    }
+  },
+  "protocol": "{{happn protocol}}"
+}
+ACTUAL:::
+{
+  "data": null,
+  "_meta": {
+    "type": "response",
+    "status": "error",
+    "published": false,
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "on",
+    "error": {
+      "name": "TestError",
+      "message": "a fly in the ointment"
+    }
+  },
+  "protocol": "happn_2"
+}
+E: 
+
+COMPARE FAILURE: failure to subscribe - access denied--> in
+EXPECTED:::
+{
+  "action": "on",
+  "eventId": "{{number, matches handler in client}}",
+  "path": "/ALL@/subscription/access/denied",
+  "data": null,
+  "sessionId": "{{guid}}",
+  "options": {
+    "event_type": "all",
+    "count": 0,
+    "listenerId": 0,
+    "refCount": 1,
+    "timeout": 60000
+  }
+}
+ACTUAL:::
+{
+  "action": "on",
+  "eventId": "{{number, matches handler in client}}",
+  "path": "/ALL@/subscription/access/denied",
+  "data": null,
+  "sessionId": "{{guid}}",
+  "options": {
+    "event_type": "all",
+    "count": 0,
+    "listenerId": 0,
+    "timeout": 60000
+  }
+}
+N: refCount
+
+COMPARE FAILURE: failure to subscribe - access denied--> out
+EXPECTED:::
+{
+  "data": null,
+  "_meta": {
+    "type": "response",
+    "status": "error",
+    "published": false,
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "on",
+    "error": {
+      "name": "AccessDenied",
+      "code": 403,
+      "message": "unauthorized"
+    }
+  },
+  "protocol": "{{happn protocol}}"
+}
+ACTUAL:::
+{
+  "data": null,
+  "_meta": {
+    "type": "response",
+    "status": "error",
+    "published": false,
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "on",
+    "error": {
+      "name": "AccessDenied",
+      "code": 403,
+      "message": "unauthorized"
+    }
+  },
+  "protocol": "happn_2"
+}
+E: 
+
+OK: the client sends out a disconnect request, which the server receives - the server then queues the disconnection request, the client the ends the websocket session, and the server cleans up on the other side without sending a disconnection warning--> in
+
+COMPARE FAILURE: the client sends out a disconnect request, which the server receives - the server then queues the disconnection request, the client the ends the websocket session, and the server cleans up on the other side without sending a disconnection warning--> out
+EXPECTED:::
+{
+  "data": null,
+  "_meta": {
+    "type": "response",
+    "status": "ok",
+    "published": false,
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "disconnect"
+  },
+  "protocol": "{{happn protocol}}"
+}
+ACTUAL:::
+{
+  "data": null,
+  "_meta": {
+    "type": "response",
+    "status": "ok",
+    "published": false,
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "disconnect"
+  },
+  "protocol": "happn_2"
+}
+E: 
+
+OK: when a client is forcefully diconnected from the server side, or when a service shutdown happens, all clients are notified a disconnection is imminent--> in
+
+OK: when a client is forcefully diconnected from the server side, or when a service shutdown happens, all clients are notified a disconnection is imminent--> out
+
+OK: create a client session and login--> in
+
+COMPARE FAILURE: create a client session and login--> out
+EXPECTED:::
+{
+  "data": {
+    "id": "{{guid}}",
+    "protocol": "happn_2",
+    "happn": {
+      "name": "{{string}}",
+      "secure": true,
+      "encryptPayloads": false,
+      "publicKey": "{{ECDSA public key}}"
+    },
+    "info": {
+      "_browser": false,
+      "_local": false
+    },
+    "type": 1,
+    "user": {
+      "custom_data": {},
+      "username": "_ADMIN",
+      "_meta": {
+        "created": "{{number, utc}}",
+        "modified": "{{number, utc}}",
+        "path": "/_SYSTEM/_SECURITY/_USER/_ADMIN",
+        "_id": "{{matches path if nedb, generated if mongo}}"
+      },
+      "groups": {
+        "_ADMIN": {
+          "data": {},
+          "_meta": {
+            "created": "{{number, utc}}",
+            "modified": "{{number, utc}}",
+            "path": "/_SYSTEM/_SECURITY/_USER/_ADMIN/_USER_GROUP/_ADMIN",
+            "_id": "{{matches path if nedb, generated if mongo}}"
+          }
+        }
+      }
+    },
+    "timestamp": "{{number, utc}}",
+    "isEncrypted": false,
+    "origin": "{{sessionId}}",
+    "policy": {
+      "0": {
+        "ttl": 0,
+        "inactivity_threshold": null
+      },
+      "1": {
+        "ttl": 0,
+        "inactivity_threshold": null
+      }
+    },
+    "permissionSetKey": "/_ADMIN/",
+    "token": "{{string, jwt token}}"
+  },
+  "_meta": {
+    "type": "response",
+    "status": "ok",
+    "published": false,
+    "eventId": "{{number, matches handler in client}}",
+    "action": "login"
+  },
+  "protocol": "happn_2"
+}
+ACTUAL:::
+{
+  "data": {
+    "id": "{{guid}}",
+    "protocol": "happn_2",
+    "happn": {
+      "name": "{{string}}",
+      "secure": true,
+      "encryptPayloads": false,
+      "publicKey": "{{ECDSA public key}}"
+    },
+    "info": {
+      "_browser": false,
+      "_local": false
+    },
+    "type": 1,
+    "user": {
+      "custom_data": {},
+      "username": "_ADMIN",
+      "_meta": {
+        "created": "{{number, utc}}",
+        "modified": "{{number, utc}}",
+        "path": "/_SYSTEM/_SECURITY/_USER/_ADMIN",
+        "_id": "{{matches path if nedb, generated if mongo}}"
+      }
+    },
+    "timestamp": "{{number, utc}}",
+    "isEncrypted": false,
+    "origin": "{{sessionId}}",
+    "policy": {
+      "0": {
+        "ttl": 0,
+        "inactivity_threshold": null
+      },
+      "1": {
+        "ttl": 0,
+        "inactivity_threshold": null
+      }
+    },
+    "permissionSetKey": "FIgtui0QhsDlIrZYrku+TgJn7oY=",
+    "token": "{{string, jwt token}}"
+  },
+  "_meta": {
+    "type": "response",
+    "status": "ok",
+    "published": false,
+    "eventId": "{{number, matches handler in client}}",
+    "action": "login"
+  },
+  "protocol": "happn_2"
+}
+N: user/groups
+E: permissionSetKey
+
+OK: set a piece of data using a key value pair--> in
+
+OK: set a piece of data using a key value pair--> out
+
+OK: merge some new values with an existing record, NB: the merge only goes 1 property level deep--> in
+
+OK: merge some new values with an existing record, NB: the merge only goes 1 property level deep--> out
+
+OK: tag some existing data--> in
+
+OK: tag some existing data--> out
+
+OK: tag failure--> in
+
+OK: tag failure--> out
+
+OK: setSibling--> in
+
+OK: setSibling--> out
+
+OK: fails to do a set--> in
+
+OK: fails to do a set--> out
+
+OK: fails to do a set, access denied, unauthorised--> in
+
+OK: fails to do a set, access denied, unauthorised--> out
+
+OK: removes one data point--> in
+
+OK: removes one data point--> out
+
+OK: call sequence representing a request to remove something that is not there--> in
+
+OK: call sequence representing a request to remove something that is not there--> out
+
+OK: an error happens when we try and remove an item--> in
+
+OK: an error happens when we try and remove an item--> out
+
+OK: an error happens when we try and remove an item, access denied--> in
+
+OK: an error happens when we try and remove an item, access denied--> out
+
+OK: subscribe to all changes on all data points--> in
+
+OK: subscribe to all changes on all data points--> out
+
+OK: set a piece of data, and get the event back based on the subscription in the previous step--> in
+
+OK: set a piece of data, and get the event back based on the subscription in the previous step--> out
+
+OK: unsubscribe from all changes on all data points, NB: will remove all subscriptions--> in
+
+COMPARE FAILURE: unsubscribe from all changes on all data points, NB: will remove all subscriptions--> out
+EXPECTED:::
+{
+  "data": {
+    "id": false,
+    "removed": [
+      {
+        "key": "49ca8135-7404-4904-8f8f-aed0eea88633",
+        "data": {
+          "options": {
+            "event_type": "all",
+            "count": 0,
+            "listenerId": 0,
+            "timeout": 60000
+          },
+          "session": {
+            "id": "{{guid}}",
+            "protocol": "happn_2",
+            "info": {
+              "_browser": false,
+              "_local": false
+            }
+          },
+          "action": "ALL",
+          "path": "*"
+        },
+        "id": "{{guid}}",
+        "path": "*"
+      }
+    ]
+  },
+  "_meta": {
+    "status": "ok",
+    "type": "response",
+    "published": false,
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "off"
+  },
+  "protocol": "happn_2"
+}
+ACTUAL:::
+{
+  "data": {
+    "id": false,
+    "removed": [
+      {
+        "key": "7df63e17-7df4-4be0-923d-59ab06413a8d",
+        "data": {
+          "options": {
+            "event_type": "all",
+            "count": 0,
+            "listenerId": 0,
+            "timeout": 60000
+          },
+          "session": {
+            "id": "{{guid}}",
+            "protocol": "happn_2",
+            "info": {
+              "_browser": false,
+              "_local": false
+            }
+          },
+          "action": "ALL",
+          "path": "*"
+        },
+        "id": "{{guid}}",
+        "path": "*"
+      }
+    ]
+  },
+  "_meta": {
+    "status": "ok",
+    "type": "response",
+    "published": false,
+    "eventId": "{{number, matches handler in client}}",
+    "sessionId": "{{guid}}",
+    "action": "off"
+  },
+  "protocol": "happn_2"
+}
+E: removed/0/key
+
+OK: subscribe to only set actions on a specific data point--> in
+
+OK: subscribe to only set actions on a specific data point--> out
+
+OK: subscribe to the removal of data at a specified point--> in
+
+OK: subscribe to the removal of data at a specified point--> out
+
+OK: remove a piece of data, and get the event back based on the subscription in the previous step--> in
+
+OK: remove a piece of data, and get the event back based on the subscription in the previous step--> out
+
+OK: subscribe to a change only once, on the native happn client this is done by specifying the 'count' option, but you can tell from the following sequence how to unsubscribe--> in
+
+OK: subscribe to a change only once, on the native happn client this is done by specifying the 'count' option, but you can tell from the following sequence how to unsubscribe--> out
+
+OK: perform an action without publishing using the noPublish flag--> in
+
+OK: perform an action without publishing using the noPublish flag--> out
+
+OK: set a piece of data, and get a response from the server, but no publication because noPublish was set to true--> in
+
+OK: set a piece of data, and get a response from the server, but no publication because noPublish was set to true--> out
+
+OK: failure to subscribe--> in
+
+OK: failure to subscribe--> out
+
+OK: failure to subscribe - access denied--> in
+
+OK: failure to subscribe - access denied--> out
+
+OK: the client sends out a disconnect request, which the server receives - the server then queues the disconnection request, the client the ends the websocket session, and the server cleans up on the other side without sending a disconnection warning--> in
+
+OK: the client sends out a disconnect request, which the server receives - the server then queues the disconnection request, the client the ends the websocket session, and the server cleans up on the other side without sending a disconnection warning--> out
+
+OK: when a client is forcefully diconnected from the server side, or when a service shutdown happens, all clients are notified a disconnection is imminent--> in
+
+OK: when a client is forcefully diconnected from the server side, or when a service shutdown happens, all clients are notified a disconnection is imminent--> out
